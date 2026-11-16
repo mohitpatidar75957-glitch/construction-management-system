@@ -161,8 +161,8 @@ export default function PurchaseOrdersView() {
     <div className="module-view-container">
       <div className="module-header-row">
         <div>
-          <h2 className="module-title">Purchase Orders (PO) & Procurement Approvals</h2>
-          <p className="module-subtitle">Official contractor purchase orders, supplier contracts, delivery terms & owner approvals</p>
+          <h2 className="module-title">Purchase Orders (PO) <span className="amp">&</span> Procurement Approvals</h2>
+          <p className="module-subtitle">Official contractor purchase orders, supplier contracts, delivery terms <span className="amp">&</span> owner approvals</p>
         </div>
         <button className="btn-dubai-gold" onClick={() => setShowAdd(true)}>
           <Plus size={16} />

@@ -557,8 +557,8 @@ export default function TaskGanttView() {
     <div className="module-view-container animate-fade-in">
       <div className="module-header-row">
         <div>
-          <h2 className="module-title">Task Scheduling & Gantt Timeline</h2>
-          <p className="module-subtitle">Milestone dependencies, critical path tracking, interactive work completion sliders & delay alerts</p>
+          <h2 className="module-title">Task Scheduling <span className="amp">&</span> Gantt Timeline</h2>
+          <p className="module-subtitle">Milestone dependencies, critical path tracking, interactive work completion sliders <span className="amp">&</span> delay alerts</p>
         </div>
         <div style={{ display: 'flex', gap: '10px', alignItems: 'center', flexWrap: 'wrap' }}>
           <select 
@@ -636,7 +636,7 @@ export default function TaskGanttView() {
         <div className="table-header-bar">
           <div className="table-title-group">
             <Calendar size={18} className="gold-text" />
-            <h3>Master Construction Timeline & Progress Sliders</h3>
+            <h3>Master Construction Timeline <span className="amp">&</span> Progress Sliders</h3>
           </div>
           <span style={{ fontSize: '11px', color: '#64748B', fontWeight: 600 }}>
             {selectedSite === 'ALL_SITES' ? 'All Active Sites' : selectedSite}

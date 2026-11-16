@@ -485,12 +485,12 @@ export default function DocumentManagerView({ filterProjectId = null }) {
           <table className="dubai-table">
             <thead>
               <tr>
-                <th>Document & Blueprint</th>
+                <th>Document <span className="amp">&</span> Blueprint</th>
                 <th>Category</th>
                 <th>Construction Site</th>
-                <th>Version & Format</th>
+                <th>Version <span className="amp">&</span> Format</th>
                 <th>Upload Date</th>
-                <th>Expiry & Status</th>
+                <th>Expiry <span className="amp">&</span> Status</th>
                 <th style={{ textAlign: 'right' }}>Actions</th>
               </tr>
             </thead>

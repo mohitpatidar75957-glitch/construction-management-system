@@ -36,8 +36,8 @@ export default function NotificationsView() {
     <div className="module-view-container">
       <div className="module-header-row">
         <div>
-          <h2 className="module-title">Automated Notifications & Communication Gateway</h2>
-          <p className="module-subtitle">WhatsApp business alerts, SMS dispatch notifications, payment demand alerts & low-stock pings</p>
+          <h2 className="module-title">Automated Notifications <span className="amp">&</span> Communication Gateway</h2>
+          <p className="module-subtitle">WhatsApp business alerts, SMS dispatch notifications, payment demand alerts <span className="amp">&</span> low-stock pings</p>
         </div>
         <button className="btn-dubai-gold" onClick={handleSendTest}>
           <Send size={15} />
@@ -72,7 +72,7 @@ export default function NotificationsView() {
         <div className="table-header-bar">
           <div className="table-title-group">
             <Bell size={18} className="gold-text" />
-            <h3>Notification Audit Trail & Dispatch Logs</h3>
+            <h3>Notification Audit Trail <span className="amp">&</span> Dispatch Logs</h3>
           </div>
         </div>
 

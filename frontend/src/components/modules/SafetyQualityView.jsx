@@ -223,7 +223,11 @@ export default function SafetyQualityView() {
 
             <div>
               <h1 style={{ fontSize: '24px', fontWeight: 800, color: '#0F172A', margin: 0, letterSpacing: '-0.02em' }}>
-                {activeTab === 'SAFETY' ? 'Conduct Site Safety & OSHA Audit' : 'Log Quality Snag & Defect Punch-List'}
+                {activeTab === 'SAFETY' ? (
+                  <span>Conduct Site Safety <span className="amp">&</span> OSHA Audit</span>
+                ) : (
+                  <span>Log Quality Snag <span className="amp">&</span> Defect Punch-List</span>
+                )}
               </h1>
               <span style={{ fontSize: '12px', color: '#64748B', fontWeight: 500 }}>
                 {activeTab === 'SAFETY' 
@@ -799,8 +803,8 @@ export default function SafetyQualityView() {
     <div className="module-view-container animate-fade-in">
       <div className="module-header-row">
         <div>
-          <h2 className="module-title">Site Safety Inspections & Quality Snag List</h2>
-          <p className="module-subtitle">Daily OSHA site safety audits, PPE compliance scoring, finishing snag punch-lists & trade rectification workflows</p>
+          <h2 className="module-title">Site Safety Inspections <span className="amp">&</span> Quality Snag List</h2>
+          <p className="module-subtitle">Daily OSHA site safety audits, PPE compliance scoring, finishing snag punch-lists <span className="amp">&</span> trade rectification workflows</p>
         </div>
         <div style={{ display: 'flex', gap: '10px', alignItems: 'center', flexWrap: 'wrap' }}>
           <select 
@@ -868,7 +872,7 @@ export default function SafetyQualityView() {
           <div className="table-header-bar">
             <div className="table-title-group">
               <ShieldCheck size={18} className="gold-text" />
-              <h3>Daily Site Safety & PPE Audit Checklist</h3>
+              <h3>Daily Site Safety <span className="amp">&</span> PPE Audit Checklist</h3>
             </div>
             <span style={{ fontSize: '11px', color: '#64748B', fontWeight: 600 }}>
               Showing {filteredAudits.length} safety inspections
@@ -918,7 +922,7 @@ export default function SafetyQualityView() {
           <div className="table-header-bar">
             <div className="table-title-group">
               <AlertTriangle size={18} className="gold-text" />
-              <h3>Finishing Snag & Defect Punch-List Workflow</h3>
+              <h3>Finishing Snag <span className="amp">&</span> Defect Punch-List Workflow</h3>
             </div>
             <span style={{ fontSize: '11px', color: '#64748B', fontWeight: 600 }}>
               Showing {filteredSnags.length} registered defects

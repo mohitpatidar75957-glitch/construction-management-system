@@ -1063,8 +1063,8 @@ export default function SettingsRolesView() {
       {/* Header Row */}
       <div className="module-header-row">
         <div>
-          <h2 className="module-title">System Settings, Users & Role Permissions</h2>
-          <p className="module-subtitle">Super Admin control center to manage staff access clearance, assign module permissions & field sync</p>
+          <h2 className="module-title">System Settings, Users <span className="amp">&</span> Role Permissions</h2>
+          <p className="module-subtitle">Super Admin control center to manage staff access clearance, assign module permissions <span className="amp">&</span> field sync</p>
         </div>
         <button 
           onClick={() => setShowAddUserModal(true)}

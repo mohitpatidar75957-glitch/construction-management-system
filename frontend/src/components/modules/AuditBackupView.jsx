@@ -40,8 +40,8 @@ export default function AuditBackupView() {
     <div className="module-view-container">
       <div className="module-header-row">
         <div>
-          <h2 className="module-title">System Audit Log & Automated Data Backups</h2>
-          <p className="module-subtitle">Immutable access audit records, role tracking, automatic daily snapshots & disaster recovery</p>
+          <h2 className="module-title">System Audit Log <span className="amp">&</span> Automated Data Backups</h2>
+          <p className="module-subtitle">Immutable access audit records, role tracking, automatic daily snapshots <span className="amp">&</span> disaster recovery</p>
         </div>
         <button className="btn-dubai-gold" onClick={handleTriggerBackup} disabled={backingUp}>
           <RefreshCw size={15} className={backingUp ? 'animate-spin' : ''} />

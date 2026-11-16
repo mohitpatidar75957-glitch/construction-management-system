@@ -689,7 +689,7 @@ export default function AccountsView() {
           <table className="dubai-table">
             <thead>
               <tr>
-                <th>Site & Location</th>
+                <th>Site <span className="amp">&</span> Location</th>
                 <th>Contract Value</th>
                 <th>Received</th>
                 <th>Expenses</th>

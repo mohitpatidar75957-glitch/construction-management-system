@@ -582,7 +582,7 @@ export default function EquipmentView() {
           <table className="dubai-table">
             <thead>
               <tr>
-                <th>Equipment & Model</th>
+                <th>Equipment <span className="amp">&</span> Model</th>
                 <th>Ownership</th>
                 <th>Daily Diesel</th>
                 <th>Rental Rate</th>

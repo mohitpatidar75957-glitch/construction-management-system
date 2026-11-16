@@ -1818,7 +1818,7 @@ export default function ProjectsView() {
               <table className="dubai-table">
                 <thead>
                   <tr>
-                    <th>Snag ID & Location</th>
+                    <th>Snag ID <span className="amp">&</span> Location</th>
                     <th>Defect Description</th>
                     <th>Trade Responsible</th>
                     <th>Assigned Agency</th>
@@ -1967,7 +1967,7 @@ export default function ProjectsView() {
           <table className="dubai-table">
             <thead>
               <tr>
-                <th>Site & Project Code</th>
+                <th>Site <span className="amp">&</span> Project Code</th>
                 <th>Location</th>
                 <th>Contract Budget</th>
                 <th>Current Spent</th>

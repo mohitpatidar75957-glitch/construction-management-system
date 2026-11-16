@@ -153,8 +153,8 @@ export default function VendorsView() {
     <div className="module-view-container">
       <div className="module-header-row">
         <div>
-          <h2 className="module-title">Vendor & Supplier Management</h2>
-          <p className="module-subtitle">Direct suppliers, agreed wholesale rates, delivery reliability, past POs & pending payables</p>
+          <h2 className="module-title">Vendor <span className="amp">&</span> Supplier Management</h2>
+          <p className="module-subtitle">Direct suppliers, agreed wholesale rates, delivery reliability, past POs <span className="amp">&</span> pending payables</p>
         </div>
         <button className="btn-dubai-gold" onClick={() => setShowAdd(true)}>
           <Plus size={16} />
@@ -189,7 +189,7 @@ export default function VendorsView() {
         <div className="table-header-bar">
           <div className="table-title-group">
             <Store size={18} className="gold-text" />
-            <h3>Authorized Supplier Directory & Payables</h3>
+            <h3>Authorized Supplier Directory <span className="amp">&</span> Payables</h3>
           </div>
         </div>
 

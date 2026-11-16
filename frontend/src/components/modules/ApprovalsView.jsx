@@ -36,8 +36,8 @@ export default function ApprovalsView() {
     <div className="module-view-container">
       <div className="module-header-row">
         <div>
-          <h2 className="module-title">Expense Approval Workflow & Audit Sign-Off</h2>
-          <p className="module-subtitle">Site manager requisitions, contractor bills & material vouchers waiting Owner digital sign</p>
+          <h2 className="module-title">Expense Approval Workflow <span className="amp">&</span> Audit Sign-Off</h2>
+          <p className="module-subtitle">Site manager requisitions, contractor bills <span className="amp">&</span> material vouchers waiting Owner digital sign</p>
         </div>
       </div>
 

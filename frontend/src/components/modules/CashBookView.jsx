@@ -766,8 +766,8 @@ export default function CashBookView() {
     <div className="module-view-container animate-fade-in">
       <div className="module-header-row">
         <div>
-          <h2 className="module-title">Site Cash Book & Petty Cash Float</h2>
-          <p className="module-subtitle">Daily on-site petty cash ledger, spot purchases, hardware, refreshments & imprest balance</p>
+          <h2 className="module-title">Site Cash Book <span className="amp">&</span> Petty Cash Float</h2>
+          <p className="module-subtitle">Daily on-site petty cash ledger, spot purchases, hardware, refreshments <span className="amp">&</span> imprest balance</p>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
           <select 
@@ -823,7 +823,7 @@ export default function CashBookView() {
         <div className="table-header-bar">
           <div className="table-title-group">
             <Coins size={18} className="gold-text" />
-            <h3>Site Petty Cash Ledger & Slip Audit</h3>
+            <h3>Site Petty Cash Ledger <span className="amp">&</span> Slip Audit</h3>
           </div>
           <span style={{ fontSize: '11px', color: '#64748B', fontWeight: 600 }}>
             Showing {filteredEntries.length} recorded voucher{filteredEntries.length !== 1 ? 's' : ''}

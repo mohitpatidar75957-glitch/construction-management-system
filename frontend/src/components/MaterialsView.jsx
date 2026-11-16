@@ -606,7 +606,7 @@ export default function MaterialsView() {
           <table className="dubai-table">
             <thead>
               <tr>
-                <th>Material & Category</th>
+                <th>Material <span className="amp">&</span> Category</th>
                 <th>Site Location</th>
                 <th>Current Stock</th>
                 <th>Safety Threshold</th>

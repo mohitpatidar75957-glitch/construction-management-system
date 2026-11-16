@@ -547,7 +547,7 @@ export default function ReportsView() {
           <table className="dubai-table">
             <thead>
               <tr>
-                <th>Site & Location</th>
+                <th>Site <span className="amp">&</span> Location</th>
                 <th>Contract Budget</th>
                 <th>Spent</th>
                 <th>Progress %</th>
@@ -623,7 +623,7 @@ export default function ReportsView() {
           <table className="dubai-table">
             <thead>
               <tr>
-                <th>Date & Site</th>
+                <th>Date <span className="amp">&</span> Site</th>
                 <th>Milestone Activity</th>
                 <th>Work Scope Logs</th>
                 <th>Progress %</th>

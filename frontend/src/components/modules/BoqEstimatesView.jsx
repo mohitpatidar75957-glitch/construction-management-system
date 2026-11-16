@@ -203,7 +203,7 @@ export default function BoqEstimatesView() {
 
             <div>
               <h1 style={{ fontSize: '24px', fontWeight: 800, color: '#0F172A', margin: 0, letterSpacing: '-0.02em' }}>
-                Create New BOQ Line Item & Material Takeoff
+                Create New BOQ Line Item <span className="amp">&</span> Material Takeoff
               </h1>
               <span style={{ fontSize: '12px', color: '#64748B', fontWeight: 500 }}>
                 Define engineering estimates, tender quantity baselines, and link spot procurement rates
@@ -592,8 +592,8 @@ export default function BoqEstimatesView() {
     <div className="module-view-container animate-fade-in">
       <div className="module-header-row">
         <div>
-          <h2 className="module-title">Bill of Quantities (BOQ) & Cost Estimates</h2>
-          <p className="module-subtitle">Material quantity takeoff & tender rate estimates compared with actual site consumption and live cost variance</p>
+          <h2 className="module-title">Bill of Quantities (BOQ) <span className="amp">&</span> Cost Estimates</h2>
+          <p className="module-subtitle">Material quantity takeoff <span className="amp">&</span> tender rate estimates compared with actual site consumption and live cost variance</p>
         </div>
         <div style={{ display: 'flex', gap: '10px', alignItems: 'center', flexWrap: 'wrap' }}>
           <select 

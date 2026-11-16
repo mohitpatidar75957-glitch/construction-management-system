@@ -25,8 +25,8 @@ export default function CustomerPortalView() {
     <div className="module-view-container">
       <div className="module-header-row">
         <div>
-          <h2 className="module-title">Customer & Investor Portal (Client View)</h2>
-          <p className="module-subtitle">Transparent real-time client tracking of slab progress, stage photos & milestone demand letters</p>
+          <h2 className="module-title">Customer <span className="amp">&</span> Investor Portal (Client View)</h2>
+          <p className="module-subtitle">Transparent real-time client tracking of slab progress, stage photos <span className="amp">&</span> milestone demand letters</p>
         </div>
         <select 
           className="select-filter-dubai"
