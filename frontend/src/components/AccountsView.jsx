@@ -20,6 +20,7 @@ import {
   HiOutlineShieldCheck as ShieldCheck,
   HiSparkles as Sparkles
 } from 'react-icons/hi2';
+import RupeeIcon from './common/RupeeIcon';
 
 export default function AccountsView() {
   const [data, setData] = useState(DEFAULT_ACCOUNTS);
@@ -606,9 +607,12 @@ export default function AccountsView() {
         <div className="dubai-card fin-stat-card">
           <div className="fin-card-top">
             <span className="fin-label">Total Contract Value</span>
-            <span className="fin-icon-pill icon-gold"><IndianRupee size={18} /></span>
+            <span className="fin-icon-pill icon-gold"><RupeeIcon size={18} color="#D97706" /></span>
           </div>
-          <div className="fin-val">₹{(summary.totalContractValue / 10000000).toFixed(2)} Cr</div>
+          <div className="fin-val" style={{ display: 'inline-flex', alignItems: 'center', gap: '3px' }}>
+            <RupeeIcon size={20} color="#0F172A" />
+            <span>{(summary.totalContractValue / 10000000).toFixed(2)} Cr</span>
+          </div>
           <div className="fin-sub">Cumulative portfolio commitment</div>
         </div>
 
@@ -617,7 +621,10 @@ export default function AccountsView() {
             <span className="fin-label">Customer Receipts Received</span>
             <span className="fin-icon-pill icon-green"><ArrowUpRight size={18} /></span>
           </div>
-          <div className="fin-val text-green">₹{(summary.totalCustomerReceived / 10000000).toFixed(2)} Cr</div>
+          <div className="fin-val text-green" style={{ display: 'inline-flex', alignItems: 'center', gap: '3px' }}>
+            <RupeeIcon size={20} color="#16A34A" />
+            <span>{(summary.totalCustomerReceived / 10000000).toFixed(2)} Cr</span>
+          </div>
           <div className="fin-sub">Milestone payments collected</div>
         </div>
 
@@ -626,7 +633,10 @@ export default function AccountsView() {
             <span className="fin-label">Pending Client Receivables</span>
             <span className="fin-icon-pill icon-rose"><Clock size={18} /></span>
           </div>
-          <div className="fin-val text-rose">₹{(summary.pendingCustomerPayments / 10000000).toFixed(2)} Cr</div>
+          <div className="fin-val text-rose" style={{ display: 'inline-flex', alignItems: 'center', gap: '3px' }}>
+            <RupeeIcon size={20} color="#E11D48" />
+            <span>{(summary.pendingCustomerPayments / 10000000).toFixed(2)} Cr</span>
+          </div>
           <div className="fin-sub">Balance payment pending from buyers</div>
         </div>
 
@@ -635,7 +645,10 @@ export default function AccountsView() {
             <span className="fin-label">Total Site Expenses Incurred</span>
             <span className="fin-icon-pill icon-amber"><Receipt size={18} /></span>
           </div>
-          <div className="fin-val text-amber">₹{(summary.totalActualExpenses / 10000000).toFixed(2)} Cr</div>
+          <div className="fin-val text-amber" style={{ display: 'inline-flex', alignItems: 'center', gap: '3px' }}>
+            <RupeeIcon size={20} color="#D97706" />
+            <span>{(summary.totalActualExpenses / 10000000).toFixed(2)} Cr</span>
+          </div>
           <div className="fin-sub">Material, Labour & Contractor payouts</div>
         </div>
       </div>
@@ -790,9 +803,13 @@ export default function AccountsView() {
                       <span style={{ 
                         fontWeight: 800, 
                         color: isIncome ? '#10B981' : '#0F172A',
-                        fontSize: '13.5px'
+                        fontSize: '13.5px',
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: '2px'
                       }}>
-                        {isIncome ? '+' : '-'} ₹{Number(tx.amount).toLocaleString('en-IN')}
+                        {isIncome ? '+' : '-'} <RupeeIcon size={12} color={isIncome ? '#10B981' : '#0F172A'} />
+                        <span>{Number(tx.amount).toLocaleString('en-IN')}</span>
                       </span>
                     </td>
                     <td style={{ color: '#64748B', maxWidth: '240px' }}>

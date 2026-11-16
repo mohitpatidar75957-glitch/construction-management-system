@@ -22,6 +22,7 @@ import {
   HiOutlineSquare3Stack3D as Layers,
   HiCheck as Check
 } from 'react-icons/hi2';
+import RupeeIcon from './common/RupeeIcon';
 
 export default function ProjectsView() {
   const [projects, setProjects] = useState(DEFAULT_PROJECTS);
@@ -1962,10 +1963,16 @@ export default function ProjectsView() {
                       <div className="table-cell-title">{p.site_location}</div>
                     </td>
                     <td>
-                      <div className="table-cell-title">₹{(Number(p.budget) / 10000000).toFixed(2)} Cr</div>
+                      <div className="table-cell-title" style={{ display: 'inline-flex', alignItems: 'center', gap: '3px' }}>
+                        <RupeeIcon size={12} color="#0F172A" />
+                        <span>{(Number(p.budget) / 10000000).toFixed(2)} Cr</span>
+                      </div>
                     </td>
                     <td>
-                      <div className="table-cell-title text-amber">₹{(Number(p.spent) / 10000000).toFixed(2)} Cr</div>
+                      <div className="table-cell-title text-amber" style={{ display: 'inline-flex', alignItems: 'center', gap: '3px' }}>
+                        <RupeeIcon size={12} color="#D97706" />
+                        <span>{(Number(p.spent) / 10000000).toFixed(2)} Cr</span>
+                      </div>
                     </td>
                     <td>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>

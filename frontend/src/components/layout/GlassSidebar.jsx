@@ -1,47 +1,44 @@
 import React from 'react';
 import { useAuth } from '../../context/AuthContext';
+import { LayoutDashboard, HardHat } from 'lucide-react';
 import { 
-  HiHome,
-  HiOutlineHome,
   HiOutlineBuildingOffice2,
-  HiOutlineCreditCard,
-  HiOutlineUserGroup,
+  HiOutlineBanknotes,
   HiOutlineCube,
   HiOutlineChartBar,
   HiOutlineTruck,
-  HiOutlineShoppingCart,
+  HiOutlineClipboardDocumentList,
   HiOutlineBuildingStorefront,
   HiOutlineCalendarDays,
   HiOutlineCalculator,
   HiOutlineCheckBadge,
   HiOutlineFolderArrowDown,
-  HiOutlineBanknotes,
+  HiOutlineCreditCard,
   HiOutlineShieldCheck,
   HiOutlineGlobeAlt,
   HiOutlineBellAlert,
   HiOutlineCircleStack,
-  HiOutlineCog6Tooth,
-  HiOutlineDocumentText
+  HiOutlineCog6Tooth
 } from 'react-icons/hi2';
 
 export default function GlassSidebar({ activeTab, setActiveTab }) {
   const { user, canAccess } = useAuth();
 
   const menuItems = [
-    { id: 'overview', label: 'Dashboard Overview', icon: HiOutlineHome, activeIcon: HiHome },
+    { id: 'overview', label: 'Dashboard Overview', icon: LayoutDashboard },
     { id: 'projects', label: 'Sites & Projects', icon: HiOutlineBuildingOffice2 },
-    { id: 'accounts', label: 'Accounts & Billing (RA Bills)', icon: HiOutlineCreditCard },
-    { id: 'labour', label: 'Labour & Workforce Muster', icon: HiOutlineUserGroup },
+    { id: 'accounts', label: 'Accounts & Billing (RA Bills)', icon: HiOutlineBanknotes },
+    { id: 'labour', label: 'Labour & Workforce Muster', icon: HardHat },
     { id: 'materials', label: 'Material & Inventory Assets', icon: HiOutlineCube },
     { id: 'reports', label: 'Daily Progress (DPR) & Reports', icon: HiOutlineChartBar },
     { id: 'equipment', label: 'Machinery & Equipment Tracking', icon: HiOutlineTruck },
-    { id: 'purchase_orders', label: 'Purchase Orders (PO) Approvals', icon: HiOutlineShoppingCart },
+    { id: 'purchase_orders', label: 'Purchase Orders (PO) Approvals', icon: HiOutlineClipboardDocumentList },
     { id: 'vendors', label: 'Vendor & Supplier Management', icon: HiOutlineBuildingStorefront },
     { id: 'tasks_gantt', label: 'Task Scheduling & Gantt Timeline', icon: HiOutlineCalendarDays },
     { id: 'boq_estimates', label: 'BOQ & Cost Estimates vs Actuals', icon: HiOutlineCalculator },
     { id: 'approvals', label: 'Expense Approval Workflow', icon: HiOutlineCheckBadge },
     { id: 'documents', label: 'Document Manager & Compliance NOCs', icon: HiOutlineFolderArrowDown },
-    { id: 'cashbook', label: 'Site Cash Book & Petty Cash Float', icon: HiOutlineBanknotes },
+    { id: 'cashbook', label: 'Site Cash Book & Petty Cash Float', icon: HiOutlineCreditCard },
     { id: 'safety_quality', label: 'Safety Checklists & Snag List', icon: HiOutlineShieldCheck },
     { id: 'customer_portal', label: 'Customer & Investor Portal', icon: HiOutlineGlobeAlt },
     { id: 'notifications', label: 'Notifications (WhatsApp / SMS Alerts)', icon: HiOutlineBellAlert },
@@ -72,13 +69,13 @@ export default function GlassSidebar({ activeTab, setActiveTab }) {
         }}
         title="SitePilot - Construction Management"
       >
-        <HiOutlineDocumentText size={21} strokeWidth={2} />
+        <HiOutlineBuildingOffice2 size={22} strokeWidth={2.2} />
       </div>
 
       {/* Navigation Icons Visible Directly on the Line */}
       <nav className="sidebar-nav-list">
         {visibleItems.map((item) => {
-          const Icon = (item.activeIcon && activeTab === item.id) ? item.activeIcon : item.icon;
+          const Icon = item.icon;
           const isActive = activeTab === item.id;
 
           return (

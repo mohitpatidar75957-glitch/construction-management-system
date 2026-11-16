@@ -15,6 +15,7 @@ import {
   HiOutlineShieldCheck as ShieldCheck,
   HiOutlineUserPlus as UserCheck
 } from 'react-icons/hi2';
+import RupeeIcon from './common/RupeeIcon';
 
 export default function LabourView() {
   const [labour, setLabour] = useState(DEFAULT_LABOUR);
@@ -486,7 +487,10 @@ export default function LabourView() {
             <span className="fin-label">Today's Wage Liability</span>
             <span className="fin-icon-pill icon-green"><IndianRupee size={18} /></span>
           </div>
-          <div className="fin-val text-green">₹{totalWagePool.toLocaleString('en-IN')}</div>
+          <div className="fin-val text-green" style={{ display: 'inline-flex', alignItems: 'center', gap: '3px' }}>
+            <RupeeIcon size={20} color="#16A34A" />
+            <span>{totalWagePool.toLocaleString('en-IN')}</span>
+          </div>
           <div className="fin-sub">Daily wage bill for today's muster roll</div>
         </div>
 
@@ -495,7 +499,10 @@ export default function LabourView() {
             <span className="fin-label">Pending Wage Disbursements</span>
             <span className="fin-icon-pill icon-rose"><Clock size={18} /></span>
           </div>
-          <div className="fin-val text-rose">₹{pendingPayouts.toLocaleString('en-IN')}</div>
+          <div className="fin-val text-rose" style={{ display: 'inline-flex', alignItems: 'center', gap: '3px' }}>
+            <RupeeIcon size={20} color="#E11D48" />
+            <span>{pendingPayouts.toLocaleString('en-IN')}</span>
+          </div>
           <div className="fin-sub">Unpaid wages awaiting bank payout</div>
         </div>
 
@@ -563,7 +570,10 @@ export default function LabourView() {
                     <div style={{ color: '#475569' }}>{w.contractor_agency || 'Direct Site Hire'}</div>
                   </td>
                   <td>
-                    <span style={{ fontWeight: 800 }}>₹{w.daily_wage}</span>
+                    <span style={{ fontWeight: 800, display: 'inline-flex', alignItems: 'center', gap: '2px' }}>
+                      <RupeeIcon size={12} color="#0F172A" />
+                      <span>{w.daily_wage}</span>
+                    </span>
                   </td>
                   <td>
                     <span className={`status-tag ${w.attendance_status === 'PRESENT' ? 'tag-green' : 'tag-rose'}`}>

@@ -14,6 +14,7 @@ import {
   HiOutlineShieldCheck as ShieldCheck,
   HiOutlineTruck as Truck
 } from 'react-icons/hi2';
+import RupeeIcon from './common/RupeeIcon';
 
 export default function MaterialsView() {
   const [materials, setMaterials] = useState(DEFAULT_MATERIALS);
@@ -532,7 +533,10 @@ export default function MaterialsView() {
             <span className="fin-label">Total Inventory Assets</span>
             <span className="fin-icon-pill icon-gold"><Boxes size={18} /></span>
           </div>
-          <div className="fin-val">₹{(totalInventoryValue / 100000).toFixed(2)} Lakhs</div>
+          <div className="fin-val" style={{ display: 'inline-flex', alignItems: 'center', gap: '3px' }}>
+            <RupeeIcon size={20} color="#0F172A" />
+            <span>{(totalInventoryValue / 100000).toFixed(2)} Lakhs</span>
+          </div>
           <div className="fin-sub">Estimated on-site material valuation</div>
         </div>
 
@@ -635,11 +639,15 @@ export default function MaterialsView() {
                       <span style={{ color: '#64748B' }}>{m.min_threshold} {m.unit}</span>
                     </td>
                     <td>
-                      ₹{m.unit_price} / {m.unit}
+                      <span style={{ display: 'inline-flex', alignItems: 'center', gap: '2px' }}>
+                        <RupeeIcon size={12} color="#475569" />
+                        <span>{m.unit_price} / {m.unit}</span>
+                      </span>
                     </td>
                     <td>
-                      <span style={{ fontWeight: 800, color: '#0F172A' }}>
-                        ₹{itemVal.toLocaleString('en-IN')}
+                      <span style={{ fontWeight: 800, color: '#0F172A', display: 'inline-flex', alignItems: 'center', gap: '2px' }}>
+                        <RupeeIcon size={13} color="#0F172A" />
+                        <span>{itemVal.toLocaleString('en-IN')}</span>
                       </span>
                     </td>
                     <td>

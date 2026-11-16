@@ -17,6 +17,7 @@ import {
 } from 'react-icons/hi2';
 import ChartCard from './common/ChartCard';
 import StatusChip from './common/StatusChip';
+import RupeeIcon from './common/RupeeIcon';
 import { api } from '../api/client';
 
 export default function Dashboard() {
@@ -1679,14 +1680,15 @@ export default function Dashboard() {
           <div>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '8px' }}>
               <span style={{ fontSize: '12px', fontWeight: 600, color: '#64748B' }}>Total Project Value</span>
-              <span className="glass-pill" style={{ padding: '2px 10px', fontSize: '10px', fontWeight: 700, color: '#475569' }}>
-                INR ₹
+              <span className="glass-pill" style={{ padding: '2px 10px', fontSize: '10px', fontWeight: 700, color: '#475569', display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
+                INR <RupeeIcon size={10} color="#475569" />
               </span>
             </div>
 
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px', margin: '8px 0 16px 0', flexWrap: 'wrap' }}>
-              <h2 style={{ fontSize: '30px', fontWeight: 800, color: '#0F172A', letterSpacing: '-0.03em', margin: 0 }}>
-                ₹53,00,00,000
+              <h2 style={{ fontSize: '30px', fontWeight: 800, color: '#0F172A', letterSpacing: '-0.03em', margin: 0, display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
+                <RupeeIcon size={25} color="#0F172A" />
+                <span>53,00,00,000</span>
               </h2>
               <span style={{
                 display: 'inline-flex',
@@ -1733,7 +1735,9 @@ export default function Dashboard() {
               {/* Palm Residency */}
               <div className="mini-wallet-card">
                 <span style={{ display: 'block', fontSize: '10px', fontWeight: 700, color: '#64748B', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>Palm Residency</span>
-                <span style={{ display: 'block', fontSize: '13px', fontWeight: 800, color: '#0F172A', margin: '3px 0' }}>₹18.2 Cr</span>
+                <span style={{ display: 'inline-flex', alignItems: 'center', gap: '2px', fontSize: '13px', fontWeight: 800, color: '#0F172A', margin: '3px 0' }}>
+                  <RupeeIcon size={12} color="#0F172A" /> 18.2 Cr
+                </span>
                 <span style={{ display: 'inline-block', fontSize: '10px', fontWeight: 700, color: '#16A34A', background: '#DCFCE7', padding: '1px 6px', borderRadius: '9999px' }}>
                   +4.2%
                 </span>
@@ -1742,7 +1746,9 @@ export default function Dashboard() {
               {/* Skyline Tower */}
               <div className="mini-wallet-card">
                 <span style={{ display: 'block', fontSize: '10px', fontWeight: 700, color: '#64748B', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>Skyline Tower</span>
-                <span style={{ display: 'block', fontSize: '13px', fontWeight: 800, color: '#0F172A', margin: '3px 0' }}>₹21.5 Cr</span>
+                <span style={{ display: 'inline-flex', alignItems: 'center', gap: '2px', fontSize: '13px', fontWeight: 800, color: '#0F172A', margin: '3px 0' }}>
+                  <RupeeIcon size={12} color="#0F172A" /> 21.5 Cr
+                </span>
                 <span style={{ display: 'inline-block', fontSize: '10px', fontWeight: 700, color: '#16A34A', background: '#DCFCE7', padding: '1px 6px', borderRadius: '9999px' }}>
                   +2.1%
                 </span>
@@ -1751,7 +1757,9 @@ export default function Dashboard() {
               {/* Green Avenue */}
               <div className="mini-wallet-card">
                 <span style={{ display: 'block', fontSize: '10px', fontWeight: 700, color: '#64748B', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>Green Avenue</span>
-                <span style={{ display: 'block', fontSize: '13px', fontWeight: 800, color: '#0F172A', margin: '3px 0' }}>₹13.3 Cr</span>
+                <span style={{ display: 'inline-flex', alignItems: 'center', gap: '2px', fontSize: '13px', fontWeight: 800, color: '#0F172A', margin: '3px 0' }}>
+                  <RupeeIcon size={12} color="#0F172A" /> 13.3 Cr
+                </span>
                 <span style={{ display: 'inline-block', fontSize: '10px', fontWeight: 700, color: '#DC2626', background: '#FEE2E2', padding: '1px 6px', borderRadius: '9999px' }}>
                   -1.4%
                 </span>
@@ -1813,8 +1821,9 @@ export default function Dashboard() {
                 <ArrowUpRight size={13} color="#475569" />
               </span>
             </div>
-            <div style={{ fontSize: '24px', fontWeight: 800, color: '#0F172A', margin: '6px 0' }}>
-              ₹38.5 L
+            <div style={{ fontSize: '24px', fontWeight: 800, color: '#0F172A', margin: '6px 0', display: 'inline-flex', alignItems: 'center', gap: '3px' }}>
+              <RupeeIcon size={19} color="#0F172A" />
+              <span>38.5 L</span>
             </div>
             <div>
               <span style={{
@@ -1885,8 +1894,12 @@ export default function Dashboard() {
             </div>
 
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: '6px' }}>
-              <span style={{ fontSize: '13px', fontWeight: 800, color: '#0F172A' }}>₹5.4 Cr spent</span>
-              <span style={{ fontSize: '12px', fontWeight: 600, color: '#94A3B8' }}>of ₹7.5 Cr</span>
+              <span style={{ fontSize: '13px', fontWeight: 800, color: '#0F172A', display: 'inline-flex', alignItems: 'center', gap: '2px' }}>
+                <RupeeIcon size={12} color="#0F172A" /> 5.4 Cr spent
+              </span>
+              <span style={{ fontSize: '12px', fontWeight: 600, color: '#94A3B8', display: 'inline-flex', alignItems: 'center', gap: '2px' }}>
+                of <RupeeIcon size={11} color="#94A3B8" /> 7.5 Cr
+              </span>
             </div>
           </div>
 
@@ -1974,7 +1987,12 @@ export default function Dashboard() {
                           {row.title}
                         </span>
                       </td>
-                      <td style={{ fontWeight: 800, color: '#0F172A' }}>{row.amount}</td>
+                      <td style={{ fontWeight: 800, color: '#0F172A' }}>
+                        <span style={{ display: 'inline-flex', alignItems: 'center', gap: '3px' }}>
+                          <RupeeIcon size={12} color="#0F172A" />
+                          <span>{String(row.amount || '').replace('₹', '').trim()}</span>
+                        </span>
+                      </td>
                       <td><StatusChip status={row.status} /></td>
                       <td style={{ fontSize: '11px', color: '#64748B' }}>{row.date}</td>
                     </tr>
