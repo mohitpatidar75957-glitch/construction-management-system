@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { api, DEFAULT_MATERIALS, DEFAULT_PROJECTS } from '../api/client';
 import { 
-  Boxes, 
-  AlertTriangle, 
-  CheckCircle2, 
-  IndianRupee, 
-  PackagePlus, 
-  Building2, 
-  Plus, 
-  Trash2,
-  Filter,
-  ArrowLeft,
-  ShieldCheck,
-  Truck
-} from 'lucide-react';
+  HiOutlineCube as Boxes, 
+  HiOutlineExclamationTriangle as AlertTriangle, 
+  HiOutlineCheckCircle as CheckCircle2, 
+  HiOutlineCurrencyRupee as IndianRupee, 
+  HiPlus as PackagePlus, 
+  HiOutlineBuildingOffice2 as Building2, 
+  HiPlus as Plus, 
+  HiOutlineTrash as Trash2,
+  HiOutlineFunnel as Filter,
+  HiArrowLeft as ArrowLeft,
+  HiOutlineShieldCheck as ShieldCheck,
+  HiOutlineTruck as Truck
+} from 'react-icons/hi2';
 
 export default function MaterialsView() {
   const [materials, setMaterials] = useState(DEFAULT_MATERIALS);

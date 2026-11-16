@@ -1,20 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { api } from '../api/client';
 import { 
-  Truck, 
-  Plus, 
-  Trash2, 
-  Fuel, 
-  Wrench, 
-  CheckCircle2, 
-  AlertCircle, 
-  Building2, 
-  IndianRupee,
-  ArrowLeft,
-  ShieldCheck,
-  User,
-  Clock
-} from 'lucide-react';
+  HiOutlineTruck as Truck, 
+  HiPlus as Plus, 
+  HiOutlineTrash as Trash2, 
+  HiOutlineFire as Fuel, 
+  HiOutlineWrenchScrewdriver as Wrench, 
+  HiOutlineCheckCircle as CheckCircle2, 
+  HiOutlineExclamationCircle as AlertCircle, 
+  HiOutlineBuildingOffice2 as Building2, 
+  HiOutlineCurrencyRupee as IndianRupee,
+  HiArrowLeft as ArrowLeft,
+  HiOutlineShieldCheck as ShieldCheck,
+  HiOutlineUser as User,
+  HiOutlineClock as Clock
+} from 'react-icons/hi2';
 
 export default function EquipmentView() {
   const [equipment, setEquipment] = useState([]);

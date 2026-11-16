@@ -1,5 +1,13 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Search, Bell, LogOut, ChevronDown, User, ShieldCheck, RefreshCw } from 'lucide-react';
+import { 
+  HiMagnifyingGlass, 
+  HiOutlineBell, 
+  HiArrowPath, 
+  HiChevronDown, 
+  HiOutlineUser, 
+  HiOutlineArrowRightOnRectangle, 
+  HiOutlineShieldCheck 
+} from 'react-icons/hi2';
 import { useAuth } from '../../context/AuthContext';
 
 export default function GlassTopbar({ onRefresh, onOpenProfile }) {
@@ -94,14 +102,14 @@ export default function GlassTopbar({ onRefresh, onOpenProfile }) {
       {/* Center: Search Pill Bar */}
       <div style={{ flex: 1, maxWidth: '500px', margin: '0 16px' }}>
         <div style={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
-          <Search size={14} color="#475569" style={{ position: 'absolute', left: '14px', pointerEvents: 'none' }} />
+          <HiMagnifyingGlass size={16} color="#475569" style={{ position: 'absolute', left: '14px', pointerEvents: 'none' }} />
           <input 
             type="text" 
             placeholder="Search sites, labour, material, payments..." 
             className="glass-pill"
             style={{
               width: '100%',
-              padding: '8px 65px 8px 36px',
+              padding: '8px 65px 8px 38px',
               fontSize: '12px',
               fontWeight: 500,
               color: '#0F172A',
@@ -142,7 +150,7 @@ export default function GlassTopbar({ onRefresh, onOpenProfile }) {
           }}
           title="Refresh Data"
         >
-          <RefreshCw size={14} />
+          <HiArrowPath size={16} />
         </button>
 
         {/* User Profile Pill / Menu Trigger */}
@@ -175,7 +183,7 @@ export default function GlassTopbar({ onRefresh, onOpenProfile }) {
           <span style={{ fontSize: '11.5px', fontWeight: 700, color: '#0F172A' }}>
             {user?.roleTitle?.split('/')[0] || 'Super Admin'}
           </span>
-          <ChevronDown size={13} color="#64748B" />
+          <HiChevronDown size={14} color="#64748B" />
         </div>
 
         {/* Profile Details Dropdown */}
@@ -243,7 +251,7 @@ export default function GlassTopbar({ onRefresh, onOpenProfile }) {
                 textAlign: 'left'
               }}
             >
-              <User size={15} />
+              <HiOutlineUser size={16} />
               <span>View Full Profile & Clearances</span>
             </button>
 
@@ -268,7 +276,7 @@ export default function GlassTopbar({ onRefresh, onOpenProfile }) {
                 transition: 'background 0.15s ease'
               }}
             >
-              <LogOut size={14} />
+              <HiOutlineArrowRightOnRectangle size={16} />
               <span>Sign Out / Lock Workspace</span>
             </button>
           </div>

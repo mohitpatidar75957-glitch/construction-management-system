@@ -1,20 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { api, DEFAULT_LABOUR, DEFAULT_PROJECTS } from '../api/client';
 import { 
-  Users, 
-  HardHat, 
-  IndianRupee, 
-  CheckCircle2, 
-  Clock, 
-  AlertCircle, 
-  Plus, 
-  Building2,
-  Calendar,
-  Filter,
-  ArrowLeft,
-  ShieldCheck,
-  UserCheck
-} from 'lucide-react';
+  HiOutlineUserGroup as Users, 
+  HiOutlineUserGroup as HardHat, 
+  HiOutlineCurrencyRupee as IndianRupee, 
+  HiOutlineCheckCircle as CheckCircle2, 
+  HiOutlineClock as Clock, 
+  HiOutlineExclamationCircle as AlertCircle, 
+  HiPlus as Plus, 
+  HiOutlineBuildingOffice2 as Building2,
+  HiOutlineCalendarDays as Calendar,
+  HiOutlineFunnel as Filter,
+  HiArrowLeft as ArrowLeft,
+  HiOutlineShieldCheck as ShieldCheck,
+  HiOutlineUserPlus as UserCheck
+} from 'react-icons/hi2';
 
 export default function LabourView() {
   const [labour, setLabour] = useState(DEFAULT_LABOUR);

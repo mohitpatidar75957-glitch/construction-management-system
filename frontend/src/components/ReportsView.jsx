@@ -1,22 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import { api, DEFAULT_DASHBOARD, DEFAULT_DPR, DEFAULT_PROJECTS, DEFAULT_ACCOUNTS } from '../api/client';
 import { 
-  BarChart3, 
-  TrendingUp, 
-  AlertTriangle, 
-  CheckCircle2, 
-  Clock, 
-  IndianRupee, 
-  Building2, 
-  FileSpreadsheet, 
-  Plus, 
-  Sun,
-  ArrowLeft,
-  Calendar,
-  User,
-  ShieldCheck,
-  MapPin
-} from 'lucide-react';
+  HiOutlineChartBar as BarChart3, 
+  HiOutlineArrowTrendingUp as TrendingUp, 
+  HiOutlineExclamationTriangle as AlertTriangle, 
+  HiOutlineCheckCircle as CheckCircle2, 
+  HiOutlineClock as Clock, 
+  HiOutlineCurrencyRupee as IndianRupee, 
+  HiOutlineBuildingOffice2 as Building2, 
+  HiOutlineTableCells as FileSpreadsheet, 
+  HiPlus as Plus, 
+  HiOutlineSun as Sun,
+  HiArrowLeft as ArrowLeft,
+  HiOutlineCalendarDays as Calendar,
+  HiOutlineUser as User,
+  HiOutlineShieldCheck as ShieldCheck,
+  HiOutlineMapPin as MapPin
+} from 'react-icons/hi2';
 
 export default function ReportsView() {
   const [dashboardData, setDashboardData] = useState(DEFAULT_DASHBOARD);

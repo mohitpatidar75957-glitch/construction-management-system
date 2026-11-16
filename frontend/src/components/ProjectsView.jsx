@@ -1,27 +1,27 @@
 import React, { useEffect, useState } from 'react';
 import { api, DEFAULT_PROJECTS } from '../api/client';
 import { 
-  Building2, 
-  MapPin, 
-  IndianRupee, 
-  Calendar, 
-  CheckCircle2, 
-  AlertTriangle, 
-  Clock, 
-  Plus, 
-  ArrowRight, 
-  ArrowLeft,
-  User, 
-  HardHat,
-  Trash2,
-  X,
-  Sparkles,
-  ShieldCheck,
-  FileText,
-  TrendingUp,
-  Layers,
-  Check
-} from 'lucide-react';
+  HiOutlineBuildingOffice2 as Building2, 
+  HiOutlineMapPin as MapPin, 
+  HiOutlineCurrencyRupee as IndianRupee, 
+  HiOutlineCalendarDays as Calendar, 
+  HiOutlineCheckCircle as CheckCircle2, 
+  HiOutlineExclamationTriangle as AlertTriangle, 
+  HiOutlineClock as Clock, 
+  HiPlus as Plus, 
+  HiArrowRight as ArrowRight, 
+  HiArrowLeft as ArrowLeft,
+  HiOutlineUser as User, 
+  HiOutlineUserGroup as HardHat,
+  HiOutlineTrash as Trash2,
+  HiXMark as X,
+  HiSparkles as Sparkles,
+  HiOutlineShieldCheck as ShieldCheck,
+  HiOutlineDocumentText as FileText,
+  HiOutlineArrowTrendingUp as TrendingUp,
+  HiOutlineSquare3Stack3D as Layers,
+  HiCheck as Check
+} from 'react-icons/hi2';
 
 export default function ProjectsView() {
   const [projects, setProjects] = useState(DEFAULT_PROJECTS);

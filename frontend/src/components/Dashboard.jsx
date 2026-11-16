@@ -1,20 +1,20 @@
 import React, { useState } from 'react';
 import { 
-  ArrowUpRight, 
-  ArrowDownRight, 
-  Plus, 
-  Search,
-  X,
-  ArrowLeft,
-  Building2,
-  MapPin,
-  IndianRupee,
-  Calendar,
-  CheckCircle2,
-  ShieldCheck,
-  Sparkles,
-  HardHat
-} from 'lucide-react';
+  HiArrowUpRight as ArrowUpRight, 
+  HiArrowDownRight as ArrowDownRight, 
+  HiPlus as Plus, 
+  HiMagnifyingGlass as Search,
+  HiXMark as X,
+  HiArrowLeft as ArrowLeft,
+  HiOutlineBuildingOffice2 as Building2,
+  HiOutlineMapPin as MapPin,
+  HiOutlineCurrencyRupee as IndianRupee,
+  HiOutlineCalendarDays as Calendar,
+  HiOutlineCheckCircle as CheckCircle2,
+  HiOutlineShieldCheck as ShieldCheck,
+  HiSparkles as Sparkles,
+  HiOutlineUserGroup as HardHat
+} from 'react-icons/hi2';
 import ChartCard from './common/ChartCard';
 import StatusChip from './common/StatusChip';
 import { api } from '../api/client';

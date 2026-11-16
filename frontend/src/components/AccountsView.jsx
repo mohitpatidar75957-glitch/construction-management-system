@@ -1,25 +1,25 @@
 import React, { useEffect, useState } from 'react';
 import { api, DEFAULT_ACCOUNTS } from '../api/client';
 import { 
-  WalletCards, 
-  IndianRupee, 
-  TrendingUp, 
-  TrendingDown, 
-  ArrowUpRight, 
-  Plus, 
-  Receipt, 
-  Building2,
-  CheckCircle2,
-  Clock,
-  Filter,
-  ArrowLeft,
-  Calendar,
-  CreditCard,
-  FileText,
-  User,
-  ShieldCheck,
-  Sparkles
-} from 'lucide-react';
+  HiOutlineCreditCard as WalletCards, 
+  HiOutlineCurrencyRupee as IndianRupee, 
+  HiOutlineArrowTrendingUp as TrendingUp, 
+  HiOutlineArrowTrendingDown as TrendingDown, 
+  HiArrowUpRight as ArrowUpRight, 
+  HiPlus as Plus, 
+  HiOutlineReceiptPercent as Receipt, 
+  HiOutlineBuildingOffice2 as Building2,
+  HiOutlineCheckCircle as CheckCircle2,
+  HiOutlineClock as Clock,
+  HiOutlineFunnel as Filter,
+  HiArrowLeft as ArrowLeft,
+  HiOutlineCalendarDays as Calendar,
+  HiOutlineCreditCard as CreditCard,
+  HiOutlineDocumentText as FileText,
+  HiOutlineUser as User,
+  HiOutlineShieldCheck as ShieldCheck,
+  HiSparkles as Sparkles
+} from 'react-icons/hi2';
 
 export default function AccountsView() {
   const [data, setData] = useState(DEFAULT_ACCOUNTS);
