@@ -479,8 +479,8 @@ export default function ReportsView() {
       {/* Action Header */}
       <div className="module-header-row">
         <div>
-          <h2 className="module-title">Executive Reports & Construction Analytics</h2>
-          <p className="module-subtitle">Instant executive insights on top performing sites, budget overruns, delays & net profitability</p>
+          <h2 className="module-title">Executive Reports <span className="amp">&</span> Construction Analytics</h2>
+          <p className="module-subtitle">Instant executive insights on top performing sites, budget overruns, delays <span className="amp">&</span> net profitability</p>
         </div>
         <button className="btn-dubai-gold" onClick={() => setShowDprModal(true)}>
           <Plus size={16} />

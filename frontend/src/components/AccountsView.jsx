@@ -593,8 +593,8 @@ export default function AccountsView() {
       {/* Action Header */}
       <div className="module-header-row">
         <div>
-          <h2 className="module-title">Accounts & Financial Ledger</h2>
-          <p className="module-subtitle">Site budgets, contractor payouts, material invoices, client receipts & P&L</p>
+          <h2 className="module-title">Accounts <span className="amp">&</span> Financial Ledger</h2>
+          <p className="module-subtitle">Site budgets, contractor payouts, material invoices, client receipts <span className="amp">&</span> P<span className="amp">&</span>L</p>
         </div>
         <button className="btn-dubai-gold" onClick={() => setShowModal(true)}>
           <Plus size={16} />
@@ -678,7 +678,7 @@ export default function AccountsView() {
         <div className="table-header-bar">
           <div className="table-title-group">
             <Building2 size={18} className="gold-text" />
-            <h3>Site-wise Profit & Loss (P&L) Analysis</h3>
+            <h3>Site-wise Profit <span className="amp">&</span> Loss (P<span className="amp">&</span>L) Analysis</h3>
           </div>
           <span className="glass-pill" style={{ padding: '3px 12px', fontSize: '11px', fontWeight: 700 }}>
             {sitePL.length} Sites Tracked
@@ -740,7 +740,7 @@ export default function AccountsView() {
         <div className="table-header-bar">
           <div className="table-title-group">
             <Receipt size={18} className="gold-text" />
-            <h3>Verified Transaction Ledger & Vouchers</h3>
+            <h3>Verified Transaction Ledger <span className="amp">&</span> Vouchers</h3>
           </div>
 
           {/* Filter Dropdown */}

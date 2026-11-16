@@ -517,8 +517,8 @@ export default function MaterialsView() {
       {/* Action Header */}
       <div className="module-header-row">
         <div>
-          <h2 className="module-title">Material & Procurement Inventory</h2>
-          <p className="module-subtitle">Stock levels for Cement, Sariya (Steel), Bricks, Sand, site allocations & restock alerts</p>
+          <h2 className="module-title">Material <span className="amp">&</span> Procurement Inventory</h2>
+          <p className="module-subtitle">Stock levels for Cement, Sariya (Steel), Bricks, Sand, site allocations <span className="amp">&</span> restock alerts</p>
         </div>
         <button className="btn-dubai-gold" onClick={() => setShowModal(true)}>
           <Plus size={16} />

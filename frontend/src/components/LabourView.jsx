@@ -462,8 +462,8 @@ export default function LabourView() {
       {/* Action Header */}
       <div className="module-header-row">
         <div>
-          <h2 className="module-title">Labour & Contractor Workforce</h2>
-          <p className="module-subtitle">Daily site attendance, contractor agencies, trade classifications & wage payouts</p>
+          <h2 className="module-title">Labour <span className="amp">&</span> Contractor Workforce</h2>
+          <p className="module-subtitle">Daily site attendance, contractor agencies, trade classifications <span className="amp">&</span> wage payouts</p>
         </div>
         <button className="btn-dubai-gold" onClick={() => setShowModal(true)}>
           <Plus size={16} />

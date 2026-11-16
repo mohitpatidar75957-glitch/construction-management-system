@@ -208,7 +208,7 @@ export default function Dashboard() {
 
             <div>
               <h1 style={{ fontSize: '24px', fontWeight: 800, color: '#0F172A', margin: 0, letterSpacing: '-0.02em' }}>
-                Log Daily Site Activity & Field Telemetry
+                Log Daily Site Activity <span className="amp">&</span> Field Telemetry
               </h1>
               <span style={{ fontSize: '12px', color: '#64748B', fontWeight: 500 }}>
                 Record daily on-site milestone progress, material delivery logs, and field expenditure
@@ -1200,7 +1200,7 @@ export default function Dashboard() {
 
             <div>
               <h1 style={{ fontSize: '24px', fontWeight: 800, color: '#0F172A', margin: 0, letterSpacing: '-0.02em' }}>
-                Log Daily Site Activity & Field Telemetry
+                Log Daily Site Activity <span className="amp">&</span> Field Telemetry
               </h1>
               <span style={{ fontSize: '12px', color: '#64748B', fontWeight: 500 }}>
                 Record daily on-site milestone progress, material delivery logs, and field expenditure

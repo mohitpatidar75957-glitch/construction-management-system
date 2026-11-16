@@ -1848,7 +1848,7 @@ export default function ProjectsView() {
       {/* Action Header */}
       <div className="module-header-row">
         <div>
-          <h2 className="module-title">All Construction Projects & Sites</h2>
+          <h2 className="module-title">All Construction Projects <span className="amp">&</span> Sites</h2>
           <p className="module-subtitle">Click on any site to view complete project intelligence, budget and milestones</p>
         </div>
         <button className="btn-dubai-gold" onClick={() => setShowAddModal(true)}>

@@ -518,8 +518,8 @@ export default function EquipmentView() {
       {/* Action Header */}
       <div className="module-header-row">
         <div>
-          <h2 className="module-title">Machinery, Plant & Heavy Equipment Tracking</h2>
-          <p className="module-subtitle">JCB backhoes, concrete pumps, tower cranes, dumpers, daily diesel consumption & operator muster</p>
+          <h2 className="module-title">Machinery, Plant <span className="amp">&</span> Heavy Equipment Tracking</h2>
+          <p className="module-subtitle">JCB backhoes, concrete pumps, tower cranes, dumpers, daily diesel consumption <span className="amp">&</span> operator muster</p>
         </div>
         <button className="btn-dubai-gold" onClick={() => setShowModal(true)}>
           <Plus size={16} />
