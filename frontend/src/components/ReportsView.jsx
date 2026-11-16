@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { api } from '../api/client';
+import { api, DEFAULT_DASHBOARD, DEFAULT_DPR, DEFAULT_PROJECTS, DEFAULT_ACCOUNTS } from '../api/client';
 import { 
   BarChart3, 
   TrendingUp, 
@@ -19,11 +19,11 @@ import {
 } from 'lucide-react';
 
 export default function ReportsView() {
-  const [dashboardData, setDashboardData] = useState(null);
-  const [dprReports, setDprReports] = useState([]);
-  const [projects, setProjects] = useState([]);
-  const [accounts, setAccounts] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [dashboardData, setDashboardData] = useState(DEFAULT_DASHBOARD);
+  const [dprReports, setDprReports] = useState(DEFAULT_DPR);
+  const [projects, setProjects] = useState(DEFAULT_PROJECTS);
+  const [accounts, setAccounts] = useState(DEFAULT_ACCOUNTS);
+  const [loading, setLoading] = useState(false);
   const [showDprModal, setShowDprModal] = useState(false);
 
   const [dprForm, setDprForm] = useState({

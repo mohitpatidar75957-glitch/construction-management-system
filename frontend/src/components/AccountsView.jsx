@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { api } from '../api/client';
+import { api, DEFAULT_ACCOUNTS } from '../api/client';
 import { 
   WalletCards, 
   IndianRupee, 
@@ -22,8 +22,8 @@ import {
 } from 'lucide-react';
 
 export default function AccountsView() {
-  const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [data, setData] = useState(DEFAULT_ACCOUNTS);
+  const [loading, setLoading] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [filterCategory, setFilterCategory] = useState('ALL');
 

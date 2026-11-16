@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { api } from '../api/client';
+import { api, DEFAULT_LABOUR, DEFAULT_PROJECTS } from '../api/client';
 import { 
   Users, 
   HardHat, 
@@ -17,9 +17,9 @@ import {
 } from 'lucide-react';
 
 export default function LabourView() {
-  const [labour, setLabour] = useState([]);
-  const [projects, setProjects] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [labour, setLabour] = useState(DEFAULT_LABOUR);
+  const [projects, setProjects] = useState(DEFAULT_PROJECTS);
+  const [loading, setLoading] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [selectedProjectFilter, setSelectedProjectFilter] = useState('');
 

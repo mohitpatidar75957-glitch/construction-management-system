@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { api } from '../api/client';
+import { api, DEFAULT_MATERIALS, DEFAULT_PROJECTS } from '../api/client';
 import { 
   Boxes, 
   AlertTriangle, 
@@ -16,9 +16,9 @@ import {
 } from 'lucide-react';
 
 export default function MaterialsView() {
-  const [materials, setMaterials] = useState([]);
-  const [projects, setProjects] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [materials, setMaterials] = useState(DEFAULT_MATERIALS);
+  const [projects, setProjects] = useState(DEFAULT_PROJECTS);
+  const [loading, setLoading] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [selectedSiteFilter, setSelectedSiteFilter] = useState('');
 

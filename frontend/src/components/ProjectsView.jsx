@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { api } from '../api/client';
+import { api, DEFAULT_PROJECTS } from '../api/client';
 import { 
   Building2, 
   MapPin, 
@@ -24,8 +24,8 @@ import {
 } from 'lucide-react';
 
 export default function ProjectsView() {
-  const [projects, setProjects] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [projects, setProjects] = useState(DEFAULT_PROJECTS);
+  const [loading, setLoading] = useState(false);
   const [selectedProject, setSelectedProject] = useState(null);
   const [showAddModal, setShowAddModal] = useState(false);
 
