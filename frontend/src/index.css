@@ -177,15 +177,14 @@ body::after {
   width: 100% !important;
 }
 
-/* Ultra-Narrow Capsule Sidebar (56px) - Sticky & Smoothly Scrollable with NO Visible Scrollbar Line */
+/* Ultra-Narrow Capsule Sidebar (56px) - Full Height Stretch (Zero Bottom Gap) & Smoothly Scrollable with NO Scrollbar Line */
 .glass-sidebar-capsule {
   width: 56px !important;
   min-width: 56px !important;
   max-width: 56px !important;
-  height: calc(100vh - 44px) !important;
-  max-height: calc(100vh - 44px) !important;
-  position: sticky !important;
-  top: 22px !important;
+  align-self: stretch !important;
+  height: auto !important;
+  min-height: 100% !important;
   display: flex !important;
   flex-direction: column !important;
   align-items: center !important;

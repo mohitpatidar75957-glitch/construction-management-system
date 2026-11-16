@@ -12,7 +12,7 @@ export default function MainLayout({ activeTab, setActiveTab, onRefresh, onOpenP
 
       {/* 2. Master Outer Glass Shell (Holds entire dashboard exactly like reference screenshot) */}
       <GlassShell>
-        <div className="dashboard-layout-row flex gap-4 md:gap-6 items-start">
+        <div className="dashboard-layout-row flex gap-4 md:gap-6 items-stretch">
           {/* Left: Ultra-narrow floating vertical glass pill sidebar (~56px wide) */}
           <GlassSidebar activeTab={activeTab} setActiveTab={setActiveTab} />
 
