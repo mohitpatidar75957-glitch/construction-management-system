@@ -177,39 +177,58 @@ body::after {
   width: 100% !important;
 }
 
-/* Ultra-Narrow Capsule Sidebar (56px) - Long Continuous Column Displaying All Icons (Exact User Specs) */
+/* Ultra-Narrow Capsule Sidebar (56px) - Sticky & Smoothly Scrollable with NO Visible Scrollbar Line */
 .glass-sidebar-capsule {
   width: 56px !important;
   min-width: 56px !important;
   max-width: 56px !important;
+  height: calc(100vh - 44px) !important;
+  max-height: calc(100vh - 44px) !important;
+  position: sticky !important;
+  top: 22px !important;
   display: flex !important;
   flex-direction: column !important;
   align-items: center !important;
-  justify-content: flex-start !important;
-  padding: 16px 0 20px !important;
-  background: rgba(255, 255, 255, 0.65) !important;
-  backdrop-filter: blur(26px) saturate(160%) !important;
-  -webkit-backdrop-filter: blur(26px) saturate(160%) !important;
+  justify-content: space-between !important;
+  padding: 14px 0 16px !important;
+  background: rgba(255, 255, 255, 0.68) !important;
+  backdrop-filter: blur(28px) saturate(160%) !important;
+  -webkit-backdrop-filter: blur(28px) saturate(160%) !important;
   border: 1.5px solid rgba(255, 255, 255, 0.75) !important;
   border-radius: 9999px !important;
   box-shadow: 0 14px 40px rgba(10, 25, 70, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.85) !important;
-  align-self: stretch !important;
   flex-shrink: 0 !important;
-  position: relative !important;
-  z-index: 20 !important;
-  height: auto !important;
-  min-height: 100% !important;
+  z-index: 30 !important;
   box-sizing: border-box !important;
-  overflow: visible !important;
+  overflow: hidden !important;
 }
 
 .sidebar-nav-list {
   display: flex !important;
   flex-direction: column !important;
   align-items: center !important;
-  gap: 10px !important;
+  gap: 8px !important;
   width: 100% !important;
   padding: 4px 0 !important;
+  flex: 1 1 auto !important;
+  min-height: 0 !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  scroll-behavior: smooth !important;
+  overscroll-behavior: contain !important;
+  
+  /* CRITICAL: Completely hide scrollbar line across all browsers */
+  -ms-overflow-style: none !important;  /* IE and Edge */
+  scrollbar-width: none !important;     /* Firefox */
+}
+
+/* Hide scrollbar line in Chrome, Safari, Edge, Opera */
+.sidebar-nav-list::-webkit-scrollbar,
+.glass-sidebar-capsule::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  background: transparent !important;
 }
 
 .nav-item-tooltip {

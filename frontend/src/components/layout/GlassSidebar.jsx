@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import { LayoutDashboard, HardHat } from 'lucide-react';
 import { 
@@ -23,6 +23,13 @@ import {
 
 export default function GlassSidebar({ activeTab, setActiveTab }) {
   const { user, canAccess } = useAuth();
+  const navRef = useRef(null);
+
+  const handleCapsuleWheel = (e) => {
+    if (navRef.current) {
+      navRef.current.scrollTop += e.deltaY;
+    }
+  };
 
   const menuItems = [
     { id: 'overview', label: 'Dashboard Overview', icon: LayoutDashboard },
@@ -49,7 +56,10 @@ export default function GlassSidebar({ activeTab, setActiveTab }) {
   const visibleItems = menuItems.filter(item => canAccess(item.id));
 
   return (
-    <aside className="glass-sidebar-capsule">
+    <aside 
+      className="glass-sidebar-capsule"
+      onWheel={handleCapsuleWheel}
+    >
       {/* Top Blue Brand Icon Button */}
       <div 
         onClick={() => setActiveTab('overview')}
@@ -63,7 +73,7 @@ export default function GlassSidebar({ activeTab, setActiveTab }) {
           alignItems: 'center',
           justifyContent: 'center',
           boxShadow: '0 8px 18px rgba(37, 99, 235, 0.4)',
-          marginBottom: '14px',
+          marginBottom: '10px',
           cursor: 'pointer',
           flexShrink: 0
         }}
@@ -72,8 +82,11 @@ export default function GlassSidebar({ activeTab, setActiveTab }) {
         <HiOutlineBuildingOffice2 size={22} strokeWidth={2.2} />
       </div>
 
-      {/* Navigation Icons Visible Directly on the Line */}
-      <nav className="sidebar-nav-list">
+      {/* Navigation Icons Scrollable Up & Down with NO Scrollbar Line */}
+      <nav 
+        ref={navRef}
+        className="sidebar-nav-list"
+      >
         {visibleItems.map((item) => {
           const Icon = item.icon;
           const isActive = activeTab === item.id;
@@ -85,6 +98,7 @@ export default function GlassSidebar({ activeTab, setActiveTab }) {
               style={{
                 width: '38px',
                 height: '38px',
+                minHeight: '38px',
                 borderRadius: '13px',
                 display: 'flex',
                 alignItems: 'center',
@@ -107,40 +121,32 @@ export default function GlassSidebar({ activeTab, setActiveTab }) {
         })}
       </nav>
 
-      {/* Subtle Separator Dot */}
-      <div 
-        style={{ 
-          width: '16px', 
-          height: '1px', 
-          background: 'rgba(15, 23, 42, 0.14)', 
-          margin: '12px 0', 
-          flexShrink: 0 
-        }} 
-      />
-
-      {/* Bottom Settings Button */}
-      <button
-        onClick={() => setActiveTab('settings')}
-        style={{
-          width: '38px',
-          height: '38px',
-          borderRadius: '13px',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          border: 'none',
-          background: activeTab === 'settings' ? '#ffffff' : 'transparent',
-          color: activeTab === 'settings' ? '#2563EB' : '#475569',
-          boxShadow: activeTab === 'settings' ? '0 6px 18px rgba(10, 25, 70, 0.12)' : 'none',
-          cursor: 'pointer',
-          padding: 0,
-          flexShrink: 0
-        }}
-        title="Settings, Roles, Language (Hindi) & PWA"
-        aria-label="Settings"
-      >
-        <HiOutlineCog6Tooth size={20} strokeWidth={activeTab === 'settings' ? 2.4 : 1.9} />
-      </button>
+      {/* Bottom Settings Button (Pinned cleanly at bottom with NO separator line) */}
+      <div style={{ marginTop: '8px', flexShrink: 0 }}>
+        <button
+          onClick={() => setActiveTab('settings')}
+          style={{
+            width: '38px',
+            height: '38px',
+            minHeight: '38px',
+            borderRadius: '13px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            border: 'none',
+            background: activeTab === 'settings' ? '#ffffff' : 'transparent',
+            color: activeTab === 'settings' ? '#2563EB' : '#475569',
+            boxShadow: activeTab === 'settings' ? '0 6px 18px rgba(10, 25, 70, 0.12)' : 'none',
+            cursor: 'pointer',
+            padding: 0,
+            flexShrink: 0
+          }}
+          title="Settings, Roles, Language (Hindi) & PWA"
+          aria-label="Settings"
+        >
+          <HiOutlineCog6Tooth size={20} strokeWidth={activeTab === 'settings' ? 2.4 : 1.9} />
+        </button>
+      </div>
     </aside>
   );
 }
