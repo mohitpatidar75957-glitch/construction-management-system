@@ -23,6 +23,7 @@ import {
   HiCheck as Check
 } from 'react-icons/hi2';
 import RupeeIcon from './common/RupeeIcon';
+import DocumentManagerView from './modules/DocumentManagerView';
 
 export default function ProjectsView() {
   const [projects, setProjects] = useState(DEFAULT_PROJECTS);
@@ -1406,7 +1407,7 @@ export default function ProjectsView() {
               cursor: 'pointer'
             }}
           >
-            📊 Scope Variations ({variations.length})
+            Scope Variations ({variations.length})
           </button>
 
           <button 
@@ -1423,7 +1424,7 @@ export default function ProjectsView() {
               cursor: 'pointer'
             }}
           >
-            🧮 Site BOQ & Takeoffs
+            Site BOQ <span className="amp">&</span> Takeoffs
           </button>
 
           <button 
@@ -1440,7 +1441,7 @@ export default function ProjectsView() {
               cursor: 'pointer'
             }}
           >
-            📅 Construction Milestones
+            Construction Milestones
           </button>
 
           <button 
@@ -1457,7 +1458,27 @@ export default function ProjectsView() {
               cursor: 'pointer'
             }}
           >
-            🛡️ Safety & Quality Snags
+            Safety <span className="amp">&</span> Quality Snags
+          </button>
+
+          <button 
+            type="button"
+            onClick={() => setProjectSubTab('DOCS')}
+            className="glass-pill"
+            style={{
+              padding: '8px 18px',
+              fontSize: '12px',
+              fontWeight: 700,
+              background: projectSubTab === 'DOCS' ? '#0F172A' : 'rgba(255, 255, 255, 0.65)',
+              color: projectSubTab === 'DOCS' ? '#ffffff' : '#475569',
+              border: 'none',
+              cursor: 'pointer',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '6px'
+            }}
+          >
+            <span>Blueprints <span className="amp">&</span> Compliance Docs</span>
           </button>
         </div>
 
@@ -1834,6 +1855,13 @@ export default function ProjectsView() {
                 </tbody>
               </table>
             </div>
+          </div>
+        )}
+
+        {/* Subtab 5: Site Blueprints & Compliance Vault */}
+        {projectSubTab === 'DOCS' && (
+          <div className="animate-fade-in" style={{ marginTop: '10px' }}>
+            <DocumentManagerView filterProjectId={selectedProject.id} />
           </div>
         )}
       </div>

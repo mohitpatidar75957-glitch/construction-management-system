@@ -179,6 +179,137 @@ export const DEFAULT_DPR = [
   { id: 4, project_id: 4, report_date: '2026-11-16', weather: 'Clear / Sunny', milestone_activity: 'Warehouse Shed 3 - Pre-Engineered Roofing', work_description: 'Completed insulated PUF sandwich panel roofing. Floor epoxy leveling and road paving commenced.', progress_percent_achieved: 90, issues_or_delays: 'None. Almost Complete, handover next week.', supervisor_name: 'Er. Vikas Malviya', project_name: 'Chamunda Industrial Park (Project D)' }
 ];
 
+export const DEFAULT_DOCUMENTS = [
+  {
+    id: 'DOC-101',
+    title: 'Architectural Floor Plans & Structural CAD Layout (G+12)',
+    category: 'Blueprint',
+    project_id: 1,
+    site: 'Skyline Commercial Hub (Project A)',
+    type: 'DWG / CAD',
+    version: 'Rev 4.2',
+    size: '28.4 MB',
+    upload_date: '2026-10-15',
+    expiry_date: '2029-12-31',
+    status: 'VALID',
+    uploaded_by: 'Er. Ankit Sharma (Chief Architect)',
+    preview_url: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&auto=format&fit=crop&q=80',
+    description: 'Complete working drawings for Ground to 12th Floor including column grid, shear walls, and MEP shafts.'
+  },
+  {
+    id: 'DOC-102',
+    title: 'Municipal Corporation Building Sanction & Commencement Certificate',
+    category: 'NOC & Sanction',
+    project_id: 1,
+    site: 'Skyline Commercial Hub (Project A)',
+    type: 'PDF Scan',
+    version: 'Approval No. IMC/2024/7821',
+    size: '4.8 MB',
+    upload_date: '2025-01-20',
+    expiry_date: '2026-12-15',
+    status: 'EXPIRING_SOON',
+    uploaded_by: 'Legal & Liaison Dept',
+    preview_url: 'https://images.unsplash.com/photo-1450133064473-71024230f91b?w=800&auto=format&fit=crop&q=80',
+    description: 'Official municipal building permission certificate. Renewal application required before 15 Dec 2026.'
+  },
+  {
+    id: 'DOC-103',
+    title: 'State Pollution Control Board Environmental Clearance (CTE / CTO)',
+    category: 'Clearance',
+    project_id: 2,
+    site: 'Grand Horizon Enclave (Project B)',
+    type: 'PDF Signed',
+    version: 'Consent Order PCB/IND/884',
+    size: '6.2 MB',
+    upload_date: '2024-11-10',
+    expiry_date: '2026-11-20',
+    status: 'CRITICAL',
+    uploaded_by: 'Compliance Officer',
+    preview_url: 'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=800&auto=format&fit=crop&q=80',
+    description: 'Consent to Operate and air/water quality compliance certificate issued by MPPCB. Renewal required urgently.'
+  },
+  {
+    id: 'DOC-104',
+    title: 'Main Civil Contractor EPC Agreement with Liquidated Damages Clause',
+    category: 'Legal Contract',
+    project_id: 2,
+    site: 'Grand Horizon Enclave (Project B)',
+    type: 'PDF Signed',
+    version: 'Contract Ref: GHE-EPC-2025',
+    size: '12.1 MB',
+    upload_date: '2025-03-01',
+    expiry_date: '2027-03-01',
+    status: 'VALID',
+    uploaded_by: 'Contract Admin',
+    preview_url: 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=800&auto=format&fit=crop&q=80',
+    description: 'Executed construction contract with Larsen Civil Infra Ltd with milestone release schedule.'
+  },
+  {
+    id: 'DOC-105',
+    title: 'Underground Metro Pier Structural Stability & Soil Mechanics Report',
+    category: 'Blueprint',
+    project_id: 3,
+    site: 'Mahakal Metro Package (Project C)',
+    type: 'PDF / CAD',
+    version: 'IIT Structural Audit v2',
+    size: '34.6 MB',
+    upload_date: '2026-05-18',
+    expiry_date: '2027-05-18',
+    status: 'VALID',
+    uploaded_by: 'Er. Rajesh Chouhan',
+    preview_url: 'https://images.unsplash.com/photo-1541888946425-d0fbb186156f?w=800&auto=format&fit=crop&q=80',
+    description: 'Geotechnical bore log and structural stability clearance for metro viaduct piers P-10 to P-24.'
+  },
+  {
+    id: 'DOC-106',
+    title: 'Tower Crane & Passenger Hoist Annual Third-Party Safety Fitness NOC',
+    category: 'Safety & Insurance',
+    project_id: 3,
+    site: 'Mahakal Metro Package (Project C)',
+    type: 'PDF Scan',
+    version: 'Safety Certificate #TC-991',
+    size: '3.1 MB',
+    upload_date: '2025-10-10',
+    expiry_date: '2026-10-10',
+    status: 'EXPIRED',
+    uploaded_by: 'Site Safety Engineer',
+    preview_url: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&auto=format&fit=crop&q=80',
+    description: 'Statutory annual load-test and wire rope inspection certificate. EXPIRED — renewal mandatory before operating.'
+  },
+  {
+    id: 'DOC-107',
+    title: 'Pre-Engineered Building (PEB) Structural Blueprint & Roof Truss CAD',
+    category: 'Blueprint',
+    project_id: 4,
+    site: 'Chamunda Industrial Park (Project D)',
+    type: 'DWG / CAD',
+    version: 'PEB-Shed3-Rev2',
+    size: '19.8 MB',
+    upload_date: '2026-08-12',
+    expiry_date: '2030-01-01',
+    status: 'VALID',
+    uploaded_by: 'Er. Vikas Malviya',
+    preview_url: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=800&auto=format&fit=crop&q=80',
+    description: 'Detailed structural drawing for 60-meter clear span industrial warehouse shed with crane gantry beams.'
+  },
+  {
+    id: 'DOC-108',
+    title: 'Workmen Compensation & Commercial General Liability (CGL) Insurance',
+    category: 'Safety & Insurance',
+    project_id: 4,
+    site: 'Chamunda Industrial Park (Project D)',
+    type: 'PDF Signed',
+    version: 'Policy #BAJAJ-CGL-4482',
+    size: '5.5 MB',
+    upload_date: '2025-12-05',
+    expiry_date: '2026-12-04',
+    status: 'EXPIRING_SOON',
+    uploaded_by: 'HR & Accounts Dept',
+    preview_url: 'https://images.unsplash.com/photo-1450133064473-71024230f91b?w=800&auto=format&fit=crop&q=80',
+    description: 'Covers 150 site workers, subcontractors, and third-party liabilities up to ₹10 Crore.'
+  }
+];
+
 export const DEFAULT_DASHBOARD = {
   total_projects: 4,
   total_budget: 515000000,
@@ -473,5 +604,130 @@ export const api = {
     const updated = [newDpr, ...list];
     setStored('sitepilot_dpr', updated);
     return newDpr;
+  }),
+
+  // Documents & Blueprints Vault
+  getDocuments: (projectId) => safeFetch(`${API_BASE}/documents${projectId ? `?projectId=${projectId}` : ''}`, {}, () => {
+    const list = getStored('sitepilot_documents', DEFAULT_DOCUMENTS);
+    if (projectId) {
+      return list.filter(d => String(d.project_id) === String(projectId));
+    }
+    return list;
+  }),
+
+  uploadDocument: (data) => safeFetch(`${API_BASE}/documents`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data)
+  }, () => {
+    const list = getStored('sitepilot_documents', DEFAULT_DOCUMENTS);
+    const newDoc = {
+      id: `DOC-${Date.now().toString().slice(-4)}`,
+      title: data.title || 'Untitled Construction Document',
+      category: data.category || 'Blueprint',
+      project_id: Number(data.project_id) || 1,
+      site: data.site || 'Skyline Commercial Hub (Project A)',
+      type: data.type || 'PDF / DWG',
+      version: data.version || 'Rev 1.0',
+      size: data.size || '5.2 MB',
+      upload_date: data.upload_date || new Date().toISOString().split('T')[0],
+      expiry_date: data.expiry_date || '2028-12-31',
+      status: data.status || 'VALID',
+      uploaded_by: data.uploaded_by || 'Site Engineer',
+      preview_url: data.preview_url || 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&auto=format&fit=crop&q=80',
+      description: data.description || 'Uploaded blueprint and statutory compliance document'
+    };
+    const updated = [newDoc, ...list];
+    setStored('sitepilot_documents', updated);
+    return newDoc;
+  }),
+
+  renewDocument: (id, newExpiryDate) => safeFetch(`${API_BASE}/documents/${id}/renew`, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ expiry_date: newExpiryDate })
+  }, () => {
+    const list = getStored('sitepilot_documents', DEFAULT_DOCUMENTS);
+    const updated = list.map(d => {
+      if (String(d.id) === String(id)) {
+        return {
+          ...d,
+          expiry_date: newExpiryDate,
+          status: 'VALID'
+        };
+      }
+      return d;
+    });
+    setStored('sitepilot_documents', updated);
+    return { success: true };
+  }),
+
+  deleteDocument: (id) => safeFetch(`${API_BASE}/documents/${id}`, {
+    method: 'DELETE'
+  }, () => {
+    const list = getStored('sitepilot_documents', DEFAULT_DOCUMENTS);
+    const updated = list.filter(d => String(d.id) !== String(id));
+    setStored('sitepilot_documents', updated);
+    return { success: true };
   })
 };
+
+// Document Expiry & Compliance Evaluator
+export function computeDocumentExpiry(doc) {
+  if (!doc.expiry_date || String(doc.expiry_date).toLowerCase() === 'perpetual') {
+    return {
+      status: 'PERPETUAL',
+      daysLeft: 9999,
+      badgeText: 'Perpetual / Lifetime',
+      badgeClass: 'tag-green',
+      isExpired: false,
+      isExpiringSoon: false
+    };
+  }
+
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const expiry = new Date(doc.expiry_date);
+  expiry.setHours(0, 0, 0, 0);
+
+  const diffTime = expiry - today;
+  const daysLeft = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+  if (daysLeft < 0) {
+    return {
+      status: 'EXPIRED',
+      daysLeft,
+      badgeText: `Expired ${Math.abs(daysLeft)}d ago`,
+      badgeClass: 'tag-red',
+      isExpired: true,
+      isExpiringSoon: false
+    };
+  } else if (daysLeft <= 15) {
+    return {
+      status: 'CRITICAL',
+      daysLeft,
+      badgeText: `Expires in ${daysLeft}d (Critical)`,
+      badgeClass: 'tag-red',
+      isExpired: false,
+      isExpiringSoon: true
+    };
+  } else if (daysLeft <= 60) {
+    return {
+      status: 'EXPIRING_SOON',
+      daysLeft,
+      badgeText: `Renewal Due in ${daysLeft}d`,
+      badgeClass: 'tag-amber',
+      isExpired: false,
+      isExpiringSoon: true
+    };
+  } else {
+    return {
+      status: 'VALID',
+      daysLeft,
+      badgeText: `Valid (${daysLeft}d remaining)`,
+      badgeClass: 'tag-green',
+      isExpired: false,
+      isExpiringSoon: false
+    };
+  }
+}
