@@ -24,6 +24,17 @@ html, body, #root {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Space Grotesk Heading Typography Across Entire Platform */
+h1, h2, h3, h4, h5, h6,
+.module-title,
+.page-title,
+.section-title,
+.dashboard-heading,
+.font-heading {
+  font-family: 'Space Grotesk', 'Plus Jakarta Sans', sans-serif !important;
+  letter-spacing: -0.025em;
+}
+
 /* 1) EXACT BLURRED BLUE ROOM BACKGROUND MATCHING REFERENCE SCREENSHOT */
 body::before {
   content: "";
@@ -492,10 +503,11 @@ body::after {
 }
 
 .module-title {
+  font-family: 'Space Grotesk', 'Plus Jakarta Sans', sans-serif !important;
   font-size: 24px !important;
   font-weight: 800 !important;
   color: #0F172A !important;
-  letter-spacing: -0.02em !important;
+  letter-spacing: -0.025em !important;
   margin: 0 !important;
 }
 

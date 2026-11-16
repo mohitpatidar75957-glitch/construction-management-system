@@ -16,3 +16,4 @@ export default function RupeeIcon({ size = 16, className = '', style = {}, color
     />
   );
 }
+
