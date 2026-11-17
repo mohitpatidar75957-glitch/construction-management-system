@@ -82,10 +82,16 @@ body::after {
   box-shadow: 0 30px 80px rgba(10, 25, 70, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.75) !important;
   width: 100% !important;
   max-width: 1560px !important;
-  margin: 16px auto !important;
-  padding: 24px 28px !important;
+  height: calc(100vh - 36px) !important;
+  max-height: calc(100vh - 36px) !important;
+  margin: 0 auto !important;
+  padding: 20px 24px !important;
   position: relative !important;
   z-index: 10 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  box-sizing: border-box !important;
+  overflow: hidden !important;
 }
 
 /* 3) FROSTED GLASS CARDS (Exact Reference Match) */
@@ -175,8 +181,12 @@ button.glass-pill.active-blue {
   display: flex !important;
   flex-direction: row !important;
   gap: 24px !important;
-  align-items: flex-start !important;
+  align-items: stretch !important;
   width: 100% !important;
+  height: 100% !important;
+  flex: 1 1 0% !important;
+  min-height: 0 !important;
+  overflow: hidden !important;
   position: relative !important;
 }
 
@@ -184,19 +194,29 @@ button.glass-pill.active-blue {
   flex: 1 1 0% !important;
   min-width: 0 !important;
   width: 100% !important;
+  height: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+  overflow: hidden !important;
 }
 
-/* Ultra-Narrow Capsule Sidebar (56px) - Sticky Fixed On Viewport (Does NOT scroll with page) */
+.dashboard-view-scroll-container {
+  flex: 1 1 0% !important;
+  min-height: 0 !important;
+  width: 100% !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  padding-bottom: 30px !important;
+  -webkit-overflow-scrolling: touch !important;
+}
+
+/* Ultra-Narrow Capsule Sidebar (56px) - Permanently Fixed In Frame (Zero Shift / Top Space Never Shrinks) */
 .glass-sidebar-capsule {
   width: 56px !important;
   min-width: 56px !important;
   max-width: 56px !important;
-  position: sticky !important;
-  top: 24px !important;
-  align-self: flex-start !important;
-  height: calc(100vh - 64px) !important;
-  max-height: 780px !important;
-  min-height: 480px !important;
+  height: 100% !important;
+  align-self: stretch !important;
   display: flex !important;
   flex-direction: column !important;
   align-items: center !important;
@@ -209,6 +229,7 @@ button.glass-pill.active-blue {
   border-radius: 9999px !important;
   box-shadow: 0 14px 40px rgba(10, 25, 70, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.85) !important;
   flex-shrink: 0 !important;
+  position: relative !important;
   z-index: 40 !important;
   box-sizing: border-box !important;
   overflow: hidden !important;
