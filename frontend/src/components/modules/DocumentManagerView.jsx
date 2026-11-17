@@ -57,21 +57,29 @@ export default function DocumentManagerView({ filterProjectId = null }) {
     setTimeout(() => setToastMsg(''), 4000);
   };
 
-  const loadData = () => {
+  const loadData = async () => {
     setLoading(true);
-    const docList = api.getDocuments(filterProjectId);
-    const projList = api.getProjects();
-    setDocs(docList);
-    setProjects(projList);
-    setLoading(false);
+    try {
+      const docList = await api.getDocuments(filterProjectId);
+      const projList = await api.getProjects();
+      setDocs(Array.isArray(docList) ? docList : (DEFAULT_DOCUMENTS || []));
+      setProjects(Array.isArray(projList) ? projList : (DEFAULT_PROJECTS || []));
+    } catch (err) {
+      console.error('Error loading documents:', err);
+      setDocs(DEFAULT_DOCUMENTS || []);
+      setProjects(DEFAULT_PROJECTS || []);
+    } finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
     loadData();
   }, [filterProjectId]);
 
-  // Compute Expiry Stats
-  const processedDocs = docs.map(d => ({
+  // Compute Expiry Stats safely
+  const safeDocs = Array.isArray(docs) ? docs : (DEFAULT_DOCUMENTS || []);
+  const processedDocs = safeDocs.map(d => ({
     ...d,
     expiryInfo: computeDocumentExpiry(d)
   }));
@@ -118,7 +126,7 @@ export default function DocumentManagerView({ filterProjectId = null }) {
   });
 
   // Handle Upload
-  const handleUploadSubmit = (e) => {
+  const handleUploadSubmit = async (e) => {
     e.preventDefault();
     if (!formData.title) {
       alert('Please enter a document or blueprint title.');
@@ -145,8 +153,8 @@ export default function DocumentManagerView({ filterProjectId = null }) {
         : 'https://images.unsplash.com/photo-1450133064473-71024230f91b?w=800&auto=format&fit=crop&q=80'
     };
 
-    api.uploadDocument(newDoc);
-    loadData();
+    await api.uploadDocument(newDoc);
+    await loadData();
     setShowUploadModal(false);
     showToast(`Blueprint & Document "${formData.title}" uploaded to vault successfully!`);
 
@@ -166,23 +174,23 @@ export default function DocumentManagerView({ filterProjectId = null }) {
   };
 
   // Handle Delete
-  const handleDelete = (id, title) => {
+  const handleDelete = async (id, title) => {
     if (window.confirm(`Are you sure you want to remove "${title}" from the document vault?`)) {
-      api.deleteDocument(id);
-      loadData();
+      await api.deleteDocument(id);
+      await loadData();
       showToast(`Document "${title}" removed from vault.`);
     }
   };
 
   // Handle Renew Expiry
-  const handleRenewSubmit = (e) => {
+  const handleRenewSubmit = async (e) => {
     e.preventDefault();
     if (!renewDate) {
       alert('Please select a valid new renewal date.');
       return;
     }
-    api.renewDocument(renewDoc.id, renewDate);
-    loadData();
+    await api.renewDocument(renewDoc.id, renewDate);
+    await loadData();
     setRenewDoc(null);
     setRenewDate('');
     showToast(`Document "${renewDoc.title}" renewed until ${renewDate}!`);

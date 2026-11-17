@@ -1396,15 +1396,17 @@ export default function ProjectsView() {
           <button 
             type="button"
             onClick={() => setProjectSubTab('OVERVIEW')}
-            className="glass-pill"
+            className={`glass-pill ${projectSubTab === 'OVERVIEW' ? 'active' : ''}`}
             style={{
               padding: '8px 18px',
               fontSize: '12px',
               fontWeight: 700,
               background: projectSubTab === 'OVERVIEW' ? '#0F172A' : 'rgba(255, 255, 255, 0.65)',
               color: projectSubTab === 'OVERVIEW' ? '#ffffff' : '#475569',
-              border: 'none',
-              cursor: 'pointer'
+              border: projectSubTab === 'OVERVIEW' ? '1px solid #0F172A' : '1px solid rgba(255, 255, 255, 0.75)',
+              boxShadow: projectSubTab === 'OVERVIEW' ? '0 4px 14px rgba(15, 23, 42, 0.25)' : 'none',
+              cursor: 'pointer',
+              transition: 'all 0.15s ease'
             }}
           >
             Scope Variations ({variations.length})
@@ -1413,15 +1415,17 @@ export default function ProjectsView() {
           <button 
             type="button"
             onClick={() => setProjectSubTab('BOQ')}
-            className="glass-pill"
+            className={`glass-pill ${projectSubTab === 'BOQ' ? 'active' : ''}`}
             style={{
               padding: '8px 18px',
               fontSize: '12px',
               fontWeight: 700,
               background: projectSubTab === 'BOQ' ? '#0F172A' : 'rgba(255, 255, 255, 0.65)',
               color: projectSubTab === 'BOQ' ? '#ffffff' : '#475569',
-              border: 'none',
-              cursor: 'pointer'
+              border: projectSubTab === 'BOQ' ? '1px solid #0F172A' : '1px solid rgba(255, 255, 255, 0.75)',
+              boxShadow: projectSubTab === 'BOQ' ? '0 4px 14px rgba(15, 23, 42, 0.25)' : 'none',
+              cursor: 'pointer',
+              transition: 'all 0.15s ease'
             }}
           >
             Site BOQ <span className="amp">&</span> Takeoffs
@@ -1430,15 +1434,17 @@ export default function ProjectsView() {
           <button 
             type="button"
             onClick={() => setProjectSubTab('MILESTONES')}
-            className="glass-pill"
+            className={`glass-pill ${projectSubTab === 'MILESTONES' ? 'active' : ''}`}
             style={{
               padding: '8px 18px',
               fontSize: '12px',
               fontWeight: 700,
               background: projectSubTab === 'MILESTONES' ? '#0F172A' : 'rgba(255, 255, 255, 0.65)',
               color: projectSubTab === 'MILESTONES' ? '#ffffff' : '#475569',
-              border: 'none',
-              cursor: 'pointer'
+              border: projectSubTab === 'MILESTONES' ? '1px solid #0F172A' : '1px solid rgba(255, 255, 255, 0.75)',
+              boxShadow: projectSubTab === 'MILESTONES' ? '0 4px 14px rgba(15, 23, 42, 0.25)' : 'none',
+              cursor: 'pointer',
+              transition: 'all 0.15s ease'
             }}
           >
             Construction Milestones
@@ -1447,15 +1453,17 @@ export default function ProjectsView() {
           <button 
             type="button"
             onClick={() => setProjectSubTab('SAFETY')}
-            className="glass-pill"
+            className={`glass-pill ${projectSubTab === 'SAFETY' ? 'active' : ''}`}
             style={{
               padding: '8px 18px',
               fontSize: '12px',
               fontWeight: 700,
               background: projectSubTab === 'SAFETY' ? '#0F172A' : 'rgba(255, 255, 255, 0.65)',
               color: projectSubTab === 'SAFETY' ? '#ffffff' : '#475569',
-              border: 'none',
-              cursor: 'pointer'
+              border: projectSubTab === 'SAFETY' ? '1px solid #0F172A' : '1px solid rgba(255, 255, 255, 0.75)',
+              boxShadow: projectSubTab === 'SAFETY' ? '0 4px 14px rgba(15, 23, 42, 0.25)' : 'none',
+              cursor: 'pointer',
+              transition: 'all 0.15s ease'
             }}
           >
             Safety <span className="amp">&</span> Quality Snags
@@ -1464,18 +1472,20 @@ export default function ProjectsView() {
           <button 
             type="button"
             onClick={() => setProjectSubTab('DOCS')}
-            className="glass-pill"
+            className={`glass-pill ${projectSubTab === 'DOCS' ? 'active' : ''}`}
             style={{
               padding: '8px 18px',
               fontSize: '12px',
               fontWeight: 700,
               background: projectSubTab === 'DOCS' ? '#0F172A' : 'rgba(255, 255, 255, 0.65)',
               color: projectSubTab === 'DOCS' ? '#ffffff' : '#475569',
-              border: 'none',
+              border: projectSubTab === 'DOCS' ? '1px solid #0F172A' : '1px solid rgba(255, 255, 255, 0.75)',
+              boxShadow: projectSubTab === 'DOCS' ? '0 4px 14px rgba(15, 23, 42, 0.25)' : 'none',
               cursor: 'pointer',
               display: 'inline-flex',
               alignItems: 'center',
-              gap: '6px'
+              gap: '6px',
+              transition: 'all 0.15s ease'
             }}
           >
             <span>Blueprints <span className="amp">&</span> Compliance Docs</span>

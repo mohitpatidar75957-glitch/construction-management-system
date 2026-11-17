@@ -6,13 +6,13 @@ import GlassShell from '../common/GlassShell';
 
 export default function MainLayout({ activeTab, setActiveTab, onRefresh, onOpenProfile, children }) {
   return (
-    <div className="relative min-h-screen w-full flex items-center justify-center p-2 sm:p-4 md:p-8 bg-transparent overflow-x-hidden selection:bg-blue-500/20 selection:text-blue-900">
+    <div className="relative min-h-screen w-full flex items-start justify-center p-2 sm:p-4 md:p-8 bg-transparent overflow-x-clip selection:bg-blue-500/20 selection:text-blue-900">
       {/* 1. Ambient Glass Refraction Background Blobs */}
       <GlassBackground />
 
       {/* 2. Master Outer Glass Shell (Holds entire dashboard exactly like reference screenshot) */}
       <GlassShell>
-        <div className="dashboard-layout-row flex gap-4 md:gap-6 items-stretch">
+        <div className="dashboard-layout-row flex gap-4 md:gap-6 items-start">
           {/* Left: Ultra-narrow floating vertical glass pill sidebar (~56px wide) */}
           <GlassSidebar activeTab={activeTab} setActiveTab={setActiveTab} />
 

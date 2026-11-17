@@ -400,8 +400,8 @@ export default function CashBookView() {
               </div>
             </div>
 
-            {/* Step 4: Handed To & Authorized By */}
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px' }}>
+            {/* Step 4: Handed To, Payee Phone & Authorized By */}
+            <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr 1fr', gap: '14px' }}>
               <div>
                 <label style={{ fontSize: '11.5px', fontWeight: 700, color: '#475569', display: 'block', marginBottom: '6px' }}>
                   HANDED TO / BENEFICIARY *
@@ -421,6 +421,28 @@ export default function CashBookView() {
                     fontSize: '12.5px',
                     color: '#0F172A',
                     fontWeight: 600,
+                    outline: 'none'
+                  }}
+                />
+              </div>
+
+              <div>
+                <label style={{ fontSize: '11.5px', fontWeight: 700, color: '#475569', display: 'block', marginBottom: '6px' }}>
+                  BENEFICIARY PHONE (SMS / OTP)
+                </label>
+                <input 
+                  type="tel" 
+                  placeholder="+91 98260 12345"
+                  value={form.payeePhone || ''} 
+                  onChange={e => setForm({ ...form, payeePhone: e.target.value })}
+                  style={{
+                    width: '100%',
+                    padding: '11px 14px',
+                    borderRadius: '12px',
+                    border: '1px solid rgba(203, 213, 225, 0.8)',
+                    background: 'rgba(255, 255, 255, 0.85)',
+                    fontSize: '12.5px',
+                    color: '#0F172A',
                     outline: 'none'
                   }}
                 />
@@ -520,6 +542,86 @@ export default function CashBookView() {
                 }}
               />
             </div>
+
+            {/* Step 7: GST Bill & Receipt Upload Details */}
+            <div style={{
+              background: 'rgba(241, 245, 249, 0.7)',
+              borderRadius: '14px',
+              padding: '16px',
+              border: '1px solid rgba(226, 232, 240, 0.9)',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '12px'
+            }}>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                <span style={{ fontSize: '12px', fontWeight: 700, color: '#1E293B' }}>
+                  Has Official Shop Receipt / GST Invoice?
+                </span>
+                <button
+                  type="button"
+                  onClick={() => setForm({ ...form, hasGst: !form.hasGst })}
+                  style={{
+                    padding: '4px 12px',
+                    borderRadius: '8px',
+                    fontSize: '11.5px',
+                    fontWeight: 700,
+                    border: 'none',
+                    cursor: 'pointer',
+                    background: form.hasGst ? '#10B981' : '#E2E8F0',
+                    color: form.hasGst ? '#ffffff' : '#64748B'
+                  }}
+                >
+                  {form.hasGst ? '✓ GST Bill Attached' : 'Cash Slip Only'}
+                </button>
+              </div>
+
+              {form.hasGst && (
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
+                  <div>
+                    <span style={{ fontSize: '10.5px', color: '#64748B', fontWeight: 600, display: 'block', marginBottom: '4px' }}>Vendor GSTIN</span>
+                    <input
+                      type="text"
+                      placeholder="e.g. 23AABCS1429B1Z8"
+                      value={form.vendorGstin || ''}
+                      onChange={e => setForm({ ...form, vendorGstin: e.target.value })}
+                      style={{ width: '100%', padding: '8px 10px', borderRadius: '8px', border: '1px solid #CBD5E1', fontSize: '12px', background: '#fff' }}
+                    />
+                  </div>
+                  <div>
+                    <span style={{ fontSize: '10.5px', color: '#64748B', fontWeight: 600, display: 'block', marginBottom: '4px' }}>Tax Invoice #</span>
+                    <input
+                      type="text"
+                      placeholder="e.g. INV-2026/884"
+                      value={form.taxInvoiceNumber || ''}
+                      onChange={e => setForm({ ...form, taxInvoiceNumber: e.target.value })}
+                      style={{ width: '100%', padding: '8px 10px', borderRadius: '8px', border: '1px solid #CBD5E1', fontSize: '12px', background: '#fff' }}
+                    />
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Submit Action */}
+            <button
+              type="submit"
+              className="btn-dubai-gold"
+              style={{
+                width: '100%',
+                padding: '14px',
+                borderRadius: '14px',
+                fontSize: '13.5px',
+                fontWeight: 800,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '8px',
+                boxShadow: '0 8px 20px rgba(37, 99, 235, 0.3)',
+                cursor: 'pointer'
+              }}
+            >
+              <CheckCircle2 size={18} />
+              <span>Authorize & Disburse Physical Cash Voucher</span>
+            </button>
 
           </div>
 

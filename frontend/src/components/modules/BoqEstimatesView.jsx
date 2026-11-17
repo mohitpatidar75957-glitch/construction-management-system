@@ -17,7 +17,8 @@ import {
   X,
   Sparkles,
   Layers,
-  FileSpreadsheet
+  FileSpreadsheet,
+  Printer
 } from 'lucide-react';
 
 export default function BoqEstimatesView() {
@@ -623,6 +624,23 @@ export default function BoqEstimatesView() {
             <Download size={14} />
             <span>Export CSV</span>
           </button>
+          <button 
+            className="glass-pill" 
+            onClick={() => window.print()}
+            style={{ 
+              padding: '8px 14px', 
+              fontSize: '12px', 
+              fontWeight: 700, 
+              color: '#0F172A',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '6px',
+              cursor: 'pointer'
+            }}
+          >
+            <Printer size={14} />
+            <span>Print BOQ</span>
+          </button>
           <button className="btn-dubai-gold" onClick={() => setShowAdd(true)}>
             <Plus size={16} />
             <span>Add BOQ Item</span>
@@ -663,14 +681,15 @@ export default function BoqEstimatesView() {
             <button
               key={cat}
               onClick={() => setSelectedCategory(cat)}
-              className="glass-pill"
+              className={`glass-pill ${selectedCategory === cat ? 'active' : ''}`}
               style={{
                 padding: '6px 14px',
                 fontSize: '11.5px',
                 fontWeight: 700,
-                border: 'none',
+                border: selectedCategory === cat ? '1px solid #0F172A' : '1px solid rgba(255, 255, 255, 0.75)',
                 background: selectedCategory === cat ? '#0F172A' : 'rgba(255, 255, 255, 0.65)',
                 color: selectedCategory === cat ? '#ffffff' : '#64748B',
+                boxShadow: selectedCategory === cat ? '0 4px 14px rgba(15, 23, 42, 0.25)' : 'none',
                 cursor: 'pointer',
                 transition: 'all 0.15s ease'
               }}

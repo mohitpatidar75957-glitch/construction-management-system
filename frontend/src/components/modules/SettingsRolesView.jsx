@@ -64,6 +64,7 @@ export default function SettingsRolesView() {
   const allSystemModules = [
     { id: 'overview', label: 'Dashboard Overview', desc: 'KPI cards, site cashflow & recent telemetry', category: 'Executive' },
     { id: 'projects', label: 'Sites & Projects', desc: 'Master projects, locations, codes & milestones', category: 'Operations' },
+    { id: 'daily_activity', label: 'Daily Site Activity (DSR)', desc: 'Engineer muster logs, concrete pours & stage milestones', category: 'Field' },
     { id: 'accounts', label: 'Accounts & Billing (RA Bills)', desc: 'Client invoices, running-account bills & GST', category: 'Finance' },
     { id: 'labour', label: 'Labour Workforce Muster', desc: 'Daily attendance rolls, trade wages & contractor agency', category: 'Field' },
     { id: 'materials', label: 'Material & Inventory Assets', desc: 'Inward deliveries, batch pricing & safety reserves', category: 'Supply' },

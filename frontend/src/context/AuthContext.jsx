@@ -33,6 +33,7 @@ export function AuthProvider({ children }) {
 
   const canAccess = (tabId) => {
     if (!user) return false;
+    if (user.role === 'SUPER_ADMIN') return true;
     // 1. If user has custom assigned permissions by Super Admin, respect them
     if (user.customPermissions && Array.isArray(user.customPermissions)) {
       return user.customPermissions.includes(tabId);

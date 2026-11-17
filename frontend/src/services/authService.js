@@ -148,7 +148,7 @@ export const ROLE_PERMISSIONS = {
     title: 'Super Admin / Director',
     desc: 'Complete portfolio oversight, billing approvals, financial P&L, system audit logs, and global user management.',
     allowedTabs: [
-      'overview', 'projects', 'accounts', 'labour', 'materials', 'reports', 
+      'overview', 'projects', 'daily_activity', 'accounts', 'labour', 'materials', 'reports', 
       'equipment', 'purchase_orders', 'vendors', 'tasks_gantt', 'boq_estimates', 
       'approvals', 'documents', 'cashbook', 'safety_quality', 'customer_portal', 
       'notifications', 'audit_backup', 'settings'
@@ -163,7 +163,7 @@ export const ROLE_PERMISSIONS = {
     title: 'Project Manager (PM)',
     desc: 'Site scheduling, Gantt milestones, material requisitions, contractor bills submission & daily progress.',
     allowedTabs: [
-      'overview', 'projects', 'tasks_gantt', 'materials', 'equipment', 
+      'overview', 'projects', 'daily_activity', 'tasks_gantt', 'materials', 'equipment', 
       'reports', 'purchase_orders', 'boq_estimates', 'approvals', 
       'documents', 'safety_quality', 'notifications', 'settings'
     ],
@@ -177,7 +177,7 @@ export const ROLE_PERMISSIONS = {
     title: 'Site Supervisor / Incharge',
     desc: 'Worker attendance rolls, material inward deliveries, daily DPR logs, equipment hours & site safety checklists.',
     allowedTabs: [
-      'overview', 'labour', 'reports', 'materials', 'equipment', 
+      'overview', 'daily_activity', 'labour', 'reports', 'materials', 'equipment', 
       'safety_quality', 'documents', 'notifications', 'settings'
     ],
     canApproveExpenses: false,

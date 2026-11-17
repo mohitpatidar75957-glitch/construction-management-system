@@ -16,7 +16,8 @@ import {
   Sparkles,
   ClipboardCheck,
   Flame,
-  FileCheck2
+  FileCheck2,
+  Printer
 } from 'lucide-react';
 
 export default function SafetyQualityView() {
@@ -72,6 +73,27 @@ export default function SafetyQualityView() {
       console.error(e);
     }
   }, [snags]);
+
+  // Interactive 10-Point OSHA Safety Protocol Checklist
+  const [safetyChecklist, setSafetyChecklist] = useState([
+    { id: 'CHK-01', title: 'Hard Hat & Steel-Toe Boots Mandatory PPE', standard: 'OSHA 1926.100', passed: true },
+    { id: 'CHK-02', title: 'Full Body Safety Harness for Work Above 2m', standard: 'OSHA 1926.502', passed: true },
+    { id: 'CHK-03', title: 'Perimeter Edge Protection & Fall Catch Nets', standard: 'IS 4912:1978', passed: true },
+    { id: 'CHK-04', title: 'Scaffolding Stability & Green Inspection Tag', standard: 'OSHA 1926.451', passed: true },
+    { id: 'CHK-05', title: 'Temporary DB Earthing & 30mA ELCB Breakers', standard: 'CEA Reg. 2010', passed: true },
+    { id: 'CHK-06', title: 'Operational ABC Fire Extinguishers on Floors', standard: 'NFPA 10', passed: true },
+    { id: 'CHK-07', title: 'Excavation Trench Shoring & Safe Access Ladders', standard: 'OSHA 1926.652', passed: true },
+    { id: 'CHK-08', title: 'Transit Mixer & Crane Reverse Horn / Flashers', standard: 'Safety Fleet Reg', passed: true },
+    { id: 'CHK-09', title: 'First Aid Medical Kit & Emergency Siren Ready', standard: 'BOCW Rules', passed: true },
+    { id: 'CHK-10', title: 'Material Stacking & Clear Walkway Housekeeping', standard: 'OSHA 1926.250', passed: true }
+  ]);
+
+  const toggleChecklistItem = (id) => {
+    setSafetyChecklist(prev => prev.map(item => item.id === id ? { ...item, passed: !item.passed } : item));
+  };
+
+  const checklistPassedCount = safetyChecklist.filter(c => c.passed).length;
+  const checklistScore = Math.round((checklistPassedCount / safetyChecklist.length) * 100);
 
   // Form states
   const [auditForm, setAuditForm] = useState({
@@ -821,15 +843,35 @@ export default function SafetyQualityView() {
           <div style={{ display: 'flex', gap: '6px' }}>
             <button 
               onClick={() => setActiveTab('SAFETY')}
-              className="glass-pill"
-              style={{ padding: '8px 16px', background: activeTab === 'SAFETY' ? '#0F172A' : 'rgba(255,255,255,0.6)', color: activeTab === 'SAFETY' ? '#fff' : '#475569', fontWeight: 700, fontSize: '12px', cursor: 'pointer' }}
+              className={`glass-pill ${activeTab === 'SAFETY' ? 'active' : ''}`}
+              style={{
+                padding: '8px 16px',
+                background: activeTab === 'SAFETY' ? '#0F172A' : 'rgba(255, 255, 255, 0.6)',
+                color: activeTab === 'SAFETY' ? '#ffffff' : '#475569',
+                border: activeTab === 'SAFETY' ? '1px solid #0F172A' : '1px solid rgba(255, 255, 255, 0.75)',
+                boxShadow: activeTab === 'SAFETY' ? '0 4px 14px rgba(15, 23, 42, 0.25)' : 'none',
+                fontWeight: 700,
+                fontSize: '12px',
+                cursor: 'pointer',
+                transition: 'all 0.15s ease'
+              }}
             >
               🛡️ Safety Audits ({filteredAudits.length})
             </button>
             <button 
               onClick={() => setActiveTab('SNAG')}
-              className="glass-pill"
-              style={{ padding: '8px 16px', background: activeTab === 'SNAG' ? '#0F172A' : 'rgba(255,255,255,0.6)', color: activeTab === 'SNAG' ? '#fff' : '#475569', fontWeight: 700, fontSize: '12px', cursor: 'pointer' }}
+              className={`glass-pill ${activeTab === 'SNAG' ? 'active' : ''}`}
+              style={{
+                padding: '8px 16px',
+                background: activeTab === 'SNAG' ? '#0F172A' : 'rgba(255, 255, 255, 0.6)',
+                color: activeTab === 'SNAG' ? '#ffffff' : '#475569',
+                border: activeTab === 'SNAG' ? '1px solid #0F172A' : '1px solid rgba(255, 255, 255, 0.75)',
+                boxShadow: activeTab === 'SNAG' ? '0 4px 14px rgba(15, 23, 42, 0.25)' : 'none',
+                fontWeight: 700,
+                fontSize: '12px',
+                cursor: 'pointer',
+                transition: 'all 0.15s ease'
+              }}
             >
               📋 Quality Snags ({filteredSnags.length})
             </button>
@@ -866,9 +908,120 @@ export default function SafetyQualityView() {
         </div>
       </div>
 
-      {/* Safety Table */}
+      {/* Safety Table & Interactive Protocol Checklist */}
       {activeTab === 'SAFETY' ? (
-        <div className="dubai-card clear-table-card">
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+          
+          {/* Interactive 10-Point OSHA Safety Checklist Card */}
+          <div className="glass-card" style={{ padding: '22px 24px', background: 'rgba(255, 255, 255, 0.88)' }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '16px', flexWrap: 'wrap', gap: '10px' }}>
+              <div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <ShieldCheck size={20} color="#2563EB" />
+                  <h3 style={{ fontSize: '16px', fontWeight: 800, color: '#0F172A', margin: 0 }}>
+                    Live 10-Point OSHA Site Safety Protocol Checklist
+                  </h3>
+                </div>
+                <span style={{ fontSize: '12px', color: '#64748B' }}>
+                  Click any safety checkpoint to toggle compliance status and update site safety score in real-time
+                </span>
+              </div>
+
+              <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                <div style={{
+                  padding: '6px 14px',
+                  borderRadius: '12px',
+                  background: checklistScore >= 90 ? '#DCFCE7' : '#FEE2E2',
+                  color: checklistScore >= 90 ? '#15803D' : '#B91C1C',
+                  fontSize: '13px',
+                  fontWeight: 800,
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '6px'
+                }}>
+                  <span>Score: {checklistScore}%</span>
+                  <span>({checklistPassedCount}/10 Passed)</span>
+                </div>
+
+                <button
+                  type="button"
+                  onClick={() => window.print()}
+                  className="glass-pill"
+                  style={{
+                    padding: '7px 14px',
+                    fontSize: '12px',
+                    fontWeight: 700,
+                    color: '#0F172A',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '6px',
+                    cursor: 'pointer'
+                  }}
+                >
+                  <Printer size={14} />
+                  <span>Print Certificate</span>
+                </button>
+              </div>
+            </div>
+
+            {/* Checklist Grid */}
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '10px' }}>
+              {safetyChecklist.map((chk, idx) => (
+                <div
+                  key={chk.id}
+                  onClick={() => toggleChecklistItem(chk.id)}
+                  style={{
+                    padding: '12px 14px',
+                    borderRadius: '12px',
+                    background: chk.passed ? 'rgba(240, 253, 244, 0.9)' : 'rgba(254, 242, 242, 0.9)',
+                    border: chk.passed ? '1px solid rgba(34, 197, 94, 0.3)' : '1px solid rgba(239, 68, 68, 0.3)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    cursor: 'pointer',
+                    transition: 'all 0.15s ease'
+                  }}
+                >
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                    <span style={{
+                      width: '24px',
+                      height: '24px',
+                      borderRadius: '50%',
+                      background: chk.passed ? '#10B981' : '#EF4444',
+                      color: '#ffffff',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      fontSize: '11px',
+                      fontWeight: 800,
+                      flexShrink: 0
+                    }}>
+                      {chk.passed ? '✓' : '✗'}
+                    </span>
+                    <div>
+                      <div style={{ fontSize: '12px', fontWeight: 700, color: '#0F172A' }}>
+                        {idx + 1}. {chk.title}
+                      </div>
+                      <span style={{ fontSize: '10px', color: '#64748B' }}>
+                        Standard: {chk.standard}
+                      </span>
+                    </div>
+                  </div>
+
+                  <span style={{
+                    fontSize: '10.5px',
+                    fontWeight: 800,
+                    color: chk.passed ? '#047857' : '#B91C1C',
+                    textTransform: 'uppercase'
+                  }}>
+                    {chk.passed ? 'PASS' : 'ACTION'}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="dubai-card clear-table-card">
           <div className="table-header-bar">
             <div className="table-title-group">
               <ShieldCheck size={18} className="gold-text" />
@@ -916,6 +1069,7 @@ export default function SafetyQualityView() {
             </table>
           </div>
         </div>
+      </div>
       ) : (
         /* Quality Snags Table */
         <div className="dubai-card clear-table-card">

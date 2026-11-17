@@ -9,6 +9,7 @@ import WorkersList from '../pages/workforce/WorkersList';
 import MaterialsList from '../pages/materials/MaterialsList';
 import Reports from '../pages/reports/Reports';
 import EquipmentView from '../components/EquipmentView';
+import DailyActivityView from '../components/modules/DailyActivityView';
 
 // New Specialized Modules
 import PurchaseOrdersView from '../components/modules/PurchaseOrdersView';
@@ -54,6 +55,8 @@ export default function AppRoutes({ activeTab }) {
       return <Dashboard />;
     case 'projects':
       return <ProjectsList />;
+    case 'daily_activity':
+      return <DailyActivityView />;
     case 'accounts':
       return <Invoices />;
     case 'labour':

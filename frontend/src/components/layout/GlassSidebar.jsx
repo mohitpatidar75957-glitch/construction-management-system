@@ -3,6 +3,7 @@ import { useAuth } from '../../context/AuthContext';
 import { LayoutDashboard, HardHat } from 'lucide-react';
 import { 
   HiOutlineBuildingOffice2,
+  HiOutlineClipboardDocumentCheck,
   HiOutlineBanknotes,
   HiOutlineCube,
   HiOutlineChartBar,
@@ -27,65 +28,70 @@ export default function GlassSidebar({ activeTab, setActiveTab }) {
   const { user, canAccess } = useAuth();
   const asideRef = useRef(null);
   const navRef = useRef(null);
+  const rafRef = useRef(null);
 
   const [isHovered, setIsHovered] = useState(false);
   const [canScrollUp, setCanScrollUp] = useState(false);
   const [canScrollDown, setCanScrollDown] = useState(false);
 
-  const checkScroll = useCallback(() => {
+  const updateScrollState = useCallback(() => {
     if (!navRef.current) return;
     const { scrollTop, scrollHeight, clientHeight } = navRef.current;
     setCanScrollUp(scrollTop > 6);
     setCanScrollDown(scrollTop + clientHeight < scrollHeight - 6);
   }, []);
 
-  // Check scroll capability whenever items or layout changes
+  // Update scroll capability on mount and on window resize
   useEffect(() => {
-    checkScroll();
-    const handleResize = () => checkScroll();
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, [checkScroll]);
+    updateScrollState();
+    window.addEventListener('resize', updateScrollState);
+    return () => window.removeEventListener('resize', updateScrollState);
+  }, [updateScrollState]);
 
-  // Non-passive wheel handler: smooth sidebar scrolling on hover without bouncing page
+  // Handle scroll events with requestAnimationFrame to prevent render lag
+  const handleScroll = () => {
+    if (rafRef.current) return;
+    rafRef.current = requestAnimationFrame(() => {
+      rafRef.current = null;
+      updateScrollState();
+    });
+  };
+
+  // Passive wheel handler on the aside capsule:
+  // When cursor is over navEl, native 120fps browser scrolling works automatically.
+  // When cursor is over brand icon or padding, forward wheel events to navEl smoothly.
   useEffect(() => {
     const asideEl = asideRef.current;
-    if (!asideEl) return;
+    const navEl = navRef.current;
+    if (!asideEl || !navEl) return;
 
     const onWheel = (e) => {
-      const navEl = navRef.current;
-      if (!navEl) return;
-      const isScrollable = navEl.scrollHeight > navEl.clientHeight;
-      if (isScrollable) {
-        e.preventDefault();
-        navEl.scrollTop += e.deltaY;
-        checkScroll();
-      }
+      if (navEl.contains(e.target)) return; // Native scrolling takes over
+      navEl.scrollTop += e.deltaY;
     };
 
-    asideEl.addEventListener('wheel', onWheel, { passive: false });
+    asideEl.addEventListener('wheel', onWheel, { passive: true });
     return () => asideEl.removeEventListener('wheel', onWheel);
-  }, [checkScroll]);
+  }, []);
 
   const scrollUp = (e) => {
     e.stopPropagation();
     if (navRef.current) {
-      navRef.current.scrollBy({ top: -110, behavior: 'smooth' });
-      setTimeout(checkScroll, 200);
+      navRef.current.scrollBy({ top: -140, behavior: 'smooth' });
     }
   };
 
   const scrollDown = (e) => {
     e.stopPropagation();
     if (navRef.current) {
-      navRef.current.scrollBy({ top: 110, behavior: 'smooth' });
-      setTimeout(checkScroll, 200);
+      navRef.current.scrollBy({ top: 140, behavior: 'smooth' });
     }
   };
 
   const menuItems = [
     { id: 'overview', label: 'Dashboard Overview', icon: LayoutDashboard },
     { id: 'projects', label: 'Sites & Projects', icon: HiOutlineBuildingOffice2 },
+    { id: 'daily_activity', label: 'Daily Site Activity (DSR)', icon: HiOutlineClipboardDocumentCheck },
     { id: 'accounts', label: 'Accounts & Billing (RA Bills)', icon: HiOutlineBanknotes },
     { id: 'labour', label: 'Labour & Workforce Muster', icon: HardHat },
     { id: 'materials', label: 'Material & Inventory Assets', icon: HiOutlineCube },
@@ -106,6 +112,8 @@ export default function GlassSidebar({ activeTab, setActiveTab }) {
 
   // RBAC: Filter items according to the logged-in user's role permissions
   const visibleItems = menuItems.filter(item => canAccess(item.id));
+  // Items that scroll (all except 'overview' which is permanently pinned at the top)
+  const scrollableItems = visibleItems.filter(item => item.id !== 'overview');
 
   return (
     <aside 
@@ -113,33 +121,65 @@ export default function GlassSidebar({ activeTab, setActiveTab }) {
       className="glass-sidebar-capsule"
       onMouseEnter={() => {
         setIsHovered(true);
-        checkScroll();
+        updateScrollState();
       }}
       onMouseLeave={() => setIsHovered(false)}
     >
-      {/* Top Blue Brand Icon Button */}
-      <div 
-        onClick={() => setActiveTab('overview')}
-        style={{
-          width: '38px',
-          height: '38px',
-          borderRadius: '13px',
-          background: 'linear-gradient(135deg, #2563EB, #1D4ED8)',
-          color: '#ffffff',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          boxShadow: '0 8px 18px rgba(37, 99, 235, 0.4)',
-          marginBottom: '10px',
-          cursor: 'pointer',
-          flexShrink: 0
-        }}
-        title="SitePilot - Construction Management"
-      >
-        <HiOutlineBuildingOffice2 size={22} strokeWidth={2.2} />
+      {/* Top Fixed Area: Brand Logo + Dashboard Overview (Fixed & Non-scrolling) */}
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px', marginBottom: '8px', flexShrink: 0 }}>
+        {/* Brand Icon Button */}
+        <div 
+          onClick={() => setActiveTab('overview')}
+          style={{
+            width: '38px',
+            height: '38px',
+            borderRadius: '13px',
+            background: 'linear-gradient(135deg, #2563EB, #1D4ED8)',
+            color: '#ffffff',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            boxShadow: '0 8px 18px rgba(37, 99, 235, 0.4)',
+            cursor: 'pointer',
+            flexShrink: 0,
+            transition: 'transform 0.15s ease'
+          }}
+          title="SitePilot - Construction Management"
+        >
+          <HiOutlineBuildingOffice2 size={22} strokeWidth={2.2} />
+        </div>
+
+        {/* Dashboard Overview Icon Button (Fixed at top, does NOT scroll away) */}
+        {canAccess('overview') && (
+          <button
+            type="button"
+            onClick={() => setActiveTab('overview')}
+            style={{
+              width: '38px',
+              height: '38px',
+              minHeight: '38px',
+              borderRadius: '13px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              border: 'none',
+              background: activeTab === 'overview' ? '#ffffff' : 'transparent',
+              color: activeTab === 'overview' ? '#2563EB' : '#475569',
+              boxShadow: activeTab === 'overview' ? '0 6px 18px rgba(10, 25, 70, 0.12)' : 'none',
+              cursor: 'pointer',
+              transition: 'all 0.18s ease',
+              padding: 0,
+              flexShrink: 0
+            }}
+            aria-label="Dashboard Overview"
+            title="Dashboard Overview"
+          >
+            <LayoutDashboard size={20} strokeWidth={activeTab === 'overview' ? 2.4 : 1.9} />
+          </button>
+        )}
       </div>
 
-      {/* Navigation Icons Wrapper with Hover Arrow Buttons */}
+      {/* Middle Scrollable Section: All other module icons scroll smoothly with NO scrollbar line */}
       <div className="sidebar-nav-wrapper">
         {/* Subtle Up Chevron Arrow (Visible on hover when scrolled down) */}
         {isHovered && canScrollUp && (
@@ -158,9 +198,9 @@ export default function GlassSidebar({ activeTab, setActiveTab }) {
         <nav 
           ref={navRef}
           className="sidebar-nav-list"
-          onScroll={checkScroll}
+          onScroll={handleScroll}
         >
-          {visibleItems.map((item) => {
+          {scrollableItems.map((item) => {
             const Icon = item.icon;
             const isActive = activeTab === item.id;
 

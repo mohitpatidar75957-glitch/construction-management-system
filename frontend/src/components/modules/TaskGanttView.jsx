@@ -614,14 +614,15 @@ export default function TaskGanttView() {
           <button
             key={tab.id}
             onClick={() => setStatusFilter(tab.id)}
-            className="glass-pill"
+            className={`glass-pill ${statusFilter === tab.id ? 'active' : ''}`}
             style={{
               padding: '7px 16px',
               fontSize: '12px',
               fontWeight: 700,
-              border: 'none',
+              border: statusFilter === tab.id ? '1px solid #0F172A' : '1px solid rgba(255, 255, 255, 0.75)',
               background: statusFilter === tab.id ? '#0F172A' : 'rgba(255, 255, 255, 0.65)',
               color: statusFilter === tab.id ? '#ffffff' : '#64748B',
+              boxShadow: statusFilter === tab.id ? '0 4px 14px rgba(15, 23, 42, 0.25)' : 'none',
               cursor: 'pointer',
               transition: 'all 0.15s ease'
             }}
