@@ -28,16 +28,8 @@ html, body, #root {
 @font-face {
   font-family: 'CleanAmpersand';
   font-style: normal;
-  font-weight: 600 900;
-  src: url('https://fonts.gstatic.com/s/plusjakartasans/v12/LDIbaomQNQcsA88c7O9yZ4KMCoOg4IA6-91aHEjcWuA_KUnNSg.ttf') format('truetype');
-  unicode-range: U+0026; /* Strictly targets ONLY '&' */
-}
-
-@font-face {
-  font-family: 'CleanAmpersand';
-  font-style: normal;
-  font-weight: 300 500;
-  src: url('https://fonts.gstatic.com/s/plusjakartasans/v12/LDIbaomQNQcsA88c7O9yZ4KMCoOg4IA6-91aHEjcWuA_d0nNSg.ttf') format('truetype');
+  font-weight: 100 900;
+  src: local('Segoe UI'), local('Arial'), local('Helvetica Neue'), local('Plus Jakarta Sans'), local('Inter'), sans-serif;
   unicode-range: U+0026; /* Strictly targets ONLY '&' */
 }
 
@@ -47,18 +39,17 @@ h1, h2, h3, h4, h5, h6,
 .section-title,
 .dashboard-heading,
 .font-heading {
-  font-family: 'CleanAmpersand', 'Space Grotesk', 'Plus Jakarta Sans', sans-serif !important;
+  font-family: 'CleanAmpersand', 'Space Grotesk', 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif !important;
   letter-spacing: -0.025em;
 }
 
 /* Dedicated ampersand helper class matching Screenshot 2 perfectly */
 .amp, .ampersand, .amp-symbol {
-  font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
-  font-weight: 800 !important;
-  display: inline-block !important;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif !important;
+  font-weight: 700 !important;
+  display: inline !important;
   letter-spacing: normal !important;
-  margin: 0 0.12em !important;
-  vertical-align: baseline !important;
+  margin: 0 !important;
 }
 
 /* 1) EXACT BLURRED BLUE ROOM BACKGROUND MATCHING REFERENCE SCREENSHOT */
@@ -177,7 +168,7 @@ body::after {
   width: 100% !important;
 }
 
-/* Ultra-Narrow Capsule Sidebar (56px) - Full-Length Stretch (Zero Bottom Gap) & Smoothly Scrollable */
+/* Ultra-Narrow Capsule Sidebar (56px) - Full-Length Stretch (Zero Bottom Gap) & Smooth Hover Scrolling */
 .glass-sidebar-capsule {
   width: 56px !important;
   min-width: 56px !important;
@@ -188,7 +179,7 @@ body::after {
   display: flex !important;
   flex-direction: column !important;
   align-items: center !important;
-  justify-content: space-between !important;
+  justify-content: flex-start !important;
   padding: 14px 0 16px !important;
   background: rgba(255, 255, 255, 0.68) !important;
   backdrop-filter: blur(28px) saturate(160%) !important;
@@ -203,16 +194,27 @@ body::after {
   overflow: hidden !important;
 }
 
+.sidebar-nav-wrapper {
+  position: relative !important;
+  width: 100% !important;
+  flex: 1 1 0% !important;
+  min-height: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  overflow: hidden !important;
+}
+
 .sidebar-nav-list {
   display: flex !important;
   flex-direction: column !important;
   align-items: center !important;
   gap: 8px !important;
   width: 100% !important;
+  height: 100% !important;
   padding: 4px 0 !important;
   flex: 1 1 0% !important;
   min-height: 0 !important;
-  max-height: 100% !important;
   overflow-y: auto !important;
   overflow-x: hidden !important;
   scroll-behavior: smooth !important;
@@ -225,11 +227,49 @@ body::after {
 
 /* Hide scrollbar line in Chrome, Safari, Edge, Opera */
 .sidebar-nav-list::-webkit-scrollbar,
-.glass-sidebar-capsule::-webkit-scrollbar {
+.glass-sidebar-capsule::-webkit-scrollbar,
+.sidebar-nav-wrapper::-webkit-scrollbar {
   display: none !important;
   width: 0 !important;
   height: 0 !important;
   background: transparent !important;
+}
+
+/* Subtle Floating Scroll Chevrons that show on hover when more items exist */
+.sidebar-scroll-arrow-btn {
+  position: absolute !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  width: 28px !important;
+  height: 20px !important;
+  border-radius: 10px !important;
+  background: rgba(255, 255, 255, 0.94) !important;
+  backdrop-filter: blur(8px) !important;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.18) !important;
+  border: 1px solid rgba(255, 255, 255, 0.9) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  color: #2563EB !important;
+  cursor: pointer !important;
+  transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  z-index: 25 !important;
+  padding: 0 !important;
+}
+
+.sidebar-scroll-arrow-btn.top {
+  top: 2px !important;
+}
+
+.sidebar-scroll-arrow-btn.bottom {
+  bottom: 2px !important;
+}
+
+.sidebar-scroll-arrow-btn:hover {
+  background: #2563EB !important;
+  color: #ffffff !important;
+  transform: translateX(-50%) scale(1.1) !important;
+  box-shadow: 0 6px 16px rgba(37, 99, 235, 0.4) !important;
 }
 
 .nav-item-tooltip {
