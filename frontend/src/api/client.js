@@ -183,130 +183,319 @@ export const DEFAULT_DOCUMENTS = [
   {
     id: 'DOC-101',
     title: 'Architectural Floor Plans & Structural CAD Layout (G+12)',
+    sheet_no: 'DWG-ARCH-101',
+    discipline: 'Architectural',
     category: 'Blueprint',
     project_id: 1,
     site: 'Skyline Commercial Hub (Project A)',
     type: 'DWG / CAD',
-    version: 'Rev 4.2',
+    scale: '1:100',
+    version: 'Rev 4.2 (GFC)',
     size: '28.4 MB',
     upload_date: '2026-10-15',
     expiry_date: '2029-12-31',
     status: 'VALID',
     uploaded_by: 'Er. Ankit Sharma (Chief Architect)',
+    approved_by: 'Er. Mohit Patidar (Project Director)',
     preview_url: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&auto=format&fit=crop&q=80',
     description: 'Complete working drawings for Ground to 12th Floor including column grid, shear walls, and MEP shafts.'
   },
   {
     id: 'DOC-102',
     title: 'Municipal Corporation Building Sanction & Commencement Certificate',
+    sheet_no: 'SANCT-IMC-7821',
+    discipline: 'Statutory / Legal',
     category: 'NOC & Sanction',
     project_id: 1,
     site: 'Skyline Commercial Hub (Project A)',
     type: 'PDF Scan',
+    scale: 'NTS',
     version: 'Approval No. IMC/2024/7821',
     size: '4.8 MB',
     upload_date: '2025-01-20',
-    expiry_date: '2026-12-15',
+    expiry_date: '2026-11-20',
     status: 'EXPIRING_SOON',
     uploaded_by: 'Legal & Liaison Dept',
+    approved_by: 'Indore Municipal Commissioner',
     preview_url: 'https://images.unsplash.com/photo-1450133064473-71024230f91b?w=800&auto=format&fit=crop&q=80',
-    description: 'Official municipal building permission certificate. Renewal application required before 15 Dec 2026.'
+    description: 'Official municipal building permission certificate. Renewal application required immediately before 20 Nov 2026.'
   },
   {
     id: 'DOC-103',
     title: 'State Pollution Control Board Environmental Clearance (CTE / CTO)',
+    sheet_no: 'PCB-MP-884',
+    discipline: 'Environmental Compliance',
     category: 'Clearance',
     project_id: 2,
     site: 'Grand Horizon Enclave (Project B)',
     type: 'PDF Signed',
+    scale: 'NTS',
     version: 'Consent Order PCB/IND/884',
     size: '6.2 MB',
     upload_date: '2024-11-10',
-    expiry_date: '2026-11-20',
-    status: 'CRITICAL',
+    expiry_date: '2026-11-15',
+    status: 'EXPIRED',
     uploaded_by: 'Compliance Officer',
+    approved_by: 'Regional Officer MPPCB',
     preview_url: 'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=800&auto=format&fit=crop&q=80',
     description: 'Consent to Operate and air/water quality compliance certificate issued by MPPCB. Renewal required urgently.'
   },
   {
     id: 'DOC-104',
     title: 'Main Civil Contractor EPC Agreement with Liquidated Damages Clause',
+    sheet_no: 'AGMT-EPC-002',
+    discipline: 'Legal & Commercial',
     category: 'Legal Contract',
     project_id: 2,
     site: 'Grand Horizon Enclave (Project B)',
     type: 'PDF Signed',
+    scale: 'NTS',
     version: 'Contract Ref: GHE-EPC-2025',
     size: '12.1 MB',
     upload_date: '2025-03-01',
     expiry_date: '2027-03-01',
     status: 'VALID',
     uploaded_by: 'Contract Admin',
+    approved_by: 'Legal Counsel',
     preview_url: 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=800&auto=format&fit=crop&q=80',
     description: 'Executed construction contract with Larsen Civil Infra Ltd with milestone release schedule.'
   },
   {
     id: 'DOC-105',
     title: 'Underground Metro Pier Structural Stability & Soil Mechanics Report',
+    sheet_no: 'DWG-STR-GEO-04',
+    discipline: 'Structural',
     category: 'Blueprint',
     project_id: 3,
     site: 'Mahakal Metro Package (Project C)',
-    type: 'PDF / CAD',
+    type: 'DWG / CAD',
+    scale: '1:50',
     version: 'IIT Structural Audit v2',
     size: '34.6 MB',
     upload_date: '2026-05-18',
     expiry_date: '2027-05-18',
     status: 'VALID',
     uploaded_by: 'Er. Rajesh Chouhan',
+    approved_by: 'Chief Technical Director (MPMRCL)',
     preview_url: 'https://images.unsplash.com/photo-1541888946425-d0fbb186156f?w=800&auto=format&fit=crop&q=80',
     description: 'Geotechnical bore log and structural stability clearance for metro viaduct piers P-10 to P-24.'
   },
   {
     id: 'DOC-106',
     title: 'Tower Crane & Passenger Hoist Annual Third-Party Safety Fitness NOC',
+    sheet_no: 'CERT-SAFE-991',
+    discipline: 'Safety & Insurance',
     category: 'Safety & Insurance',
     project_id: 3,
     site: 'Mahakal Metro Package (Project C)',
     type: 'PDF Scan',
+    scale: 'NTS',
     version: 'Safety Certificate #TC-991',
     size: '3.1 MB',
     upload_date: '2025-10-10',
     expiry_date: '2026-10-10',
     status: 'EXPIRED',
     uploaded_by: 'Site Safety Engineer',
+    approved_by: 'TUV Rheinland Inspector',
     preview_url: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&auto=format&fit=crop&q=80',
     description: 'Statutory annual load-test and wire rope inspection certificate. EXPIRED — renewal mandatory before operating.'
   },
   {
     id: 'DOC-107',
     title: 'Pre-Engineered Building (PEB) Structural Blueprint & Roof Truss CAD',
+    sheet_no: 'DWG-PEB-S03',
+    discipline: 'Structural',
     category: 'Blueprint',
     project_id: 4,
     site: 'Chamunda Industrial Park (Project D)',
     type: 'DWG / CAD',
-    version: 'PEB-Shed3-Rev2',
+    scale: '1:100',
+    version: 'PEB-Shed3-Rev2 (GFC)',
     size: '19.8 MB',
     upload_date: '2026-08-12',
     expiry_date: '2030-01-01',
     status: 'VALID',
     uploaded_by: 'Er. Vikas Malviya',
+    approved_by: 'Structural Proof Consultant',
     preview_url: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=800&auto=format&fit=crop&q=80',
     description: 'Detailed structural drawing for 60-meter clear span industrial warehouse shed with crane gantry beams.'
   },
   {
     id: 'DOC-108',
     title: 'Workmen Compensation & Commercial General Liability (CGL) Insurance',
+    sheet_no: 'POL-CGL-4482',
+    discipline: 'Safety & Insurance',
     category: 'Safety & Insurance',
     project_id: 4,
     site: 'Chamunda Industrial Park (Project D)',
     type: 'PDF Signed',
+    scale: 'NTS',
     version: 'Policy #BAJAJ-CGL-4482',
     size: '5.5 MB',
     upload_date: '2025-12-05',
     expiry_date: '2026-12-04',
     status: 'EXPIRING_SOON',
     uploaded_by: 'HR & Accounts Dept',
+    approved_by: 'Bajaj Allianz Underwriter',
     preview_url: 'https://images.unsplash.com/photo-1450133064473-71024230f91b?w=800&auto=format&fit=crop&q=80',
     description: 'Covers 150 site workers, subcontractors, and third-party liabilities up to ₹10 Crore.'
+  }
+];
+
+export const DEFAULT_VENDORS = [
+  {
+    id: 1,
+    name: 'UltraTech Cement Ltd (Indore Depot)',
+    company: 'UltraTech Cement Ltd',
+    category: 'Cement & Concrete',
+    contact_person: 'Er. Rajesh Singhania',
+    contact: '+91 98260 11223',
+    email: 'indore.sales@ultratech.adityabirla.com',
+    gst: '23AAACU1234F1Z5',
+    pan: 'AAACU1234F',
+    location: 'Pithampur Industrial Area, Sector 3, Indore',
+    payment_terms: 'Net 30 Days',
+    bank_account: 'HDFC Bank - 50200034821190 (IFSC: HDFC0000281)',
+    totalPurchased: 4850000,
+    pendingPayable: 420000,
+    rating: 4.9,
+    status: 'ACTIVE',
+    rateContracts: [
+      { item: 'UltraTech 53G OPC Cement', unit: 'Bag (50kg)', rate: 390, validity: '2027-03-31' },
+      { item: 'UltraTech Super PPC Cement', unit: 'Bag (50kg)', rate: 365, validity: '2027-03-31' },
+      { item: 'M30 Ready-Mix Concrete (RMC)', unit: 'Cu.M', rate: 4250, validity: '2027-03-31' }
+    ],
+    ledger: [
+      { id: 'TX-101', date: '2026-11-10', type: 'INVOICE', description: 'Bill #INV-8891 - 1,200 Bags 53G Cement', amount: 468000, balance: 420000 },
+      { id: 'TX-102', date: '2026-11-02', type: 'PAYMENT', description: 'RTGS UTR #HDFC89127731 - Payout', amount: -500000, balance: -48000 }
+    ]
+  },
+  {
+    id: 2,
+    name: 'Tata Tiscon Steel Distributors (Apex Traders)',
+    company: 'Apex Steel & Alloys Pvt Ltd',
+    category: 'TMT & Structural Steel',
+    contact_person: 'Vikas Agrawal',
+    contact: '+91 94250 88991',
+    email: 'apex.tatasteel@gmail.com',
+    gst: '23AABCT9981K1Z2',
+    pan: 'AABCT9981K',
+    location: 'Loha Mandi, Dewas Naka, Indore',
+    payment_terms: 'Net 15 Days',
+    bank_account: 'ICICI Bank - 004105012398 (IFSC: ICIC0000041)',
+    totalPurchased: 8900000,
+    pendingPayable: 1250000,
+    rating: 4.8,
+    status: 'ACTIVE',
+    rateContracts: [
+      { item: 'Tata Tiscon 550D TMT (12mm/16mm)', unit: 'Metric Ton', rate: 64500, validity: '2026-12-31' },
+      { item: 'Binding Wire (18 Gauge)', unit: 'Kg', rate: 78, validity: '2026-12-31' },
+      { item: 'MS Structural Angles & Channels', unit: 'Metric Ton', rate: 67200, validity: '2026-12-31' }
+    ],
+    ledger: [
+      { id: 'TX-201', date: '2026-11-12', type: 'INVOICE', description: 'Bill #TAT-9442 - 18.5 Tons Fe550D TMT', amount: 1193250, balance: 1250000 },
+      { id: 'TX-202', date: '2026-10-25', type: 'PAYMENT', description: 'NEFT Payout UTR #SBIN220918', amount: -800000, balance: 56750 }
+    ]
+  },
+  {
+    id: 3,
+    name: 'Narmada River Sand & Aggregates Supply',
+    company: 'Narmada Mining & Logistics',
+    category: 'Sand & Crushed Aggregates',
+    contact_person: 'Gopal Yadav',
+    contact: '+91 91110 44556',
+    email: 'narmada.aggregates@yahoo.com',
+    gst: '23ABCFN5542P1Z8',
+    pan: 'ABCFN5542P',
+    location: 'Hoshangabad Road, Mandideep, Bhopal',
+    payment_terms: 'Weekly Billing',
+    bank_account: 'SBI - 31089234102 (IFSC: SBIN0001044)',
+    totalPurchased: 2150000,
+    pendingPayable: 180000,
+    rating: 4.6,
+    status: 'ACTIVE',
+    rateContracts: [
+      { item: 'Washed Narmada River Sand', unit: 'Brass', rate: 5200, validity: '2027-06-30' },
+      { item: '20mm Black Trap Aggregate', unit: 'Brass', rate: 3800, validity: '2027-06-30' },
+      { item: '10mm Blue Metal Chips', unit: 'Brass', rate: 3600, validity: '2027-06-30' }
+    ],
+    ledger: [
+      { id: 'TX-301', date: '2026-11-14', type: 'INVOICE', description: 'Bill #NS-401 - 25 Brass Coarse Sand', amount: 130000, balance: 180000 }
+    ]
+  },
+  {
+    id: 4,
+    name: 'Polycab & Havells Wires Depot (Shree Electricals)',
+    company: 'Shree Industrial Electricals Ltd',
+    category: 'Electrical & Conduits',
+    contact_person: 'Amit Sharma',
+    contact: '+91 99810 77665',
+    email: 'shree.polycab@outlook.com',
+    gst: '23AACCP7721L1Z9',
+    pan: 'AACCP7721L',
+    location: 'Mahakal Vanijya Kendra, Freeganj, Ujjain',
+    payment_terms: 'Net 30 Days',
+    bank_account: 'Axis Bank - 91802003881290 (IFSC: UTIB0000118)',
+    totalPurchased: 1450000,
+    pendingPayable: 95000,
+    rating: 4.7,
+    status: 'ACTIVE',
+    rateContracts: [
+      { item: 'Polycab 2.5 sq mm FRLS Wire', unit: 'Coil (90m)', rate: 2150, validity: '2027-01-31' },
+      { item: 'PVC Heavy Duty Conduits (25mm)', unit: 'Meter', rate: 32, validity: '2027-01-31' }
+    ],
+    ledger: [
+      { id: 'TX-401', date: '2026-11-08', type: 'INVOICE', description: 'Bill #SH-901 - Conduits & Cable Coils', amount: 95000, balance: 95000 }
+    ]
+  },
+  {
+    id: 5,
+    name: 'Supreme Pipes & Astral Plumbing Solutions',
+    company: 'Malwa Sanitary & Pipes Depot',
+    category: 'Plumbing & Sanitary',
+    contact_person: 'Nitin Jain',
+    contact: '+91 98270 33445',
+    email: 'malwa.astral@gmail.com',
+    gst: '23AABFM6631Q1Z4',
+    pan: 'AABFM6631Q',
+    location: 'Sapna Sangeeta Road, Indore',
+    payment_terms: 'Net 15 Days',
+    bank_account: 'Bank of Baroda - 08120200001123 (IFSC: BARB0INDORE)',
+    totalPurchased: 980000,
+    pendingPayable: 65000,
+    rating: 4.9,
+    status: 'ACTIVE',
+    rateContracts: [
+      { item: 'Astral CPVC Pro Pipe (1 inch, SDR 11)', unit: 'Length (3m)', rate: 420, validity: '2027-04-30' },
+      { item: 'Supreme SWR Drainage Pipe (110mm)', unit: 'Length (3m)', rate: 680, validity: '2027-04-30' }
+    ],
+    ledger: [
+      { id: 'TX-501', date: '2026-11-09', type: 'INVOICE', description: 'Bill #MSP-220 - CPVC Pipes & Brass Fittings', amount: 65000, balance: 65000 }
+    ]
+  },
+  {
+    id: 6,
+    name: 'Siporex AAC Lightweight Blocks Kiln',
+    company: 'Siporex Green Infra Solutions',
+    category: 'Bricks & Flyash Blocks',
+    contact_person: 'Dharmendra Malviya',
+    contact: '+91 94060 22331',
+    email: 'siporex.dewas@rediffmail.com',
+    gst: '23AABCS4451M1Z1',
+    pan: 'AABCS4451M',
+    location: 'Industrial Area Phase 2, Dewas',
+    payment_terms: 'Net 15 Days',
+    bank_account: 'Kotak Bank - 441029381200 (IFSC: KKBK0000721)',
+    totalPurchased: 1850000,
+    pendingPayable: 0,
+    rating: 4.8,
+    status: 'ACTIVE',
+    rateContracts: [
+      { item: 'AAC Blocks (600x200x150 mm)', unit: 'Piece', rate: 72, validity: '2027-05-31' }
+    ],
+    ledger: [
+      { id: 'TX-601', date: '2026-11-05', type: 'PAYMENT', description: 'Full settlement via NEFT #KKBK998127', amount: -220000, balance: 0 }
+    ]
   }
 ];
 
@@ -326,6 +515,95 @@ export const DEFAULT_DASHBOARD = {
     { id: 4, name: 'Ambuja PPC Cement', current_stock: 280, min_threshold: 400, unit: 'Bags', isUrgent: true, isLow: true, img: 'https://images.unsplash.com/photo-1504917599217-d4dc5ebe6122?w=100&auto=format&fit=crop&q=80' }
   ]
 };
+
+export const DEFAULT_NOTIFICATIONS = [
+  {
+    id: 'NT-101',
+    category: 'PAYMENT',
+    type: 'PAYMENT_RECEIVED',
+    severity: 'SUCCESS',
+    title: 'Customer RA Milestone Payment Received',
+    message: 'Horizon Realty Group deposited ₹40,00,000 via RTGS for Grand Horizon Enclave (Tower B - 4th Floor Slab Milestone).',
+    site: 'Grand Horizon Enclave (Project B)',
+    amount: '₹40,00,000',
+    time: '15 Mins ago',
+    channel: 'WHATSAPP / SMS',
+    recipient: 'Er. Mohit Patidar (Director)',
+    read: false
+  },
+  {
+    id: 'NT-102',
+    category: 'MATERIAL_SHORTAGE',
+    type: 'STOCK_CRITICAL',
+    severity: 'DANGER',
+    title: 'Critical Material Shortage Alert: Cement & Steel',
+    message: 'Ambuja PPC Cement inventory is down to 280 Bags (Minimum threshold: 400 Bags). Immediate PO re-order required to avoid pouring halt.',
+    site: 'Grand Horizon Enclave (Project B)',
+    current_stock: '280 Bags',
+    min_threshold: '400 Bags',
+    time: '45 Mins ago',
+    channel: 'WHATSAPP & APP',
+    recipient: 'Purchase Manager & Er. Rajesh Verma',
+    read: false
+  },
+  {
+    id: 'NT-103',
+    category: 'PROJECT_UPDATE',
+    type: 'MILESTONE_PROGRESS',
+    severity: 'INFO',
+    title: 'DPR Verified: 5th Floor Slab Casting Completed',
+    message: 'Skyline Commercial Hub has achieved 85% overall project progress. Structural inspection completed by Er. Ankit Sharma with zero defects.',
+    site: 'Skyline Commercial Hub (Project A)',
+    progress: '85%',
+    time: '2 Hours ago',
+    channel: 'SYSTEM & EMAIL',
+    recipient: 'Client & Supervisory Board',
+    read: false
+  },
+  {
+    id: 'NT-104',
+    category: 'PAYMENT',
+    type: 'VENDOR_PAYOUT_DUE',
+    severity: 'WARNING',
+    title: 'Vendor Payment Due Reminder: Tata Tiscon',
+    message: 'Payment of ₹12,50,000 due to Tata Tiscon Steel Distributors in 3 days against Invoice #TAT-9442 (18.5 Tons Fe550D TMT).',
+    site: 'Skyline Commercial Hub (Project A)',
+    amount: '₹12,50,000',
+    time: '4 Hours ago',
+    channel: 'SMS & EMAIL',
+    recipient: 'Accounts Division',
+    read: true
+  },
+  {
+    id: 'NT-105',
+    category: 'MATERIAL_SHORTAGE',
+    type: 'STOCK_CRITICAL',
+    severity: 'DANGER',
+    title: 'Low Stock Warning: Red Clay Bricks (Class 1)',
+    message: 'Red Clay Bricks stock at 8,500 Pieces, below re-order trigger of 10,000 Pieces at Skyline Commercial Hub. Dispatch requested from Malwa Kiln.',
+    site: 'Skyline Commercial Hub (Project A)',
+    current_stock: '8,500 Pcs',
+    min_threshold: '10,000 Pcs',
+    time: 'Yesterday',
+    channel: 'WHATSAPP',
+    recipient: 'Site Supervisor & Storekeeper',
+    read: true
+  },
+  {
+    id: 'NT-106',
+    category: 'PROJECT_UPDATE',
+    type: 'SITE_ALERT',
+    severity: 'WARNING',
+    title: 'Schedule Lag Notice: Mahakal Metro Package 4',
+    message: 'Underground pier drilling at Nanakheda delayed by 2 days due to heavy water seepage. Dewatering pump deployed.',
+    site: 'Mahakal Metro Package (Project C)',
+    progress: '35%',
+    time: 'Yesterday',
+    channel: 'WHATSAPP PUSH',
+    recipient: 'Chief Project Engineer',
+    read: true
+  }
+];
 
 // Storage helper functions
 function getStored(key, defaultValue) {
@@ -383,15 +661,30 @@ export const api = {
       id: Date.now(),
       project_name: data.project_name || 'New Construction Site',
       project_code: data.project_code || `PRJ-NEW-${Math.floor(Math.random() * 90 + 10)}`,
+      project_type: data.project_type || 'Commercial Tower',
       site_location: data.site_location || 'Madhya Pradesh',
+      site_address: data.site_address || '',
+      city: data.city || 'Indore',
+      state: data.state || 'Madhya Pradesh',
+      pincode: data.pincode || '',
       client_name: data.client_name || 'Client Corp',
+      client_contact: data.client_contact || '',
+      client_email: data.client_email || '',
       contractor_name: data.contractor_name || 'Prime Contractor',
+      project_manager: data.project_manager || '',
+      site_engineer: data.site_engineer || '',
       budget: Number(data.budget) || 10000000,
       spent: 0,
+      builtup_area: data.builtup_area || '',
+      total_floors: data.total_floors || '',
+      rera_number: data.rera_number || '',
       start_date: data.start_date || new Date().toISOString().split('T')[0],
       completion_date: data.completion_date || '',
+      handover_date: data.handover_date || '',
+      priority: data.priority || 'HIGH',
       status: data.status || 'IN_PROGRESS',
-      progress_percent: Number(data.progress_percent) || 10
+      progress_percent: Number(data.progress_percent) || 10,
+      description: data.description || ''
     };
     const updated = [newProj, ...current];
     setStored('sitepilot_projects', updated);
@@ -668,6 +961,165 @@ export const api = {
     const list = getStored('sitepilot_documents', DEFAULT_DOCUMENTS);
     const updated = list.filter(d => String(d.id) !== String(id));
     setStored('sitepilot_documents', updated);
+    return { success: true };
+  }),
+
+  // Vendor & Supplier Management
+  getVendors: () => safeFetch(`${API_BASE}/vendors`, {}, () => {
+    return getStored('sitepilot_vendors', DEFAULT_VENDORS);
+  }),
+
+  createVendor: (data) => safeFetch(`${API_BASE}/vendors`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data)
+  }, () => {
+    const list = getStored('sitepilot_vendors', DEFAULT_VENDORS);
+    const newVendor = {
+      id: list.length > 0 ? Math.max(...list.map(v => Number(v.id) || 0)) + 1 : 1,
+      name: data.name || 'New Authorized Supplier',
+      company: data.company || data.name || 'Supplier Firm',
+      category: data.category || 'Cement & Concrete',
+      contact_person: data.contact_person || 'Sales Representative',
+      contact: data.contact || '+91 98000 00000',
+      email: data.email || 'supplier@sitepilot.com',
+      gst: (data.gst || '23AAAAA0000A1Z5').toUpperCase(),
+      pan: (data.pan || (data.gst ? data.gst.substring(2, 12) : 'AAAAA0000A')).toUpperCase(),
+      location: data.location || 'Local Depot',
+      payment_terms: data.payment_terms || 'Net 30 Days',
+      bank_account: data.bank_account || 'SBI Current A/C (IFSC: SBIN0001001)',
+      totalPurchased: Number(data.totalPurchased) || 0,
+      pendingPayable: Number(data.pendingPayable) || 0,
+      rating: Number(data.rating) || 4.8,
+      status: data.status || 'ACTIVE',
+      rateContracts: data.rateContracts || [
+        { item: 'Standard Material Delivery', unit: 'Unit', rate: 100, validity: '2027-12-31' }
+      ],
+      ledger: data.ledger || [
+        { id: `TX-${Date.now().toString().slice(-4)}`, date: new Date().toISOString().split('T')[0], type: 'OPENING', description: 'Opening Balance Ledger Entry', amount: Number(data.pendingPayable) || 0, balance: Number(data.pendingPayable) || 0 }
+      ]
+    };
+    const updated = [newVendor, ...list];
+    setStored('sitepilot_vendors', updated);
+    return newVendor;
+  }),
+
+  updateVendor: (id, data) => safeFetch(`${API_BASE}/vendors/${id}`, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data)
+  }, () => {
+    const list = getStored('sitepilot_vendors', DEFAULT_VENDORS);
+    const updated = list.map(v => {
+      if (String(v.id) === String(id)) {
+        return { ...v, ...data };
+      }
+      return v;
+    });
+    setStored('sitepilot_vendors', updated);
+    return { success: true };
+  }),
+
+  deleteVendor: (id) => safeFetch(`${API_BASE}/vendors/${id}`, {
+    method: 'DELETE'
+  }, () => {
+    const list = getStored('sitepilot_vendors', DEFAULT_VENDORS);
+    const updated = list.filter(v => String(v.id) !== String(id));
+    setStored('sitepilot_vendors', updated);
+    return { success: true };
+  }),
+
+  recordVendorPayment: (vendorId, payment) => safeFetch(`${API_BASE}/vendors/${vendorId}/payments`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payment)
+  }, () => {
+    const list = getStored('sitepilot_vendors', DEFAULT_VENDORS);
+    const amount = Number(payment.amount) || 0;
+    const updated = list.map(v => {
+      if (String(v.id) === String(vendorId)) {
+        const newPending = Math.max(0, (Number(v.pendingPayable) || 0) - amount);
+        const newTx = {
+          id: `TX-${Date.now().toString().slice(-4)}`,
+          date: payment.date || new Date().toISOString().split('T')[0],
+          type: 'PAYMENT',
+          description: `${payment.mode || 'RTGS'} Payment UTR #${payment.reference_no || 'MANUAL-PAY'} - ${payment.remarks || 'Supplier settlement'}`,
+          amount: -amount,
+          balance: newPending
+        };
+        return {
+          ...v,
+          pendingPayable: newPending,
+          ledger: [newTx, ...(v.ledger || [])]
+        };
+      }
+      return v;
+    });
+    setStored('sitepilot_vendors', updated);
+    return { success: true };
+  }),
+
+  // Automated Notifications Center
+  getNotifications: (filterCategory) => safeFetch(`${API_BASE}/notifications${filterCategory ? `?category=${filterCategory}` : ''}`, {}, () => {
+    const list = getStored('sitepilot_notifications', DEFAULT_NOTIFICATIONS);
+    if (filterCategory && filterCategory !== 'ALL') {
+      return list.filter(n => n.category === filterCategory);
+    }
+    return list;
+  }),
+
+  createNotification: (data) => safeFetch(`${API_BASE}/notifications`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data)
+  }, () => {
+    const list = getStored('sitepilot_notifications', DEFAULT_NOTIFICATIONS);
+    const newNotif = {
+      id: `NT-${Date.now().toString().slice(-4)}`,
+      category: data.category || 'PROJECT_UPDATE',
+      type: data.type || 'GENERAL',
+      severity: data.severity || 'INFO',
+      title: data.title || 'System Notification',
+      message: data.message || '',
+      site: data.site || 'Skyline Commercial Hub (Project A)',
+      amount: data.amount || '',
+      current_stock: data.current_stock || '',
+      min_threshold: data.min_threshold || '',
+      progress: data.progress || '',
+      time: 'Just now',
+      channel: data.channel || 'WHATSAPP & APP',
+      recipient: data.recipient || 'All Concerned Personnel',
+      read: false
+    };
+    const updated = [newNotif, ...list];
+    setStored('sitepilot_notifications', updated);
+    return newNotif;
+  }),
+
+  markNotificationRead: (id) => safeFetch(`${API_BASE}/notifications/${id}/read`, {
+    method: 'PUT'
+  }, () => {
+    const list = getStored('sitepilot_notifications', DEFAULT_NOTIFICATIONS);
+    const updated = list.map(n => String(n.id) === String(id) ? { ...n, read: true } : n);
+    setStored('sitepilot_notifications', updated);
+    return { success: true };
+  }),
+
+  markAllNotificationsRead: () => safeFetch(`${API_BASE}/notifications/read-all`, {
+    method: 'PUT'
+  }, () => {
+    const list = getStored('sitepilot_notifications', DEFAULT_NOTIFICATIONS);
+    const updated = list.map(n => ({ ...n, read: true }));
+    setStored('sitepilot_notifications', updated);
+    return { success: true };
+  }),
+
+  deleteNotification: (id) => safeFetch(`${API_BASE}/notifications/${id}`, {
+    method: 'DELETE'
+  }, () => {
+    const list = getStored('sitepilot_notifications', DEFAULT_NOTIFICATIONS);
+    const updated = list.filter(n => String(n.id) !== String(id));
+    setStored('sitepilot_notifications', updated);
     return { success: true };
   })
 };

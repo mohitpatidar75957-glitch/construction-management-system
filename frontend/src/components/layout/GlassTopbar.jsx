@@ -47,7 +47,7 @@ export default function GlassTopbar({ onRefresh, onOpenProfile }) {
 
   return (
     <header className="glass-topbar-header" style={{ position: 'relative', zIndex: 50 }}>
-      {/* Left: Avatar, Welcome Pill & Live Role Badge */}
+      {/* Left: Avatar & Welcome Pill */}
       <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
         <div 
           onClick={handleProfileClick}
@@ -81,22 +81,6 @@ export default function GlassTopbar({ onRefresh, onOpenProfile }) {
             Welcome, {user?.name || 'Mohit Patidar'}
           </span>
         </div>
-
-        {/* Live Role Pill */}
-        <span style={{
-          fontSize: '11px',
-          fontWeight: 800,
-          padding: '4px 10px',
-          borderRadius: '9999px',
-          background: badgeStyle.bg,
-          color: badgeStyle.color,
-          border: badgeStyle.border,
-          display: 'inline-flex',
-          alignItems: 'center',
-          gap: '5px'
-        }}>
-          {user?.roleBadge || '👑 Super Admin'}
-        </span>
       </div>
 
       {/* Center: Search Pill Bar */}
@@ -186,49 +170,64 @@ export default function GlassTopbar({ onRefresh, onOpenProfile }) {
           <HiChevronDown size={14} color="#64748B" />
         </div>
 
-        {/* Profile Details Dropdown */}
+        {/* Profile Details Dropdown - Solid Opaque Background (Zero Chart Bleed-through) */}
         {menuOpen && (
           <div 
-            className="glass-card animate-fade-in"
+            className="glass-dropdown-menu animate-fade-in"
             style={{
               position: 'absolute',
               top: '46px',
               right: '0',
-              width: '270px',
-              padding: '16px',
+              width: '290px',
+              padding: '18px',
               borderRadius: '20px',
-              background: 'rgba(255, 255, 255, 0.98)',
-              backdropFilter: 'blur(32px)',
-              boxShadow: '0 20px 50px rgba(0, 0, 0, 0.14)',
-              border: '1px solid rgba(255, 255, 255, 0.9)',
+              background: '#ffffff',
+              boxShadow: '0 24px 50px rgba(10, 25, 70, 0.22), 0 4px 14px rgba(0, 0, 0, 0.08)',
+              border: '1.5px solid rgba(203, 213, 225, 0.9)',
               display: 'flex',
               flexDirection: 'column',
               gap: '12px',
-              zIndex: 100
+              zIndex: 9999
             }}
           >
             {/* Header info */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', paddingBottom: '12px', borderBottom: '1px solid rgba(226, 232, 240, 0.8)' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', paddingBottom: '14px', borderBottom: '1px solid rgba(226, 232, 240, 0.9)' }}>
               <div style={{
-                width: '38px',
-                height: '38px',
+                width: '42px',
+                height: '42px',
                 borderRadius: '50%',
-                background: '#2563EB',
+                background: 'linear-gradient(135deg, #2563EB, #1D4ED8)',
                 color: '#ffffff',
-                fontWeight: 800,
-                fontSize: '13px',
+                fontWeight: 900,
+                fontSize: '14px',
                 display: 'flex',
                 alignItems: 'center',
-                justifyContent: 'center'
+                justifyContent: 'center',
+                boxShadow: '0 4px 12px rgba(37, 99, 235, 0.3)',
+                flexShrink: 0
               }}>
                 {user?.avatar || 'MP'}
               </div>
-              <div style={{ overflow: 'hidden' }}>
-                <div style={{ fontSize: '13px', fontWeight: 800, color: '#0F172A', whiteSpace: 'nowrap', textOverflow: 'ellipsis' }}>
-                  {user?.name}
+              <div style={{ overflow: 'hidden', flex: 1 }}>
+                <div style={{ fontSize: '14px', fontWeight: 800, color: '#0F172A', whiteSpace: 'nowrap', textOverflow: 'ellipsis' }}>
+                  {user?.name || 'Mohit Patidar'}
                 </div>
-                <div style={{ fontSize: '11px', color: '#64748B', whiteSpace: 'nowrap', textOverflow: 'ellipsis' }}>
-                  {user?.email}
+                <div style={{ fontSize: '11.5px', color: '#64748B', whiteSpace: 'nowrap', textOverflow: 'ellipsis' }}>
+                  {user?.email || 'admin@sitepilot.in'}
+                </div>
+                <div style={{ marginTop: '4px' }}>
+                  <span style={{
+                    fontSize: '10px',
+                    fontWeight: 800,
+                    padding: '2px 8px',
+                    borderRadius: '6px',
+                    background: badgeStyle.bg,
+                    color: badgeStyle.color,
+                    border: badgeStyle.border,
+                    display: 'inline-block'
+                  }}>
+                    {user?.roleBadge || '👑 Super Admin'}
+                  </span>
                 </div>
               </div>
             </div>
@@ -239,19 +238,20 @@ export default function GlassTopbar({ onRefresh, onOpenProfile }) {
               style={{
                 display: 'flex',
                 alignItems: 'center',
-                gap: '8px',
-                padding: '9px 12px',
-                borderRadius: '10px',
-                border: '1px solid rgba(37, 99, 235, 0.25)',
-                background: 'rgba(37, 99, 235, 0.08)',
-                color: '#2563EB',
-                fontSize: '12px',
-                fontWeight: 700,
+                gap: '10px',
+                padding: '10px 14px',
+                borderRadius: '12px',
+                border: '1.5px solid rgba(37, 99, 235, 0.3)',
+                background: '#EFF6FF',
+                color: '#1D4ED8',
+                fontSize: '12.5px',
+                fontWeight: 800,
                 cursor: 'pointer',
-                textAlign: 'left'
+                textAlign: 'left',
+                transition: 'all 0.15s ease'
               }}
             >
-              <HiOutlineUser size={16} />
+              <HiOutlineUser size={17} />
               <span>View Full Profile & Clearances</span>
             </button>
 
@@ -264,19 +264,19 @@ export default function GlassTopbar({ onRefresh, onOpenProfile }) {
               style={{
                 display: 'flex',
                 alignItems: 'center',
-                gap: '8px',
-                padding: '9px 12px',
-                borderRadius: '10px',
-                border: 'none',
+                gap: '10px',
+                padding: '10px 14px',
+                borderRadius: '12px',
+                border: '1.5px solid rgba(239, 68, 68, 0.25)',
                 background: '#FEE2E2',
                 color: '#DC2626',
-                fontSize: '12px',
-                fontWeight: 700,
+                fontSize: '12.5px',
+                fontWeight: 800,
                 cursor: 'pointer',
-                transition: 'background 0.15s ease'
+                transition: 'all 0.15s ease'
               }}
             >
-              <HiOutlineArrowRightOnRectangle size={16} />
+              <HiOutlineArrowRightOnRectangle size={17} />
               <span>Sign Out / Lock Workspace</span>
             </button>
           </div>

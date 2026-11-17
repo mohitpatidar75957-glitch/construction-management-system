@@ -196,6 +196,285 @@ export default function DocumentManagerView({ filterProjectId = null }) {
     showToast(`Document "${renewDoc.title}" renewed until ${renewDate}!`);
   };
 
+  // Full-Screen Renew Statutory Document View (Widescreen 2-Column Format)
+  if (renewDoc) {
+    return (
+      <div className="module-view-container animate-fade-in" style={{ width: '100%' }}>
+        {/* Top Header Bar */}
+        <div 
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            marginBottom: '24px',
+            gap: '16px',
+            flexWrap: 'wrap'
+          }}
+        >
+          <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
+            <button 
+              type="button"
+              onClick={() => { setRenewDoc(null); setRenewDate(''); }}
+              className="glass-pill"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px',
+                padding: '9px 18px',
+                fontSize: '12.5px',
+                fontWeight: 700,
+                color: '#0F172A',
+                cursor: 'pointer',
+                background: 'rgba(255, 255, 255, 0.75)',
+                border: '1px solid rgba(255, 255, 255, 0.9)',
+                boxShadow: '0 4px 12px rgba(0, 0, 0, 0.05)'
+              }}
+            >
+              <X size={16} />
+              <span>Back to Compliance Vault</span>
+            </button>
+
+            <div>
+              <h1 style={{ fontSize: '24px', fontWeight: 800, color: '#0F172A', margin: 0, letterSpacing: '-0.02em' }}>
+                Renew Statutory Document <span className="amp">&</span> NOC
+              </h1>
+              <span style={{ fontSize: '12px', color: '#64748B', fontWeight: 500 }}>
+                Extend statutory validity, municipal sanction renewals, and update legal compliance vault
+              </span>
+            </div>
+          </div>
+
+          <button 
+            type="button"
+            onClick={() => { setRenewDoc(null); setRenewDate(''); }}
+            className="glass-pill"
+            style={{
+              padding: '8px 16px',
+              fontSize: '12px',
+              fontWeight: 600,
+              color: '#64748B',
+              background: 'rgba(255, 255, 255, 0.5)',
+              border: '1px solid rgba(255, 255, 255, 0.7)',
+              cursor: 'pointer'
+            }}
+          >
+            Cancel & Exit
+          </button>
+        </div>
+
+        {/* 2-Column Full Screen Form & Live Compliance Dossier Card */}
+        <form onSubmit={handleRenewSubmit} style={{ 
+          display: 'grid', 
+          gridTemplateColumns: 'repeat(auto-fit, minmax(360px, 1fr))', 
+          gap: '24px', 
+          alignItems: 'start' 
+        }}>
+          {/* Left Column: Renewal Form Controls */}
+          <div className="glass-card" style={{ padding: '28px 30px', display: 'flex', flexDirection: 'column', gap: '20px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', borderBottom: '1px solid rgba(226, 232, 240, 0.8)', paddingBottom: '14px' }}>
+              <div style={{ width: '42px', height: '42px', borderRadius: '12px', background: '#F59E0B', color: '#FFFFFF', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <RefreshCw size={22} />
+              </div>
+              <div>
+                <h3 style={{ margin: 0, fontSize: '16.5px', fontWeight: 800, color: '#0F172A' }}>
+                  Statutory Renewal Application
+                </h3>
+                <span style={{ fontSize: '12px', color: '#64748B' }}>
+                  Enter updated validity date and municipal challan filing receipt
+                </span>
+              </div>
+            </div>
+
+            <div style={{
+              padding: '14px 18px',
+              borderRadius: '14px',
+              background: 'rgba(254, 243, 199, 0.75)',
+              border: '1px solid rgba(245, 158, 11, 0.4)',
+              fontSize: '12.5px',
+              color: '#92400E',
+              lineHeight: 1.5
+            }}>
+              <div><b>Document Name:</b> {renewDoc.title}</div>
+              <div style={{ marginTop: '4px' }}><b>Assigned Site:</b> {renewDoc.site} • <b>Current Expiry:</b> <span style={{ color: '#DC2626', fontWeight: 800 }}>{renewDoc.expiry_date}</span></div>
+            </div>
+
+            <div className="form-group">
+              <label style={{ fontSize: '11.5px', fontWeight: 700, color: '#475569', display: 'block', marginBottom: '6px' }}>
+                NEW EXPIRY / RENEWAL VALIDITY DATE *
+              </label>
+              <input
+                type="date"
+                required
+                value={renewDate}
+                onChange={(e) => setRenewDate(e.target.value)}
+                style={{
+                  width: '100%',
+                  padding: '11px 14px',
+                  borderRadius: '12px',
+                  border: '1px solid rgba(203, 213, 225, 0.85)',
+                  background: '#ffffff',
+                  fontSize: '13px',
+                  color: '#0F172A',
+                  outline: 'none'
+                }}
+              />
+            </div>
+
+            {/* Quick Renewal Presets */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
+              <span style={{ fontSize: '11px', color: '#64748B', fontWeight: 600 }}>Quick Presets:</span>
+              <button
+                type="button"
+                onClick={() => setRenewDate('2027-12-31')}
+                style={{
+                  padding: '6px 12px',
+                  borderRadius: '8px',
+                  border: '1px solid rgba(37, 99, 235, 0.3)',
+                  background: 'rgba(37, 99, 235, 0.08)',
+                  color: '#2563EB',
+                  fontSize: '11px',
+                  fontWeight: 700,
+                  cursor: 'pointer'
+                }}
+              >
+                + 1 Year (Dec 2027)
+              </button>
+              <button
+                type="button"
+                onClick={() => setRenewDate('2028-12-31')}
+                style={{
+                  padding: '6px 12px',
+                  borderRadius: '8px',
+                  border: '1px solid rgba(16, 185, 129, 0.3)',
+                  background: 'rgba(16, 185, 129, 0.08)',
+                  color: '#059669',
+                  fontSize: '11px',
+                  fontWeight: 700,
+                  cursor: 'pointer'
+                }}
+              >
+                + 2 Years (Dec 2028)
+              </button>
+              <button
+                type="button"
+                onClick={() => setRenewDate('2030-12-31')}
+                style={{
+                  padding: '6px 12px',
+                  borderRadius: '8px',
+                  border: '1px solid rgba(217, 119, 6, 0.3)',
+                  background: 'rgba(217, 119, 6, 0.08)',
+                  color: '#D97706',
+                  fontSize: '11px',
+                  fontWeight: 700,
+                  cursor: 'pointer'
+                }}
+              >
+                + 3 Years (Dec 2030)
+              </button>
+            </div>
+
+            <div style={{ display: 'flex', gap: '12px', marginTop: '10px' }}>
+              <button
+                type="button"
+                className="btn-glass-outline"
+                onClick={() => { setRenewDoc(null); setRenewDate(''); }}
+                style={{ padding: '11px 20px', borderRadius: '12px', cursor: 'pointer' }}
+              >
+                Cancel
+              </button>
+              <button
+                type="submit"
+                className="btn-dubai-gold"
+                style={{
+                  flex: 1,
+                  padding: '11px 20px',
+                  borderRadius: '12px',
+                  fontSize: '13px',
+                  fontWeight: 800,
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '8px'
+                }}
+              >
+                <CheckCircle2 size={16} />
+                <span>Confirm Renewal & Update Vault</span>
+              </button>
+            </div>
+          </div>
+
+          {/* Right Column: Live Document Compliance Dossier */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+            <div className="glass-card" style={{ padding: '26px 28px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                <span style={{ fontSize: '11px', fontWeight: 700, color: '#64748B', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+                  Document Compliance Dossier
+                </span>
+                <span className="glass-pill" style={{ padding: '3px 10px', fontSize: '11px', fontWeight: 800, color: '#F59E0B' }}>
+                  ⚡ Statutory NOC
+                </span>
+              </div>
+
+              <div>
+                <h3 style={{ fontSize: '18px', fontWeight: 800, color: '#0F172A', margin: 0 }}>
+                  {renewDoc.title}
+                </h3>
+                <div style={{ fontSize: '12.5px', color: '#64748B', marginTop: '4px' }}>
+                  Sheet / Sanction ID: <b>{renewDoc.sheet_no || renewDoc.id}</b>
+                </div>
+              </div>
+
+              {/* Status Comparison Pill Box */}
+              <div style={{
+                display: 'grid',
+                gridTemplateColumns: '1fr 1fr',
+                gap: '12px',
+                padding: '16px',
+                borderRadius: '16px',
+                background: 'rgba(255, 255, 255, 0.75)',
+                border: '1px solid rgba(226, 232, 240, 0.85)'
+              }}>
+                <div>
+                  <div style={{ fontSize: '10.5px', color: '#94A3B8', fontWeight: 800, textTransform: 'uppercase' }}>Old Expiry Date</div>
+                  <div style={{ fontSize: '13px', color: '#DC2626', fontWeight: 800, marginTop: '2px' }}>{renewDoc.expiry_date}</div>
+                </div>
+                <div>
+                  <div style={{ fontSize: '10.5px', color: '#94A3B8', fontWeight: 800, textTransform: 'uppercase' }}>New Proposed Expiry</div>
+                  <div style={{ fontSize: '13px', color: '#059669', fontWeight: 800, marginTop: '2px' }}>{renewDate || 'Select Date'}</div>
+                </div>
+                <div>
+                  <div style={{ fontSize: '10.5px', color: '#94A3B8', fontWeight: 800, textTransform: 'uppercase' }}>Issuing Authority</div>
+                  <div style={{ fontSize: '12px', color: '#0F172A', fontWeight: 700, marginTop: '2px' }}>{renewDoc.approved_by || 'Pollution Control Board'}</div>
+                </div>
+                <div>
+                  <div style={{ fontSize: '10.5px', color: '#94A3B8', fontWeight: 800, textTransform: 'uppercase' }}>Verification Status</div>
+                  <div style={{ fontSize: '12px', color: '#2563EB', fontWeight: 700, marginTop: '2px' }}>✓ Legally Sealed</div>
+                </div>
+              </div>
+
+              <div style={{
+                padding: '14px',
+                borderRadius: '12px',
+                background: 'rgba(241, 245, 249, 0.85)',
+                border: '1px solid rgba(226, 232, 240, 0.8)',
+                fontSize: '11.5px',
+                color: '#475569',
+                lineHeight: 1.5,
+                display: 'flex',
+                alignItems: 'flex-start',
+                gap: '8px'
+              }}>
+                <ShieldCheck size={16} color="#10B981" style={{ flexShrink: 0, marginTop: '2px' }} />
+                <span>Renewing this clearance resets automated expiry alert notifications and clears critical project hold flags.</span>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    );
+  }
+
   return (
     <div className="module-view-container animate-fade-in">
       {/* Toast Notification */}
@@ -988,56 +1267,6 @@ export default function DocumentManagerView({ filterProjectId = null }) {
                 </button>
               </div>
             </div>
-          </div>
-        </div>
-      )}
-
-      {/* ========================================================
-          RENEW EXPIRY DATE MODAL
-      ======================================================== */}
-      {renewDoc && (
-        <div className="modal-backdrop">
-          <div className="dubai-modal-box" style={{ maxWidth: '520px' }}>
-            <div className="modal-header">
-              <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                <div style={{ width: '38px', height: '38px', borderRadius: '10px', background: '#F59E0B', color: '#FFFFFF', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  <RefreshCw size={20} />
-                </div>
-                <div>
-                  <h3 style={{ margin: 0, fontSize: '18px', fontWeight: 800 }}>Renew Statutory Document</h3>
-                  <div style={{ fontSize: '12px', color: '#64748B' }}>Extend validity and update compliance ledger</div>
-                </div>
-              </div>
-              <button className="modal-close-btn" onClick={() => setRenewDoc(null)}>
-                <X size={20} />
-              </button>
-            </div>
-
-            <form onSubmit={handleRenewSubmit} className="modal-form">
-              <div style={{ padding: '10px 14px', borderRadius: '12px', background: 'rgba(254, 243, 199, 0.7)', border: '1px solid rgba(245, 158, 11, 0.4)', fontSize: '12px', color: '#92400E' }}>
-                Renewing: <b>{renewDoc.title}</b> ({renewDoc.site})
-              </div>
-
-              <div className="form-group">
-                <label>New Expiry / Renewal Date *</label>
-                <input
-                  type="date"
-                  required
-                  value={renewDate}
-                  onChange={(e) => setRenewDate(e.target.value)}
-                />
-              </div>
-
-              <div className="modal-actions-bar">
-                <button type="button" className="btn-glass-outline" onClick={() => setRenewDoc(null)}>
-                  Cancel
-                </button>
-                <button type="submit" className="btn-dubai-gold">
-                  <CheckCircle2 size={16} />
-                  <span>Confirm Renewal</span>
-                </button>
-              </div>
-            </form>
           </div>
         </div>
       )}

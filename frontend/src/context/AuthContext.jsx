@@ -31,6 +31,14 @@ export function AuthProvider({ children }) {
     return updated;
   };
 
+  const updateProfile = (profileData) => {
+    if (!user) return;
+    const updated = authService.updateUserProfile(user.id, profileData);
+    setUser(updated);
+    setUsersList(authService.getAllUsers());
+    return updated;
+  };
+
   const canAccess = (tabId) => {
     if (!user) return false;
     if (user.role === 'SUPER_ADMIN') return true;
@@ -53,6 +61,7 @@ export function AuthProvider({ children }) {
       logout, 
       addUser,
       updatePermissions,
+      updateProfile,
       usersList,
       canAccess,
       roleMeta,

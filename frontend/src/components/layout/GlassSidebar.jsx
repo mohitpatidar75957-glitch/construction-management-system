@@ -127,7 +127,7 @@ export default function GlassSidebar({ activeTab, setActiveTab }) {
     >
       {/* Top Fixed Area: Brand Logo + Dashboard Overview (Fixed & Non-scrolling) */}
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px', marginBottom: '8px', flexShrink: 0 }}>
-        {/* Brand Icon Button */}
+        {/* Brand Icon Button - Option 5 Skyline Landmark Tower & Spire */}
         <div 
           onClick={() => setActiveTab('overview')}
           style={{
@@ -144,9 +144,23 @@ export default function GlassSidebar({ activeTab, setActiveTab }) {
             flexShrink: 0,
             transition: 'transform 0.15s ease'
           }}
-          title="SitePilot - Construction Management"
+          title="SitePilot - Construction Management OS"
         >
-          <HiOutlineBuildingOffice2 size={22} strokeWidth={2.2} />
+          {/* Option 5: Pure Vector Skyline Landmark Spire */}
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.1" strokeLinecap="round" strokeLinejoin="round">
+            {/* Ground Baseline */}
+            <path d="M2 21h20" strokeWidth="2.4"/>
+            {/* Left Tower */}
+            <path d="M4 21V11l4-2v12"/>
+            <path d="M6 14h.01M6 17h.01"/>
+            {/* Center Spire Landmark Tower */}
+            <path d="M8 21V5l8 3v13"/>
+            <path d="M12 2v3" strokeWidth="2.3"/>
+            <path d="M10 10h.01M14 11h.01M10 14h.01M14 15h.01M10 18h.01M14 18h.01"/>
+            {/* Right Tower */}
+            <path d="M16 21V12l4 2v7"/>
+            <path d="M18 16h.01"/>
+          </svg>
         </div>
 
         {/* Dashboard Overview Icon Button (Fixed at top, does NOT scroll away) */}
@@ -223,12 +237,28 @@ export default function GlassSidebar({ activeTab, setActiveTab }) {
                   cursor: 'pointer',
                   transition: 'all 0.18s ease',
                   padding: 0,
-                  flexShrink: 0
+                  flexShrink: 0,
+                  position: 'relative'
                 }}
                 aria-label={item.label}
-                title={item.label}
+                title={item.id === 'documents' ? `${item.label} (⚠️ Expiry Alerts Active)` : item.label}
               >
                 <Icon size={20} strokeWidth={isActive ? 2.4 : 1.9} />
+                {item.id === 'documents' && (
+                  <span 
+                    style={{
+                      position: 'absolute',
+                      top: '5px',
+                      right: '5px',
+                      width: '7px',
+                      height: '7px',
+                      borderRadius: '50%',
+                      background: '#EF4444',
+                      boxShadow: '0 0 6px #EF4444'
+                    }} 
+                    title="Statutory Expiry Alerts"
+                  />
+                )}
               </button>
             );
           })}

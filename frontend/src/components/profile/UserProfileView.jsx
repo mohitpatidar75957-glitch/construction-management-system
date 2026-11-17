@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   ArrowLeft, 
   LogOut, 
@@ -15,14 +15,50 @@ import {
   Smartphone,
   Shield,
   Layers,
-  Sparkles
+  Sparkles,
+  Edit2,
+  Save,
+  X,
+  MapPin,
+  UserCheck
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 
 export default function UserProfileView({ onBack, onNavigateSettings }) {
-  const { user, logout, isSuperAdmin } = useAuth();
+  const { user, logout, isSuperAdmin, updateProfile, canAccess } = useAuth();
+  
+  // Inline Edit Profile State (No popup modal!)
+  const [isEditingInline, setIsEditingInline] = useState(false);
+  const [editForm, setEditForm] = useState({
+    name: '',
+    phone: '',
+    email: '',
+    site: '',
+    department: ''
+  });
+
+  // Password Update Form State
   const [passwordForm, setPasswordForm] = useState({ current: '', newPass: '', confirm: '' });
   const [passwordSaved, setPasswordSaved] = useState(false);
+  const [toastMsg, setToastMsg] = useState('');
+
+  const showToast = (msg) => {
+    setToastMsg(msg);
+    setTimeout(() => setToastMsg(''), 4000);
+  };
+
+  // Sync edit form with current user data
+  useEffect(() => {
+    if (user) {
+      setEditForm({
+        name: user.name || '',
+        phone: user.phone || '',
+        email: user.email || '',
+        site: user.site || 'All Sites (Headquarters)',
+        department: user.department || 'Executive Management'
+      });
+    }
+  }, [user]);
 
   const allModulesList = [
     { id: 'overview', label: 'Dashboard Overview', category: 'Executive' },
@@ -45,17 +81,66 @@ export default function UserProfileView({ onBack, onNavigateSettings }) {
     { id: 'audit_backup', label: 'Audit Trail & Immutable Backups', category: 'Admin' }
   ];
 
-  const userPerms = user?.customPermissions || [];
+  // Calculate permissions safely using canAccess
+  const checkModuleAccess = (modId) => {
+    if (isSuperAdmin) return true;
+    if (canAccess) return canAccess(modId);
+    if (user?.customPermissions && Array.isArray(user.customPermissions)) {
+      return user.customPermissions.includes(modId);
+    }
+    return false;
+  };
+
+  const grantedCount = allModulesList.filter(mod => checkModuleAccess(mod.id)).length;
+
+  // Handle Edit Profile Submit
+  const handleEditProfileSubmit = (e) => {
+    e.preventDefault();
+    if (!editForm.name.trim()) {
+      alert('Please enter your full name.');
+      return;
+    }
+    if (updateProfile) {
+      updateProfile(editForm);
+    }
+    setIsEditingInline(false);
+    showToast('Profile details updated successfully! Changes saved in place.');
+  };
 
   const handlePasswordSubmit = (e) => {
     e.preventDefault();
     setPasswordSaved(true);
     setTimeout(() => setPasswordSaved(false), 3000);
     setPasswordForm({ current: '', newPass: '', confirm: '' });
+    showToast('Security password updated successfully.');
   };
 
   return (
     <div className="module-view-container animate-fade-in" style={{ width: '100%' }}>
+      {/* Toast Notification */}
+      {toastMsg && (
+        <div style={{
+          position: 'fixed',
+          top: '24px',
+          right: '24px',
+          zIndex: 9999,
+          background: 'linear-gradient(135deg, #0F172A, #1E293B)',
+          color: '#FFFFFF',
+          padding: '14px 22px',
+          borderRadius: '16px',
+          border: '1.5px solid rgba(255, 255, 255, 0.4)',
+          boxShadow: '0 20px 40px rgba(0, 0, 0, 0.35)',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '12px',
+          fontSize: '13px',
+          fontWeight: 600
+        }}>
+          <CheckCircle2 size={18} color="#10B981" />
+          <span>{toastMsg}</span>
+        </div>
+      )}
+
       {/* Top Glass Navigation Bar */}
       <div 
         style={{
@@ -91,8 +176,8 @@ export default function UserProfileView({ onBack, onNavigateSettings }) {
           </button>
 
           <div>
-            <h1 style={{ fontSize: '24px', fontWeight: 800, color: '#0F172A', margin: 0, letterSpacing: '-0.02em' }}>
-              User Profile & Security Clearance
+            <h1 className="dashboard-heading" style={{ fontSize: '24px', fontWeight: 800, color: '#0F172A', margin: 0, letterSpacing: '-0.02em' }}>
+              User Profile <span className="amp">&</span> Account Details
             </h1>
           </div>
         </div>
@@ -120,93 +205,260 @@ export default function UserProfileView({ onBack, onNavigateSettings }) {
         </button>
       </div>
 
-      {/* 2-Column Full Screen Profile Layout */}
+      {/* Widescreen 2-Column Layout Matching Other CMS System Pages */}
       <div style={{ 
         display: 'grid', 
         gridTemplateColumns: 'repeat(auto-fit, minmax(360px, 1fr))', 
         gap: '24px', 
-        alignItems: 'start' 
+        alignItems: 'start',
+        width: '100%'
       }}>
-        {/* Left Column: Personal Identity & Security Profile */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-          {/* Identity Card */}
-          <div 
-            className="glass-card" 
-            style={{ 
-              padding: '30px', 
-              display: 'flex', 
-              flexDirection: 'column', 
-              gap: '20px',
-              background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.5))' 
-            }}
-          >
-            <div style={{ display: 'flex', alignItems: 'center', gap: '18px' }}>
-              <div style={{
-                width: '68px',
-                height: '68px',
-                borderRadius: '50%',
-                background: '#0F172A',
-                color: '#ffffff',
-                fontWeight: 900,
-                fontSize: '24px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                boxShadow: '0 8px 24px rgba(15, 23, 42, 0.25)'
-              }}>
-                {user?.avatar || 'MP'}
+        {/* Left Column: Personal Identity & In-Place Profile Editor */}
+        <div 
+          className="glass-card" 
+          style={{ 
+            padding: '28px', 
+            display: 'flex', 
+            flexDirection: 'column', 
+            gap: '20px',
+            background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.88), rgba(255, 255, 255, 0.65))',
+            boxShadow: '0 8px 30px rgba(10, 25, 70, 0.06)'
+          }}
+        >
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '14px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+                <div style={{
+                  width: '64px',
+                  height: '64px',
+                  borderRadius: '50%',
+                  background: 'linear-gradient(135deg, #0F172A, #1E293B)',
+                  color: '#ffffff',
+                  fontWeight: 900,
+                  fontSize: '22px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  boxShadow: '0 8px 24px rgba(15, 23, 42, 0.25)',
+                  flexShrink: 0
+                }}>
+                  {user?.avatar || 'MP'}
+                </div>
+
+                <div>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
+                    <h2 style={{ fontSize: '20px', fontWeight: 900, color: '#0F172A', margin: 0 }}>
+                      {user?.name || 'Mohit Patidar'}
+                    </h2>
+                    <span style={{
+                      fontSize: '11px',
+                      fontWeight: 800,
+                      padding: '3px 10px',
+                      borderRadius: '9999px',
+                      background: 'rgba(37, 99, 235, 0.12)',
+                      color: '#2563EB',
+                      border: '1px solid rgba(37, 99, 235, 0.25)'
+                    }}>
+                      {user?.roleBadge || '👑 Super Admin'}
+                    </span>
+                  </div>
+                  <div style={{ fontSize: '13px', color: '#64748B', fontWeight: 600, marginTop: '3px' }}>
+                    {user?.roleTitle || 'Super Admin / Director'}
+                  </div>
+                </div>
               </div>
 
-              <div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
-                  <h2 style={{ fontSize: '20px', fontWeight: 900, color: '#0F172A', margin: 0 }}>
-                    {user?.name}
-                  </h2>
-                  <span style={{
-                    fontSize: '11px',
-                    fontWeight: 800,
-                    padding: '3px 10px',
-                    borderRadius: '9999px',
-                    background: 'rgba(37, 99, 235, 0.12)',
+              {/* Inline Edit Mode Toggle Button */}
+              {!isEditingInline ? (
+                <button
+                  type="button"
+                  onClick={() => setIsEditingInline(true)}
+                  className="glass-pill"
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '6px',
+                    padding: '7px 14px',
+                    fontSize: '12px',
+                    fontWeight: 700,
                     color: '#2563EB',
-                    border: '1px solid rgba(37, 99, 235, 0.25)'
-                  }}>
-                    {user?.roleBadge}
-                  </span>
-                </div>
-                <div style={{ fontSize: '13px', color: '#64748B', fontWeight: 600, marginTop: '3px' }}>
-                  {user?.roleTitle}
-                </div>
-              </div>
+                    background: 'rgba(37, 99, 235, 0.08)',
+                    border: '1px solid rgba(37, 99, 235, 0.25)',
+                    cursor: 'pointer'
+                  }}
+                >
+                  <Edit2 size={13} />
+                  <span>Edit Profile</span>
+                </button>
+              ) : (
+                <button
+                  type="button"
+                  onClick={() => setIsEditingInline(false)}
+                  className="glass-pill"
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '6px',
+                    padding: '7px 14px',
+                    fontSize: '12px',
+                    fontWeight: 700,
+                    color: '#64748B',
+                    background: 'rgba(255, 255, 255, 0.9)',
+                    border: '1px solid rgba(203, 213, 225, 0.8)',
+                    cursor: 'pointer'
+                  }}
+                >
+                  <X size={13} />
+                  <span>Cancel Edit</span>
+                </button>
+              )}
             </div>
 
-            {/* User Meta Grid */}
-            <div style={{ 
-              display: 'grid', 
-              gridTemplateColumns: '1fr 1fr', 
-              gap: '12px',
-              padding: '16px',
-              borderRadius: '16px',
-              background: 'rgba(255, 255, 255, 0.75)',
-              border: '1px solid rgba(226, 232, 240, 0.8)'
-            }}>
-              <div>
-                <div style={{ fontSize: '10.5px', color: '#94A3B8', fontWeight: 700, textTransform: 'uppercase' }}>Corporate Email</div>
-                <div style={{ fontSize: '12.5px', color: '#0F172A', fontWeight: 700, marginTop: '2px' }}>{user?.email}</div>
+            {/* In-Place Editable Form or View Grid (No popup modal!) */}
+            {!isEditingInline ? (
+              <div style={{ 
+                display: 'grid', 
+                gridTemplateColumns: '1fr 1fr', 
+                gap: '12px',
+                padding: '16px',
+                borderRadius: '16px',
+                background: 'rgba(255, 255, 255, 0.8)',
+                border: '1px solid rgba(226, 232, 240, 0.85)'
+              }}>
+                <div>
+                  <div style={{ fontSize: '10.5px', color: '#94A3B8', fontWeight: 800, textTransform: 'uppercase' }}>Corporate Email</div>
+                  <div style={{ fontSize: '12.5px', color: '#0F172A', fontWeight: 700, marginTop: '2px', wordBreak: 'break-all' }}>{user?.email || 'admin@sitepilot.in'}</div>
+                </div>
+                <div>
+                  <div style={{ fontSize: '10.5px', color: '#94A3B8', fontWeight: 800, textTransform: 'uppercase' }}>Assigned Site</div>
+                  <div style={{ fontSize: '12.5px', color: '#0F172A', fontWeight: 700, marginTop: '2px' }}>{user?.site || 'All Sites (Headquarters)'}</div>
+                </div>
+                <div>
+                  <div style={{ fontSize: '10.5px', color: '#94A3B8', fontWeight: 800, textTransform: 'uppercase' }}>Official Phone / Mobile</div>
+                  <div style={{ fontSize: '12.5px', color: '#0F172A', fontWeight: 700, marginTop: '2px' }}>{user?.phone || '+91 98260 11223'}</div>
+                </div>
+                <div>
+                  <div style={{ fontSize: '10.5px', color: '#94A3B8', fontWeight: 800, textTransform: 'uppercase' }}>Employee ID</div>
+                  <div style={{ fontSize: '12.5px', color: '#2563EB', fontWeight: 800, marginTop: '2px' }}>{user?.empId || 'SP-001'}</div>
+                </div>
               </div>
-              <div>
-                <div style={{ fontSize: '10.5px', color: '#94A3B8', fontWeight: 700, textTransform: 'uppercase' }}>Assigned Site</div>
-                <div style={{ fontSize: '12.5px', color: '#0F172A', fontWeight: 700, marginTop: '2px' }}>{user?.site || 'Central HQ'}</div>
-              </div>
-              <div>
-                <div style={{ fontSize: '10.5px', color: '#94A3B8', fontWeight: 700, textTransform: 'uppercase' }}>Official Phone</div>
-                <div style={{ fontSize: '12.5px', color: '#0F172A', fontWeight: 700, marginTop: '2px' }}>{user?.phone || '+91 98260 00000'}</div>
-              </div>
-              <div>
-                <div style={{ fontSize: '10.5px', color: '#94A3B8', fontWeight: 700, textTransform: 'uppercase' }}>Employee ID</div>
-                <div style={{ fontSize: '12.5px', color: '#2563EB', fontWeight: 800, marginTop: '2px' }}>{user?.empId || 'SP-001'}</div>
-              </div>
-            </div>
+            ) : (
+              <form onSubmit={handleEditProfileSubmit} style={{
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '14px',
+                padding: '18px',
+                borderRadius: '16px',
+                background: 'rgba(255, 255, 255, 0.95)',
+                border: '1.5px solid rgba(37, 99, 235, 0.35)',
+                boxShadow: '0 8px 24px rgba(37, 99, 235, 0.08)'
+              }}>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderBottom: '1px solid #E2E8F0', paddingBottom: '8px' }}>
+                  <div style={{ fontSize: '12.5px', fontWeight: 800, color: '#0F172A', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                    <Edit2 size={14} color="#2563EB" />
+                    <span>Edit Profile In-Place</span>
+                  </div>
+                  <span style={{ fontSize: '11px', color: '#64748B' }}>Direct edit mode</span>
+                </div>
+
+                <div className="form-group">
+                  <label style={{ fontSize: '11px', fontWeight: 700, color: '#475569', display: 'block', marginBottom: '4px' }}>FULL NAME *</label>
+                  <input
+                    type="text"
+                    required
+                    placeholder="e.g. Mohit Patidar"
+                    value={editForm.name}
+                    onChange={(e) => setEditForm({ ...editForm, name: e.target.value })}
+                    style={{ width: '100%', padding: '9px 12px', borderRadius: '10px', border: '1px solid #CBD5E1', fontSize: '12.5px', fontWeight: 600, outline: 'none' }}
+                  />
+                </div>
+
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
+                  <div className="form-group">
+                    <label style={{ fontSize: '11px', fontWeight: 700, color: '#475569', display: 'block', marginBottom: '4px' }}>OFFICIAL PHONE *</label>
+                    <input
+                      type="text"
+                      required
+                      placeholder="+91 98260 11223"
+                      value={editForm.phone}
+                      onChange={(e) => setEditForm({ ...editForm, phone: e.target.value })}
+                      style={{ width: '100%', padding: '9px 12px', borderRadius: '10px', border: '1px solid #CBD5E1', fontSize: '12.5px', fontWeight: 600, outline: 'none' }}
+                    />
+                  </div>
+
+                  <div className="form-group">
+                    <label style={{ fontSize: '11px', fontWeight: 700, color: '#475569', display: 'block', marginBottom: '4px' }}>CORPORATE EMAIL *</label>
+                    <input
+                      type="email"
+                      required
+                      placeholder="admin@sitepilot.in"
+                      value={editForm.email}
+                      onChange={(e) => setEditForm({ ...editForm, email: e.target.value })}
+                      style={{ width: '100%', padding: '9px 12px', borderRadius: '10px', border: '1px solid #CBD5E1', fontSize: '12.5px', fontWeight: 600, outline: 'none' }}
+                    />
+                  </div>
+                </div>
+
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
+                  <div className="form-group">
+                    <label style={{ fontSize: '11px', fontWeight: 700, color: '#475569', display: 'block', marginBottom: '4px' }}>ASSIGNED SITE</label>
+                    <input
+                      type="text"
+                      placeholder="All Sites (Headquarters)"
+                      value={editForm.site}
+                      onChange={(e) => setEditForm({ ...editForm, site: e.target.value })}
+                      style={{ width: '100%', padding: '9px 12px', borderRadius: '10px', border: '1px solid #CBD5E1', fontSize: '12.5px', fontWeight: 600, outline: 'none' }}
+                    />
+                  </div>
+
+                  <div className="form-group">
+                    <label style={{ fontSize: '11px', fontWeight: 700, color: '#475569', display: 'block', marginBottom: '4px' }}>DEPARTMENT</label>
+                    <input
+                      type="text"
+                      placeholder="Executive Management"
+                      value={editForm.department}
+                      onChange={(e) => setEditForm({ ...editForm, department: e.target.value })}
+                      style={{ width: '100%', padding: '9px 12px', borderRadius: '10px', border: '1px solid #CBD5E1', fontSize: '12.5px', fontWeight: 600, outline: 'none' }}
+                    />
+                  </div>
+                </div>
+
+                <div style={{ display: 'flex', gap: '10px', justifyContent: 'flex-end', marginTop: '6px' }}>
+                  <button
+                    type="button"
+                    onClick={() => setIsEditingInline(false)}
+                    style={{
+                      padding: '8px 16px',
+                      borderRadius: '10px',
+                      border: '1px solid #CBD5E1',
+                      background: '#F1F5F9',
+                      color: '#475569',
+                      fontSize: '12px',
+                      fontWeight: 700,
+                      cursor: 'pointer'
+                    }}
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    className="btn-dubai-gold"
+                    style={{
+                      padding: '8px 18px',
+                      borderRadius: '10px',
+                      fontSize: '12px',
+                      fontWeight: 800,
+                      cursor: 'pointer',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '6px'
+                    }}
+                  >
+                    <CheckCircle2 size={15} />
+                    <span>Save Profile Changes</span>
+                  </button>
+                </div>
+              </form>
+            )}
 
             {/* Super Admin Control Notice */}
             {isSuperAdmin && (
@@ -242,133 +494,110 @@ export default function UserProfileView({ onBack, onNavigateSettings }) {
                     cursor: 'pointer'
                   }}
                 >
-                  Manage Team & Role Access ➔
+                  <span>Manage Team <span className="amp">&</span> Role Access ➔</span>
                 </button>
               </div>
             )}
+        </div>
+
+        {/* Right Column: Security Credentials Card Matching CMS Design System */}
+        <div 
+          className="glass-card" 
+          style={{ 
+            padding: '28px', 
+            display: 'flex', 
+            flexDirection: 'column', 
+            gap: '20px',
+            background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.88), rgba(255, 255, 255, 0.65))',
+            boxShadow: '0 8px 30px rgba(10, 25, 70, 0.06)'
+          }}
+        >
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderBottom: '1px solid rgba(226, 232, 240, 0.8)', paddingBottom: '12px' }}>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: 800, color: '#0F172A', margin: 0 }}>
+                Update Security Password
+              </h3>
+              <span style={{ fontSize: '11.5px', color: '#64748B' }}>
+                Change your ERP access authentication password
+              </span>
+            </div>
+            <span className="glass-pill" style={{ padding: '3px 10px', fontSize: '11px', fontWeight: 700, color: '#059669' }}>
+              🔒 256-Bit SSL
+            </span>
           </div>
 
-          {/* Security Credentials Card */}
-          <div className="glass-card" style={{ padding: '26px 28px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
-            <h3 style={{ fontSize: '15px', fontWeight: 800, color: '#0F172A', margin: 0 }}>
-              Update Security Password
-            </h3>
+          {passwordSaved && (
+            <div style={{ padding: '10px 14px', borderRadius: '12px', background: '#D1FAE5', color: '#059669', fontSize: '12.5px', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <CheckCircle2 size={16} />
+              <span>Security password updated successfully!</span>
+            </div>
+          )}
 
-            {passwordSaved && (
-              <div style={{ padding: '8px 12px', borderRadius: '10px', background: '#D1FAE5', color: '#059669', fontSize: '12px', fontWeight: 700 }}>
-                ✓ Password updated successfully.
-              </div>
-            )}
+          <form onSubmit={handlePasswordSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+            <div className="form-group">
+              <label style={{ fontSize: '11px', fontWeight: 700, color: '#475569', display: 'block', marginBottom: '4px' }}>CURRENT PASSWORD</label>
+              <input 
+                type="password" 
+                required 
+                placeholder="••••••••" 
+                value={passwordForm.current}
+                onChange={e => setPasswordForm({ ...passwordForm, current: e.target.value })}
+                style={{ width: '100%', padding: '10px 14px', borderRadius: '12px', border: '1px solid rgba(203, 213, 225, 0.85)', background: '#ffffff', fontSize: '12.5px', outline: 'none' }}
+              />
+            </div>
 
-            <form onSubmit={handlePasswordSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px' }}>
               <div className="form-group">
-                <label style={{ fontSize: '11px', fontWeight: 700, color: '#475569' }}>CURRENT PASSWORD</label>
+                <label style={{ fontSize: '11px', fontWeight: 700, color: '#475569', display: 'block', marginBottom: '4px' }}>NEW PASSWORD</label>
                 <input 
                   type="password" 
                   required 
                   placeholder="••••••••" 
-                  value={passwordForm.current}
-                  onChange={e => setPasswordForm({ ...passwordForm, current: e.target.value })}
-                  style={{ width: '100%', padding: '9px 12px', borderRadius: '10px', border: '1px solid #CBD5E1', fontSize: '12px', outline: 'none' }}
+                  value={passwordForm.newPass}
+                  onChange={e => setPasswordForm({ ...passwordForm, newPass: e.target.value })}
+                  style={{ width: '100%', padding: '10px 14px', borderRadius: '12px', border: '1px solid rgba(203, 213, 225, 0.85)', background: '#ffffff', fontSize: '12.5px', outline: 'none' }}
                 />
               </div>
-
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
-                <div className="form-group">
-                  <label style={{ fontSize: '11px', fontWeight: 700, color: '#475569' }}>NEW PASSWORD</label>
-                  <input 
-                    type="password" 
-                    required 
-                    placeholder="••••••••" 
-                    value={passwordForm.newPass}
-                    onChange={e => setPasswordForm({ ...passwordForm, newPass: e.target.value })}
-                    style={{ width: '100%', padding: '9px 12px', borderRadius: '10px', border: '1px solid #CBD5E1', fontSize: '12px', outline: 'none' }}
-                  />
-                </div>
-                <div className="form-group">
-                  <label style={{ fontSize: '11px', fontWeight: 700, color: '#475569' }}>CONFIRM NEW</label>
-                  <input 
-                    type="password" 
-                    required 
-                    placeholder="••••••••" 
-                    value={passwordForm.confirm}
-                    onChange={e => setPasswordForm({ ...passwordForm, confirm: e.target.value })}
-                    style={{ width: '100%', padding: '9px 12px', borderRadius: '10px', border: '1px solid #CBD5E1', fontSize: '12px', outline: 'none' }}
-                  />
-                </div>
+              <div className="form-group">
+                <label style={{ fontSize: '11px', fontWeight: 700, color: '#475569', display: 'block', marginBottom: '4px' }}>CONFIRM NEW</label>
+                <input 
+                  type="password" 
+                  required 
+                  placeholder="••••••••" 
+                  value={passwordForm.confirm}
+                  onChange={e => setPasswordForm({ ...passwordForm, confirm: e.target.value })}
+                  style={{ width: '100%', padding: '10px 14px', borderRadius: '12px', border: '1px solid rgba(203, 213, 225, 0.85)', background: '#ffffff', fontSize: '12.5px', outline: 'none' }}
+                />
               </div>
-
-              <button 
-                type="submit"
-                className="btn-solid-dark"
-                style={{ padding: '10px', borderRadius: '10px', fontSize: '12px', fontWeight: 700, marginTop: '4px', cursor: 'pointer' }}
-              >
-                Save New Password
-              </button>
-            </form>
-          </div>
-        </div>
-
-        {/* Right Column: Active Module Clearances & RBAC Summary */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-          <div className="glass-card" style={{ padding: '28px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-              <div>
-                <h3 style={{ fontSize: '16px', fontWeight: 800, color: '#0F172A', margin: 0 }}>
-                  Active Module Clearances & Permissions
-                </h3>
-                <span style={{ fontSize: '12px', color: '#64748B' }}>
-                  Modules currently unlocked for your user account
-                </span>
-              </div>
-              <span className="glass-pill" style={{ padding: '4px 12px', fontSize: '11.5px', fontWeight: 800, color: '#2563EB' }}>
-                {userPerms.length} / {allModulesList.length} Modules Granted
-              </span>
             </div>
 
-            {/* Clearances Grid */}
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '10px' }}>
-              {allModulesList.map(mod => {
-                const isAllowed = userPerms.includes(mod.id);
-                return (
-                  <div
-                    key={mod.id}
-                    style={{
-                      padding: '12px 14px',
-                      borderRadius: '14px',
-                      background: isAllowed ? 'rgba(255, 255, 255, 0.85)' : 'rgba(241, 245, 249, 0.5)',
-                      border: isAllowed ? '1px solid rgba(203, 213, 225, 0.8)' : '1px solid rgba(226, 232, 240, 0.6)',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'space-between',
-                      opacity: isAllowed ? 1 : 0.65
-                    }}
-                  >
-                    <div>
-                      <div style={{ fontSize: '12px', fontWeight: 700, color: isAllowed ? '#0F172A' : '#94A3B8' }}>
-                        {mod.label}
-                      </div>
-                      <span style={{ fontSize: '10px', color: '#94A3B8', fontWeight: 600 }}>
-                        {mod.category} Division
-                      </span>
-                    </div>
+            <button 
+              type="submit"
+              className="btn-solid-dark"
+              style={{ width: '100%', padding: '12px', borderRadius: '12px', fontSize: '12.5px', fontWeight: 800, cursor: 'pointer', marginTop: '6px' }}
+            >
+              Save New Password
+            </button>
+          </form>
 
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
-                      {isAllowed ? (
-                        <span style={{ fontSize: '10.5px', fontWeight: 800, color: '#059669', display: 'flex', alignItems: 'center', gap: '4px' }}>
-                          <CheckCircle2 size={13} color="#059669" />
-                          <span>Granted</span>
-                        </span>
-                      ) : (
-                        <span style={{ fontSize: '10.5px', fontWeight: 700, color: '#94A3B8', display: 'flex', alignItems: 'center', gap: '4px' }}>
-                          <Lock size={12} color="#94A3B8" />
-                          <span>Restricted</span>
-                        </span>
-                      )}
-                    </div>
-                  </div>
-                );
-              })}
+          {/* Account Meta & Fast Access Info */}
+          <div style={{ 
+            marginTop: 'auto',
+            padding: '14px 16px', 
+            borderRadius: '14px', 
+            background: 'rgba(241, 245, 249, 0.75)', 
+            border: '1px solid rgba(226, 232, 240, 0.8)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between'
+          }}>
+            <div>
+              <div style={{ fontSize: '10.5px', color: '#94A3B8', fontWeight: 800, textTransform: 'uppercase' }}>Session Security</div>
+              <div style={{ fontSize: '12px', color: '#0F172A', fontWeight: 700 }}>End-to-End Encrypted</div>
+            </div>
+            <div style={{ textAlign: 'right' }}>
+              <div style={{ fontSize: '10.5px', color: '#94A3B8', fontWeight: 800, textTransform: 'uppercase' }}>Last Login</div>
+              <div style={{ fontSize: '12px', color: '#2563EB', fontWeight: 700 }}>Today, 09:30 AM</div>
             </div>
           </div>
         </div>
@@ -376,4 +605,3 @@ export default function UserProfileView({ onBack, onNavigateSettings }) {
     </div>
   );
 }
-

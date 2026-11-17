@@ -1,24 +1,49 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
   <defs>
-    <linearGradient id="blue-grad" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
+    <linearGradient id="brand-grad" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
       <stop offset="0%" stop-color="#3B82F6"/>
       <stop offset="50%" stop-color="#2563EB"/>
       <stop offset="100%" stop-color="#1D4ED8"/>
     </linearGradient>
     <linearGradient id="glass-stroke" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.6"/>
-      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0.1"/>
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.7"/>
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0.15"/>
     </linearGradient>
     <filter id="shadow" x="-4" y="-4" width="72" height="72" filterUnits="userSpaceOnUse">
       <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#1E3A8A" flood-opacity="0.35"/>
     </filter>
   </defs>
-  <!-- Rounded Royal Blue Acrylic Base -->
-  <rect width="64" height="64" rx="18" fill="url(#blue-grad)" filter="url(#shadow)"/>
+
+  <!-- Rounded Royal Blue Acrylic Base Matching Option 5 Tile -->
+  <rect width="64" height="64" rx="18" fill="url(#brand-grad)" filter="url(#shadow)"/>
   <rect x="0.75" y="0.75" width="62.5" height="62.5" rx="17.25" stroke="url(#glass-stroke)" stroke-width="1.5"/>
-  <!-- Crisp Architectural Construction Building Motif -->
-  <path d="M32 13L15 25.5V50H25V36H39V50H49V25.5L32 13Z" fill="#FFFFFF"/>
-  <circle cx="32" cy="23" r="3.5" fill="#2563EB"/>
-  <!-- Modern construction subtle accent -->
-  <rect x="28" y="42" width="8" height="8" rx="2" fill="#38BDF8" fill-opacity="0.4"/>
+
+  <!-- Option 5: Skyline Landmark Tower with Architectural Spire Vector -->
+  <g stroke="#FFFFFF" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Ground Baseline -->
+    <path d="M12 52h40" stroke-width="3.5"/>
+    
+    <!-- Left Tower -->
+    <path d="M16 52V28l9-5v29" stroke-width="3"/>
+    <circle cx="20.5" cy="35" r="1.5" fill="#FFFFFF" stroke="none"/>
+    <circle cx="20.5" cy="43" r="1.5" fill="#FFFFFF" stroke="none"/>
+    
+    <!-- Center Landmark Tower with Spire Antenna -->
+    <path d="M25 52V15l15 6v31" stroke-width="3"/>
+    <!-- Top Spire Antenna -->
+    <path d="M32.5 8v7" stroke-width="3.5"/>
+    <circle cx="32.5" cy="8" r="2" fill="#FFFFFF" stroke="none"/>
+    
+    <!-- Center Tower Windows -->
+    <circle cx="30" cy="25" r="1.5" fill="#FFFFFF" stroke="none"/>
+    <circle cx="36" cy="27" r="1.5" fill="#FFFFFF" stroke="none"/>
+    <circle cx="30" cy="34" r="1.5" fill="#FFFFFF" stroke="none"/>
+    <circle cx="36" cy="36" r="1.5" fill="#FFFFFF" stroke="none"/>
+    <circle cx="30" cy="43" r="1.5" fill="#FFFFFF" stroke="none"/>
+    <circle cx="36" cy="45" r="1.5" fill="#FFFFFF" stroke="none"/>
+    
+    <!-- Right Tower -->
+    <path d="M40 52V30l8 4v18" stroke-width="3"/>
+    <circle cx="44" cy="39" r="1.5" fill="#FFFFFF" stroke="none"/>
+  </g>
 </svg>

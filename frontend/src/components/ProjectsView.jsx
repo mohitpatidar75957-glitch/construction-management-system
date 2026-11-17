@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { api, DEFAULT_PROJECTS } from '../api/client';
+import { api, DEFAULT_PROJECTS, DEFAULT_MATERIALS } from '../api/client';
 import { 
   HiOutlineBuildingOffice2 as Building2, 
   HiOutlineMapPin as MapPin, 
@@ -20,7 +20,12 @@ import {
   HiOutlineDocumentText as FileText,
   HiOutlineArrowTrendingUp as TrendingUp,
   HiOutlineSquare3Stack3D as Layers,
-  HiCheck as Check
+  HiCheck as Check,
+  HiOutlineCube as Cube,
+  HiOutlineShoppingCart as ShoppingCart,
+  HiOutlineReceiptPercent as Receipt,
+  HiOutlineBanknotes as Banknotes,
+  HiOutlineChartBar as ChartBar
 } from 'react-icons/hi2';
 import RupeeIcon from './common/RupeeIcon';
 import DocumentManagerView from './modules/DocumentManagerView';
@@ -174,14 +179,29 @@ export default function ProjectsView() {
   const [formData, setFormData] = useState({
     project_name: '',
     project_code: '',
+    project_type: 'Commercial Tower',
     site_location: '',
+    site_address: '',
+    city: 'Indore',
+    state: 'Madhya Pradesh',
+    pincode: '',
     client_name: '',
+    client_contact: '',
+    client_email: '',
     contractor_name: '',
+    project_manager: '',
+    site_engineer: '',
     budget: '',
+    builtup_area: '',
+    total_floors: '',
+    rera_number: '',
     start_date: new Date().toISOString().split('T')[0],
     completion_date: '',
+    handover_date: '',
+    priority: 'HIGH',
     status: 'IN_PROGRESS',
-    progress_percent: 10
+    progress_percent: 10,
+    description: ''
   });
 
   const loadProjects = () => {
@@ -210,14 +230,29 @@ export default function ProjectsView() {
       setFormData({
         project_name: '',
         project_code: '',
+        project_type: 'Commercial Tower',
         site_location: '',
+        site_address: '',
+        city: 'Indore',
+        state: 'Madhya Pradesh',
+        pincode: '',
         client_name: '',
+        client_contact: '',
+        client_email: '',
         contractor_name: '',
+        project_manager: '',
+        site_engineer: '',
         budget: '',
+        builtup_area: '',
+        total_floors: '',
+        rera_number: '',
         start_date: new Date().toISOString().split('T')[0],
         completion_date: '',
+        handover_date: '',
+        priority: 'HIGH',
         status: 'IN_PROGRESS',
-        progress_percent: 10
+        progress_percent: 10,
+        description: ''
       });
     });
   };
@@ -304,270 +339,636 @@ export default function ProjectsView() {
           </button>
         </div>
 
-        {/* 2-Column Full Screen Form & Real-time Live Blueprint Card */}
+        {/* 2-Column Balanced Full-Screen Grid Form (Both columns balanced with equal height & content) */}
         <form onSubmit={handleCreate} style={{ 
           display: 'grid', 
-          gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))', 
+          gridTemplateColumns: '1fr 1fr', 
           gap: '24px', 
           alignItems: 'start' 
         }}>
           
-          {/* Left Column: Form Controls inside Glass Card */}
-          <div className="glass-card" style={{ padding: '26px 28px', display: 'flex', flexDirection: 'column', gap: '20px' }}>
+          {/* Left Column: Core Identity, Site Location & Timeline Dates */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
             
-            {/* Step 1: Project Identity */}
-            <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 0.8fr', gap: '14px' }}>
-              <div className="form-group">
-                <label style={{ fontSize: '11.5px', fontWeight: 700, color: '#475569' }}>
-                  PROJECT NAME
-                </label>
-                <input 
-                  type="text" 
-                  required 
-                  placeholder="Skyline Commercial Hub (Phase 2)"
-                  value={formData.project_name} 
-                  onChange={e => setFormData({ ...formData, project_name: e.target.value })}
-                  style={{
-                    width: '100%',
-                    padding: '10px 14px',
-                    borderRadius: '12px',
-                    border: '1px solid rgba(203, 213, 225, 0.8)',
-                    background: 'rgba(255, 255, 255, 0.85)',
-                    fontSize: '12.5px',
-                    fontWeight: 600,
-                    color: '#0F172A',
-                    outline: 'none'
-                  }}
-                />
+            {/* Box 1: Project Identification & Classification */}
+            <div className="glass-card" style={{ padding: '24px 26px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', borderBottom: '1px solid rgba(226, 232, 240, 0.8)', paddingBottom: '10px' }}>
+                <Building2 size={16} color="#2563EB" />
+                <span style={{ fontSize: '12px', fontWeight: 800, color: '#1E293B', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+                  1. Project Identification & Classification
+                </span>
               </div>
 
-              <div className="form-group">
-                <label style={{ fontSize: '11.5px', fontWeight: 700, color: '#475569' }}>
-                  PROJECT CODE
-                </label>
-                <input 
-                  type="text" 
-                  required 
-                  placeholder="PRJ-IND-05"
-                  value={formData.project_code} 
-                  onChange={e => setFormData({ ...formData, project_code: e.target.value.toUpperCase() })}
-                  style={{
-                    width: '100%',
-                    padding: '10px 14px',
-                    borderRadius: '12px',
-                    border: '1px solid rgba(203, 213, 225, 0.8)',
-                    background: 'rgba(255, 255, 255, 0.85)',
-                    fontSize: '12.5px',
-                    fontWeight: 700,
-                    color: '#2563EB',
-                    outline: 'none'
-                  }}
-                />
-              </div>
-            </div>
-
-            {/* Step 2: Location & Dates */}
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px' }}>
-              <div className="form-group">
-                <label style={{ fontSize: '11.5px', fontWeight: 700, color: '#475569' }}>
-                  SITE LOCATION (CITY & CORRIDOR)
-                </label>
-                <input 
-                  type="text" 
-                  required 
-                  placeholder="Super Corridor, Indore"
-                  value={formData.site_location} 
-                  onChange={e => setFormData({ ...formData, site_location: e.target.value })}
-                  style={{
-                    width: '100%',
-                    padding: '10px 14px',
-                    borderRadius: '12px',
-                    border: '1px solid rgba(203, 213, 225, 0.8)',
-                    background: 'rgba(255, 255, 255, 0.85)',
-                    fontSize: '12.5px',
-                    color: '#0F172A',
-                    outline: 'none'
-                  }}
-                />
-              </div>
-
-              <div className="form-group">
-                <label style={{ fontSize: '11.5px', fontWeight: 700, color: '#475569' }}>
-                  GROUNDBREAKING DATE
-                </label>
-                <input 
-                  type="date" 
-                  value={formData.start_date} 
-                  onChange={e => setFormData({ ...formData, start_date: e.target.value })}
-                  style={{
-                    width: '100%',
-                    padding: '10px 14px',
-                    borderRadius: '12px',
-                    border: '1px solid rgba(203, 213, 225, 0.8)',
-                    background: 'rgba(255, 255, 255, 0.85)',
-                    fontSize: '12.5px',
-                    color: '#0F172A',
-                    outline: 'none'
-                  }}
-                />
-              </div>
-            </div>
-
-            {/* Step 3: Total Budget with Quick Presets */}
-            <div className="form-group">
-              <label style={{ fontSize: '11.5px', fontWeight: 700, color: '#475569', display: 'flex', justifyContent: 'space-between' }}>
-                <span>TOTAL ESTIMATED CONTRACT BUDGET (₹ INR)</span>
-                <span style={{ color: '#2563EB', fontWeight: 600 }}>Enter in Crores or Lakhs</span>
-              </label>
-              
-              {/* Clean Flex Prefix Input (No text overlap) */}
-              <div style={{
-                display: 'flex',
-                alignItems: 'center',
-                background: 'rgba(255, 255, 255, 0.95)',
-                border: '1px solid rgba(203, 213, 225, 0.85)',
-                borderRadius: '12px',
-                overflow: 'hidden',
-                boxShadow: '0 2px 6px rgba(0, 0, 0, 0.02)'
-              }}>
-                <div style={{
-                  padding: '0 16px',
-                  fontSize: '18px',
-                  fontWeight: 800,
-                  color: '#2563EB',
-                  background: 'rgba(241, 245, 249, 0.75)',
-                  borderRight: '1px solid rgba(203, 213, 225, 0.85)',
-                  height: '48px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  userSelect: 'none'
-                }}>
-                  ₹
-                </div>
-                <input 
-                  type="number" 
-                  required 
-                  placeholder="50000000"
-                  value={formData.budget} 
-                  onChange={e => setFormData({ ...formData, budget: e.target.value })}
-                  style={{
-                    flex: 1,
-                    border: 'none',
-                    background: 'transparent',
-                    padding: '12px 14px',
-                    fontSize: '18px',
-                    fontWeight: 800,
-                    color: '#0F172A',
-                    outline: 'none',
-                    minWidth: 0
-                  }}
-                />
-              </div>
-
-              {/* Quick Presets */}
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginTop: '6px' }}>
-                <span style={{ fontSize: '10.5px', color: '#94A3B8', fontWeight: 600 }}>Presets:</span>
-                {[20000000, 50000000, 100000000, 250000000, 500000000].map(val => (
-                  <button
-                    key={val}
-                    type="button"
-                    onClick={() => setFormData({ ...formData, budget: String(val) })}
+              <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 0.8fr', gap: '14px' }}>
+                <div className="form-group">
+                  <label style={{ fontSize: '11px', fontWeight: 700, color: '#475569' }}>
+                    PROJECT NAME *
+                  </label>
+                  <input 
+                    type="text" 
+                    required 
+                    placeholder="e.g. Skyline Commercial Hub (Phase 2)"
+                    value={formData.project_name} 
+                    onChange={e => setFormData({ ...formData, project_name: e.target.value })}
                     style={{
-                      padding: '2px 8px',
-                      borderRadius: '6px',
-                      border: '1px solid rgba(203, 213, 225, 0.7)',
-                      background: 'rgba(255, 255, 255, 0.7)',
-                      fontSize: '10.5px',
+                      width: '100%',
+                      padding: '10px 14px',
+                      borderRadius: '12px',
+                      border: '1px solid rgba(203, 213, 225, 0.8)',
+                      background: 'rgba(255, 255, 255, 0.85)',
+                      fontSize: '12.5px',
                       fontWeight: 600,
-                      color: '#475569',
-                      cursor: 'pointer'
+                      color: '#0F172A',
+                      outline: 'none'
+                    }}
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label style={{ fontSize: '11px', fontWeight: 700, color: '#475569' }}>
+                    PROJECT CODE *
+                  </label>
+                  <input 
+                    type="text" 
+                    required 
+                    placeholder="PRJ-IND-05"
+                    value={formData.project_code} 
+                    onChange={e => setFormData({ ...formData, project_code: e.target.value.toUpperCase() })}
+                    style={{
+                      width: '100%',
+                      padding: '10px 14px',
+                      borderRadius: '12px',
+                      border: '1px solid rgba(203, 213, 225, 0.8)',
+                      background: 'rgba(255, 255, 255, 0.85)',
+                      fontSize: '12.5px',
+                      fontWeight: 700,
+                      color: '#2563EB',
+                      outline: 'none'
+                    }}
+                  />
+                </div>
+              </div>
+
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px' }}>
+                <div className="form-group">
+                  <label style={{ fontSize: '11px', fontWeight: 700, color: '#475569' }}>
+                    CONSTRUCTION TYPE
+                  </label>
+                  <select
+                    value={formData.project_type || 'Commercial Tower'}
+                    onChange={e => setFormData({ ...formData, project_type: e.target.value })}
+                    style={{
+                      width: '100%',
+                      padding: '10px 14px',
+                      borderRadius: '12px',
+                      border: '1px solid rgba(203, 213, 225, 0.8)',
+                      background: 'rgba(255, 255, 255, 0.85)',
+                      fontSize: '12px',
+                      fontWeight: 600,
+                      color: '#0F172A',
+                      outline: 'none'
                     }}
                   >
-                    ₹{val / 10000000} Cr
-                  </button>
-                ))}
+                    <option value="Commercial Tower">Commercial High-Rise / Office Tower</option>
+                    <option value="Residential Complex">Residential Apartments / Township</option>
+                    <option value="Industrial & Warehouse">Industrial Plant / PEB Warehouse</option>
+                    <option value="Infrastructure & Metro">Highway / Metro / Bridge</option>
+                    <option value="Hospitality & Institutional">Hospitality, Mall & Institutional</option>
+                  </select>
+                </div>
+
+                <div className="form-group">
+                  <label style={{ fontSize: '11px', fontWeight: 700, color: '#475569' }}>
+                    RERA REGISTRATION / PERMIT
+                  </label>
+                  <input 
+                    type="text" 
+                    placeholder="e.g. P-IND-24-4192 / MP-RERA"
+                    value={formData.rera_number || ''} 
+                    onChange={e => setFormData({ ...formData, rera_number: e.target.value })}
+                    style={{
+                      width: '100%',
+                      padding: '10px 14px',
+                      borderRadius: '12px',
+                      border: '1px solid rgba(203, 213, 225, 0.8)',
+                      background: 'rgba(255, 255, 255, 0.85)',
+                      fontSize: '12px',
+                      color: '#0F172A',
+                      outline: 'none'
+                    }}
+                  />
+                </div>
               </div>
             </div>
 
-            {/* Step 4: Client & Contractor */}
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px' }}>
-              <div className="form-group">
-                <label style={{ fontSize: '11.5px', fontWeight: 700, color: '#475569' }}>
-                  CLIENT / DEVELOPER ENTITY
-                </label>
-                <input 
-                  type="text" 
-                  placeholder="Skyline Real Estate Developers"
-                  value={formData.client_name} 
-                  onChange={e => setFormData({ ...formData, client_name: e.target.value })}
-                  style={{
-                    width: '100%',
-                    padding: '10px 14px',
-                    borderRadius: '12px',
-                    border: '1px solid rgba(203, 213, 225, 0.8)',
-                    background: 'rgba(255, 255, 255, 0.85)',
-                    fontSize: '12.5px',
-                    color: '#0F172A',
-                    outline: 'none'
-                  }}
-                />
+            {/* Box 2: Detailed Site Location & Address */}
+            <div className="glass-card" style={{ padding: '24px 26px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', borderBottom: '1px solid rgba(226, 232, 240, 0.8)', paddingBottom: '10px' }}>
+                <MapPin size={16} color="#2563EB" />
+                <span style={{ fontSize: '12px', fontWeight: 800, color: '#1E293B', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+                  2. Detailed Site Location & Postal Address
+                </span>
               </div>
 
-              <div className="form-group">
-                <label style={{ fontSize: '11.5px', fontWeight: 700, color: '#475569' }}>
-                  GENERAL CONTRACTOR FIRM
-                </label>
-                <input 
-                  type="text" 
-                  placeholder="Apex Civil Infratech Pvt Ltd"
-                  value={formData.contractor_name} 
-                  onChange={e => setFormData({ ...formData, contractor_name: e.target.value })}
-                  style={{
-                    width: '100%',
-                    padding: '10px 14px',
-                    borderRadius: '12px',
-                    border: '1px solid rgba(203, 213, 225, 0.8)',
-                    background: 'rgba(255, 255, 255, 0.85)',
-                    fontSize: '12.5px',
-                    color: '#0F172A',
-                    outline: 'none'
-                  }}
-                />
+              <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 0.8fr', gap: '14px' }}>
+                <div className="form-group">
+                  <label style={{ fontSize: '11px', fontWeight: 700, color: '#475569' }}>
+                    SITE LOCATION (CORRIDOR / AREA) *
+                  </label>
+                  <input 
+                    type="text" 
+                    required 
+                    placeholder="e.g. Super Corridor, Sector 3"
+                    value={formData.site_location} 
+                    onChange={e => setFormData({ ...formData, site_location: e.target.value })}
+                    style={{
+                      width: '100%',
+                      padding: '10px 14px',
+                      borderRadius: '12px',
+                      border: '1px solid rgba(203, 213, 225, 0.8)',
+                      background: 'rgba(255, 255, 255, 0.85)',
+                      fontSize: '12.5px',
+                      color: '#0F172A',
+                      outline: 'none'
+                    }}
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label style={{ fontSize: '11px', fontWeight: 700, color: '#475569' }}>
+                    CITY & STATE
+                  </label>
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px' }}>
+                    <input 
+                      type="text" 
+                      placeholder="Indore"
+                      value={formData.city || 'Indore'} 
+                      onChange={e => setFormData({ ...formData, city: e.target.value })}
+                      style={{
+                        width: '100%',
+                        padding: '10px 10px',
+                        borderRadius: '12px',
+                        border: '1px solid rgba(203, 213, 225, 0.8)',
+                        background: 'rgba(255, 255, 255, 0.85)',
+                        fontSize: '12px',
+                        color: '#0F172A',
+                        outline: 'none'
+                      }}
+                    />
+                    <input 
+                      type="text" 
+                      placeholder="Madhya Pradesh"
+                      value={formData.state || 'Madhya Pradesh'} 
+                      onChange={e => setFormData({ ...formData, state: e.target.value })}
+                      style={{
+                        width: '100%',
+                        padding: '10px 10px',
+                        borderRadius: '12px',
+                        border: '1px solid rgba(203, 213, 225, 0.8)',
+                        background: 'rgba(255, 255, 255, 0.85)',
+                        fontSize: '12px',
+                        color: '#0F172A',
+                        outline: 'none'
+                      }}
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div style={{ display: 'grid', gridTemplateColumns: '1.4fr 0.6fr', gap: '14px' }}>
+                <div className="form-group">
+                  <label style={{ fontSize: '11px', fontWeight: 700, color: '#475569' }}>
+                    FULL SITE POSTAL / LANDMARK ADDRESS
+                  </label>
+                  <input 
+                    type="text" 
+                    placeholder="Plot No 42-45, Near TCS / Infosys IT SEZ campus"
+                    value={formData.site_address || ''} 
+                    onChange={e => setFormData({ ...formData, site_address: e.target.value })}
+                    style={{
+                      width: '100%',
+                      padding: '10px 14px',
+                      borderRadius: '12px',
+                      border: '1px solid rgba(203, 213, 225, 0.8)',
+                      background: 'rgba(255, 255, 255, 0.85)',
+                      fontSize: '12px',
+                      color: '#0F172A',
+                      outline: 'none'
+                    }}
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label style={{ fontSize: '11px', fontWeight: 700, color: '#475569' }}>
+                    PINCODE
+                  </label>
+                  <input 
+                    type="text" 
+                    placeholder="452005"
+                    value={formData.pincode || ''} 
+                    onChange={e => setFormData({ ...formData, pincode: e.target.value })}
+                    style={{
+                      width: '100%',
+                      padding: '10px 14px',
+                      borderRadius: '12px',
+                      border: '1px solid rgba(203, 213, 225, 0.8)',
+                      background: 'rgba(255, 255, 255, 0.85)',
+                      fontSize: '12px',
+                      color: '#0F172A',
+                      outline: 'none'
+                    }}
+                  />
+                </div>
               </div>
             </div>
 
-            {/* Step 5: Construction Status & Progress */}
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px' }}>
+            {/* Box 3: Timeline Schedule & Milestone Dates */}
+            <div className="glass-card" style={{ padding: '24px 26px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', borderBottom: '1px solid rgba(226, 232, 240, 0.8)', paddingBottom: '10px' }}>
+                <Calendar size={16} color="#2563EB" />
+                <span style={{ fontSize: '12px', fontWeight: 800, color: '#1E293B', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+                  3. Timeline Schedule & Milestone Dates
+                </span>
+              </div>
+
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '12px' }}>
+                <div className="form-group">
+                  <label style={{ fontSize: '11px', fontWeight: 700, color: '#475569' }}>
+                    START DATE *
+                  </label>
+                  <input 
+                    type="date" 
+                    required
+                    value={formData.start_date} 
+                    onChange={e => setFormData({ ...formData, start_date: e.target.value })}
+                    style={{
+                      width: '100%',
+                      padding: '10px 12px',
+                      borderRadius: '12px',
+                      border: '1px solid rgba(203, 213, 225, 0.8)',
+                      background: 'rgba(255, 255, 255, 0.85)',
+                      fontSize: '12px',
+                      color: '#0F172A',
+                      outline: 'none'
+                    }}
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label style={{ fontSize: '11px', fontWeight: 700, color: '#475569' }}>
+                    COMPLETION *
+                  </label>
+                  <input 
+                    type="date" 
+                    value={formData.completion_date || ''} 
+                    onChange={e => setFormData({ ...formData, completion_date: e.target.value })}
+                    style={{
+                      width: '100%',
+                      padding: '10px 12px',
+                      borderRadius: '12px',
+                      border: '1px solid rgba(203, 213, 225, 0.8)',
+                      background: 'rgba(255, 255, 255, 0.85)',
+                      fontSize: '12px',
+                      color: '#0F172A',
+                      outline: 'none'
+                    }}
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label style={{ fontSize: '11px', fontWeight: 700, color: '#475569' }}>
+                    HANDOVER DATE
+                  </label>
+                  <input 
+                    type="date" 
+                    value={formData.handover_date || ''} 
+                    onChange={e => setFormData({ ...formData, handover_date: e.target.value })}
+                    style={{
+                      width: '100%',
+                      padding: '10px 12px',
+                      borderRadius: '12px',
+                      border: '1px solid rgba(203, 213, 225, 0.8)',
+                      background: 'rgba(255, 255, 255, 0.85)',
+                      fontSize: '12px',
+                      color: '#0F172A',
+                      outline: 'none'
+                    }}
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Box 4: Commercial Contract Budget & Built-up Specs */}
+            <div className="glass-card" style={{ padding: '24px 26px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', borderBottom: '1px solid rgba(226, 232, 240, 0.8)', paddingBottom: '10px' }}>
+                <Banknotes size={16} color="#2563EB" />
+                <span style={{ fontSize: '12px', fontWeight: 800, color: '#1E293B', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+                  4. Commercial Budget & Built-up Specs
+                </span>
+              </div>
+
+              {/* Total Budget with Compound Input */}
               <div className="form-group">
-                <label style={{ fontSize: '11.5px', fontWeight: 700, color: '#475569' }}>
-                  PORTFOLIO STAGE / STATUS
+                <label style={{ fontSize: '11px', fontWeight: 700, color: '#475569', display: 'flex', justifyContent: 'space-between' }}>
+                  <span>TOTAL ESTIMATED CONTRACT BUDGET (₹ INR) *</span>
+                  <span style={{ color: '#2563EB', fontWeight: 600 }}>Enter in Crores or Lakhs</span>
                 </label>
-                <select 
-                  value={formData.status} 
-                  onChange={e => setFormData({ ...formData, status: e.target.value })}
+                
+                <div 
+                  className="compound-input-wrap"
                   style={{
-                    width: '100%',
-                    padding: '10px 14px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    background: 'rgba(255, 255, 255, 0.95)',
+                    border: '1px solid rgba(203, 213, 225, 0.85)',
                     borderRadius: '12px',
-                    border: '1px solid rgba(203, 213, 225, 0.8)',
-                    background: 'rgba(255, 255, 255, 0.85)',
-                    fontSize: '12.5px',
-                    fontWeight: 600,
-                    color: '#0F172A',
-                    outline: 'none'
+                    overflow: 'hidden',
+                    boxShadow: '0 2px 6px rgba(0, 0, 0, 0.02)'
                   }}
                 >
-                  <option value="IN_PROGRESS">In Progress (Active Site)</option>
-                  <option value="PLANNING">Planning & Architectural Stage</option>
-                  <option value="ON_HOLD">Delayed / On Hold</option>
-                  <option value="COMPLETED">Successfully Completed</option>
-                </select>
+                  <div style={{
+                    padding: '0 16px',
+                    fontSize: '18px',
+                    fontWeight: 800,
+                    color: '#2563EB',
+                    background: 'rgba(241, 245, 249, 0.75)',
+                    borderRight: '1px solid rgba(203, 213, 225, 0.85)',
+                    height: '46px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    userSelect: 'none'
+                  }}>
+                    ₹
+                  </div>
+                  <input 
+                    type="number" 
+                    required 
+                    placeholder="50000000"
+                    value={formData.budget} 
+                    onChange={e => setFormData({ ...formData, budget: e.target.value })}
+                    style={{
+                      flex: 1,
+                      border: 'none',
+                      background: 'transparent',
+                      padding: '10px 14px',
+                      fontSize: '18px',
+                      fontWeight: 800,
+                      color: '#0F172A',
+                      outline: 'none',
+                      minWidth: 0,
+                      boxShadow: 'none'
+                    }}
+                  />
+                </div>
+
+                {/* Quick Presets */}
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginTop: '6px' }}>
+                  <span style={{ fontSize: '10.5px', color: '#94A3B8', fontWeight: 600 }}>Presets:</span>
+                  {[20000000, 50000000, 100000000, 250000000, 500000000].map(val => (
+                    <button
+                      key={val}
+                      type="button"
+                      onClick={() => setFormData({ ...formData, budget: String(val) })}
+                      style={{
+                        padding: '2px 8px',
+                        borderRadius: '6px',
+                        border: '1px solid rgba(203, 213, 225, 0.7)',
+                        background: 'rgba(255, 255, 255, 0.7)',
+                        fontSize: '10.5px',
+                        fontWeight: 600,
+                        color: '#475569',
+                        cursor: 'pointer'
+                      }}
+                    >
+                      ₹{val / 10000000} Cr
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Built-up area & floor specs */}
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px' }}>
+                <div className="form-group">
+                  <label style={{ fontSize: '11px', fontWeight: 700, color: '#475569' }}>
+                    BUILT-UP AREA (SQ. FT)
+                  </label>
+                  <input 
+                    type="text" 
+                    placeholder="e.g. 1,85,000 Sq.Ft"
+                    value={formData.builtup_area || ''} 
+                    onChange={e => setFormData({ ...formData, builtup_area: e.target.value })}
+                    style={{
+                      width: '100%',
+                      padding: '10px 14px',
+                      borderRadius: '12px',
+                      border: '1px solid rgba(203, 213, 225, 0.8)',
+                      background: 'rgba(255, 255, 255, 0.85)',
+                      fontSize: '12.5px',
+                      color: '#0F172A',
+                      outline: 'none'
+                    }}
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label style={{ fontSize: '11px', fontWeight: 700, color: '#475569' }}>
+                    FLOOR CONFIGURATION
+                  </label>
+                  <input 
+                    type="text" 
+                    placeholder="e.g. 2B + G + 14 Floors"
+                    value={formData.total_floors || ''} 
+                    onChange={e => setFormData({ ...formData, total_floors: e.target.value })}
+                    style={{
+                      width: '100%',
+                      padding: '10px 14px',
+                      borderRadius: '12px',
+                      border: '1px solid rgba(203, 213, 225, 0.8)',
+                      background: 'rgba(255, 255, 255, 0.85)',
+                      fontSize: '12.5px',
+                      color: '#0F172A',
+                      outline: 'none'
+                    }}
+                  />
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          {/* Right Column: Stakeholders, Execution Status, Live Blueprint Card & Action Buttons */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+            
+            {/* Box 5: Client Entity, Contractor & Key Engineers */}
+            <div className="glass-card" style={{ padding: '24px 26px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', borderBottom: '1px solid rgba(226, 232, 240, 0.8)', paddingBottom: '10px' }}>
+                <HardHat size={16} color="#2563EB" />
+                <span style={{ fontSize: '12px', fontWeight: 800, color: '#1E293B', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+                  5. Client Entity, Contractor & Key Engineers
+                </span>
+              </div>
+
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px' }}>
+                <div className="form-group">
+                  <label style={{ fontSize: '11px', fontWeight: 700, color: '#475569' }}>
+                    CLIENT / DEVELOPER ENTITY *
+                  </label>
+                  <input 
+                    type="text" 
+                    required
+                    placeholder="e.g. Skyline Real Estate Developers"
+                    value={formData.client_name} 
+                    onChange={e => setFormData({ ...formData, client_name: e.target.value })}
+                    style={{
+                      width: '100%',
+                      padding: '10px 14px',
+                      borderRadius: '12px',
+                      border: '1px solid rgba(203, 213, 225, 0.8)',
+                      background: 'rgba(255, 255, 255, 0.85)',
+                      fontSize: '12.5px',
+                      color: '#0F172A',
+                      outline: 'none'
+                    }}
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label style={{ fontSize: '11px', fontWeight: 700, color: '#475569' }}>
+                    CLIENT CONTACT PERSON & PHONE
+                  </label>
+                  <input 
+                    type="text" 
+                    placeholder="e.g. Er. Rajesh Singhania (+91 98260 11223)"
+                    value={formData.client_contact || ''} 
+                    onChange={e => setFormData({ ...formData, client_contact: e.target.value })}
+                    style={{
+                      width: '100%',
+                      padding: '10px 14px',
+                      borderRadius: '12px',
+                      border: '1px solid rgba(203, 213, 225, 0.8)',
+                      background: 'rgba(255, 255, 255, 0.85)',
+                      fontSize: '12.5px',
+                      color: '#0F172A',
+                      outline: 'none'
+                    }}
+                  />
+                </div>
+              </div>
+
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px' }}>
+                <div className="form-group">
+                  <label style={{ fontSize: '11px', fontWeight: 700, color: '#475569' }}>
+                    GENERAL CONTRACTOR FIRM
+                  </label>
+                  <input 
+                    type="text" 
+                    placeholder="e.g. Apex Civil Infratech Pvt Ltd"
+                    value={formData.contractor_name} 
+                    onChange={e => setFormData({ ...formData, contractor_name: e.target.value })}
+                    style={{
+                      width: '100%',
+                      padding: '10px 14px',
+                      borderRadius: '12px',
+                      border: '1px solid rgba(203, 213, 225, 0.8)',
+                      background: 'rgba(255, 255, 255, 0.85)',
+                      fontSize: '12.5px',
+                      color: '#0F172A',
+                      outline: 'none'
+                    }}
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label style={{ fontSize: '11px', fontWeight: 700, color: '#475569' }}>
+                    PROJECT MANAGER / SITE ENGINEER
+                  </label>
+                  <input 
+                    type="text" 
+                    placeholder="e.g. Er. Ankit Sharma (Chief PM)"
+                    value={formData.project_manager || ''} 
+                    onChange={e => setFormData({ ...formData, project_manager: e.target.value })}
+                    style={{
+                      width: '100%',
+                      padding: '10px 14px',
+                      borderRadius: '12px',
+                      border: '1px solid rgba(203, 213, 225, 0.8)',
+                      background: 'rgba(255, 255, 255, 0.85)',
+                      fontSize: '12.5px',
+                      color: '#0F172A',
+                      outline: 'none'
+                    }}
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Box 6: Execution Stage, Priority & Scope Remarks */}
+            <div className="glass-card" style={{ padding: '24px 26px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', borderBottom: '1px solid rgba(226, 232, 240, 0.8)', paddingBottom: '10px' }}>
+                <Layers size={16} color="#2563EB" />
+                <span style={{ fontSize: '12px', fontWeight: 800, color: '#1E293B', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+                  6. Execution Stage, Priority & Initial Progress
+                </span>
+              </div>
+
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px' }}>
+                <div className="form-group">
+                  <label style={{ fontSize: '11px', fontWeight: 700, color: '#475569' }}>
+                    PORTFOLIO STAGE / STATUS
+                  </label>
+                  <select 
+                    value={formData.status} 
+                    onChange={e => setFormData({ ...formData, status: e.target.value })}
+                    style={{
+                      width: '100%',
+                      padding: '10px 14px',
+                      borderRadius: '12px',
+                      border: '1px solid rgba(203, 213, 225, 0.8)',
+                      background: 'rgba(255, 255, 255, 0.85)',
+                      fontSize: '12.5px',
+                      fontWeight: 600,
+                      color: '#0F172A',
+                      outline: 'none'
+                    }}
+                  >
+                    <option value="IN_PROGRESS">In Progress (Active Site)</option>
+                    <option value="PLANNING">Planning & Architectural Stage</option>
+                    <option value="ON_HOLD">Delayed / On Hold</option>
+                    <option value="COMPLETED">Successfully Completed</option>
+                  </select>
+                </div>
+
+                <div className="form-group">
+                  <label style={{ fontSize: '11px', fontWeight: 700, color: '#475569' }}>
+                    EXECUTION PRIORITY LEVEL
+                  </label>
+                  <select 
+                    value={formData.priority || 'HIGH'} 
+                    onChange={e => setFormData({ ...formData, priority: e.target.value })}
+                    style={{
+                      width: '100%',
+                      padding: '10px 14px',
+                      borderRadius: '12px',
+                      border: '1px solid rgba(203, 213, 225, 0.8)',
+                      background: 'rgba(255, 255, 255, 0.85)',
+                      fontSize: '12.5px',
+                      fontWeight: 600,
+                      color: '#0F172A',
+                      outline: 'none'
+                    }}
+                  >
+                    <option value="HIGH">High Priority (Fast-Track Schedule)</option>
+                    <option value="CRITICAL">Critical Flagship (Client Escalation)</option>
+                    <option value="MEDIUM">Standard Construction Priority</option>
+                    <option value="LOW">Low Maintenance / Phased Pace</option>
+                  </select>
+                </div>
               </div>
 
               <div className="form-group">
-                <label style={{ fontSize: '11.5px', fontWeight: 700, color: '#475569', display: 'flex', justifyContent: 'space-between' }}>
-                  <span>INITIAL PROGRESS %</span>
+                <label style={{ fontSize: '11px', fontWeight: 700, color: '#475569', display: 'flex', justifyContent: 'space-between' }}>
+                  <span>INITIAL PHYSICAL PROGRESS COMPLETED</span>
                   <span style={{ color: '#2563EB', fontWeight: 800 }}>{formData.progress_percent}%</span>
                 </label>
                 <input 
@@ -579,19 +980,39 @@ export default function ProjectsView() {
                   style={{ width: '100%', marginTop: '8px', accentColor: '#2563EB' }}
                 />
               </div>
-            </div>
-          </div>
 
-          {/* Right Column: Live Site Blueprint Card & Action Buttons */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-            
-            {/* Live Site Card Preview */}
+              {/* Scope remarks */}
+              <div className="form-group">
+                <label style={{ fontSize: '11px', fontWeight: 700, color: '#475569' }}>
+                  PROJECT SCOPE SUMMARY & SPECIAL REMARKS
+                </label>
+                <textarea 
+                  rows={2}
+                  placeholder="e.g. Reinforced RCC composite structure with high-speed passenger elevators..."
+                  value={formData.description || ''} 
+                  onChange={e => setFormData({ ...formData, description: e.target.value })}
+                  style={{
+                    width: '100%',
+                    padding: '8px 12px',
+                    borderRadius: '12px',
+                    border: '1px solid rgba(203, 213, 225, 0.8)',
+                    background: 'rgba(255, 255, 255, 0.85)',
+                    fontSize: '12px',
+                    color: '#0F172A',
+                    outline: 'none',
+                    resize: 'vertical'
+                  }}
+                />
+              </div>
+            </div>
+
+            {/* Box 7: Live Site Card Preview & Telemetry */}
             <div className="glass-card" style={{ 
-              padding: '24px', 
-              background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.35))',
+              padding: '22px 24px', 
+              background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0.45))',
               display: 'flex',
               flexDirection: 'column',
-              gap: '16px'
+              gap: '14px'
             }}>
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                 <span style={{ fontSize: '11px', fontWeight: 700, color: '#64748B', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
@@ -603,7 +1024,7 @@ export default function ProjectsView() {
               </div>
 
               <div>
-                <h3 style={{ fontSize: '18px', fontWeight: 800, color: '#0F172A', margin: 0 }}>
+                <h3 style={{ fontSize: '17px', fontWeight: 800, color: '#0F172A', margin: 0 }}>
                   {formData.project_name || 'Project Name Preview'}
                 </h3>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '12px', color: '#64748B', marginTop: '4px' }}>
@@ -626,43 +1047,72 @@ export default function ProjectsView() {
                 </div>
               </div>
 
-              {/* Financial metrics preview */}
+              {/* Financial metrics & specs preview */}
               <div style={{ 
-                padding: '14px', 
-                borderRadius: '16px', 
-                background: 'rgba(255, 255, 255, 0.55)', 
-                border: '1px solid rgba(255, 255, 255, 0.8)',
+                padding: '12px 14px', 
+                borderRadius: '14px', 
+                background: 'rgba(255, 255, 255, 0.75)', 
+                border: '1px solid rgba(226, 232, 240, 0.85)',
                 display: 'grid',
                 gridTemplateColumns: '1fr 1fr',
-                gap: '10px'
+                gap: '8px'
               }}>
                 <div className="fin-col">
                   <span className="fin-mini-label">Total Budget</span>
-                  <span className="fin-mini-val">
+                  <span className="fin-mini-val" style={{ color: '#2563EB' }}>
                     ₹{budgetNum ? (budgetNum / 10000000).toFixed(2) : '0.00'} Cr
                   </span>
                 </div>
                 <div className="fin-col">
-                  <span className="fin-mini-label">Client / Dev</span>
+                  <span className="fin-mini-label">Client / Developer</span>
                   <span className="fin-mini-val" style={{ fontSize: '12px' }}>
                     {formData.client_name || 'Developer'}
                   </span>
+                </div>
+                <div>
+                  <span style={{ color: '#64748B', display: 'block', fontWeight: 600, fontSize: '10px' }}>Start Date</span>
+                  <span style={{ fontWeight: 700, color: '#0F172A', fontSize: '11.5px' }}>{formData.start_date || 'Not set'}</span>
+                </div>
+                <div>
+                  <span style={{ color: '#64748B', display: 'block', fontWeight: 600, fontSize: '10px' }}>Target Completion</span>
+                  <span style={{ fontWeight: 700, color: '#2563EB', fontSize: '11.5px' }}>{formData.completion_date || 'Not set'}</span>
                 </div>
               </div>
 
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '11px', color: '#10B981', fontWeight: 600 }}>
                 <ShieldCheck size={14} />
-                <span>Site will be registered into live tracking and map telemetry</span>
+                <span>Site telemetry & auto-sync enabled</span>
               </div>
             </div>
 
-            {/* Action Buttons */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+            {/* Action Buttons Symmetrically Aligned on the Right Column Bottom */}
+            <div style={{ display: 'flex', gap: '12px', marginTop: 'auto' }}>
+              <button 
+                type="button" 
+                onClick={() => setShowAddModal(false)}
+                className="glass-pill"
+                style={{
+                  padding: '12px 24px',
+                  borderRadius: '9999px',
+                  border: '1px solid rgba(255, 255, 255, 0.8)',
+                  background: 'rgba(255, 255, 255, 0.6)',
+                  color: '#475569',
+                  fontSize: '13px',
+                  fontWeight: 700,
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                }}
+              >
+                Cancel
+              </button>
+
               <button 
                 type="submit" 
                 style={{
-                  width: '100%',
-                  padding: '14px',
+                  flex: 1,
+                  padding: '13px 24px',
                   borderRadius: '9999px',
                   border: 'none',
                   background: '#0F172A',
@@ -681,28 +1131,8 @@ export default function ProjectsView() {
                 <Plus size={16} />
                 <span>Launch & Register Construction Site</span>
               </button>
-
-              <button 
-                type="button" 
-                onClick={() => setShowAddModal(false)}
-                className="glass-pill"
-                style={{
-                  width: '100%',
-                  padding: '12px',
-                  border: '1px solid rgba(255, 255, 255, 0.8)',
-                  background: 'rgba(255, 255, 255, 0.6)',
-                  color: '#475569',
-                  fontSize: '12.5px',
-                  fontWeight: 700,
-                  cursor: 'pointer',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center'
-                }}
-              >
-                Cancel & Return
-              </button>
             </div>
+
           </div>
         </form>
       </div>
@@ -1414,6 +1844,98 @@ export default function ProjectsView() {
 
           <button 
             type="button"
+            onClick={() => setProjectSubTab('MATERIALS')}
+            className={`glass-pill ${projectSubTab === 'MATERIALS' ? 'active' : ''}`}
+            style={{
+              padding: '8px 18px',
+              fontSize: '12px',
+              fontWeight: 700,
+              background: projectSubTab === 'MATERIALS' ? '#0F172A' : 'rgba(255, 255, 255, 0.65)',
+              color: projectSubTab === 'MATERIALS' ? '#ffffff' : '#475569',
+              border: projectSubTab === 'MATERIALS' ? '1px solid #0F172A' : '1px solid rgba(255, 255, 255, 0.75)',
+              boxShadow: projectSubTab === 'MATERIALS' ? '0 4px 14px rgba(15, 23, 42, 0.25)' : 'none',
+              cursor: 'pointer',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '6px',
+              transition: 'all 0.15s ease'
+            }}
+          >
+            <Cube size={14} />
+            <span>Material Records</span>
+          </button>
+
+          <button 
+            type="button"
+            onClick={() => setProjectSubTab('EXPENSES')}
+            className={`glass-pill ${projectSubTab === 'EXPENSES' ? 'active' : ''}`}
+            style={{
+              padding: '8px 18px',
+              fontSize: '12px',
+              fontWeight: 700,
+              background: projectSubTab === 'EXPENSES' ? '#0F172A' : 'rgba(255, 255, 255, 0.65)',
+              color: projectSubTab === 'EXPENSES' ? '#ffffff' : '#475569',
+              border: projectSubTab === 'EXPENSES' ? '1px solid #0F172A' : '1px solid rgba(255, 255, 255, 0.75)',
+              boxShadow: projectSubTab === 'EXPENSES' ? '0 4px 14px rgba(15, 23, 42, 0.25)' : 'none',
+              cursor: 'pointer',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '6px',
+              transition: 'all 0.15s ease'
+            }}
+          >
+            <Banknotes size={14} />
+            <span>Site Expenses <span className="amp">&</span> Outflows</span>
+          </button>
+
+          <button 
+            type="button"
+            onClick={() => setProjectSubTab('PURCHASES')}
+            className={`glass-pill ${projectSubTab === 'PURCHASES' ? 'active' : ''}`}
+            style={{
+              padding: '8px 18px',
+              fontSize: '12px',
+              fontWeight: 700,
+              background: projectSubTab === 'PURCHASES' ? '#0F172A' : 'rgba(255, 255, 255, 0.65)',
+              color: projectSubTab === 'PURCHASES' ? '#ffffff' : '#475569',
+              border: projectSubTab === 'PURCHASES' ? '1px solid #0F172A' : '1px solid rgba(255, 255, 255, 0.75)',
+              boxShadow: projectSubTab === 'PURCHASES' ? '0 4px 14px rgba(15, 23, 42, 0.25)' : 'none',
+              cursor: 'pointer',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '6px',
+              transition: 'all 0.15s ease'
+            }}
+          >
+            <ShoppingCart size={14} />
+            <span>Purchase History (PO)</span>
+          </button>
+
+          <button 
+            type="button"
+            onClick={() => setProjectSubTab('BUDGET_TRACKING')}
+            className={`glass-pill ${projectSubTab === 'BUDGET_TRACKING' ? 'active' : ''}`}
+            style={{
+              padding: '8px 18px',
+              fontSize: '12px',
+              fontWeight: 700,
+              background: projectSubTab === 'BUDGET_TRACKING' ? '#0F172A' : 'rgba(255, 255, 255, 0.65)',
+              color: projectSubTab === 'BUDGET_TRACKING' ? '#ffffff' : '#475569',
+              border: projectSubTab === 'BUDGET_TRACKING' ? '1px solid #0F172A' : '1px solid rgba(255, 255, 255, 0.75)',
+              boxShadow: projectSubTab === 'BUDGET_TRACKING' ? '0 4px 14px rgba(15, 23, 42, 0.25)' : 'none',
+              cursor: 'pointer',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '6px',
+              transition: 'all 0.15s ease'
+            }}
+          >
+            <ChartBar size={14} />
+            <span>Budget Tracking <span className="amp">&</span> Variance</span>
+          </button>
+
+          <button 
+            type="button"
             onClick={() => setProjectSubTab('BOQ')}
             className={`glass-pill ${projectSubTab === 'BOQ' ? 'active' : ''}`}
             style={{
@@ -1872,6 +2394,286 @@ export default function ProjectsView() {
         {projectSubTab === 'DOCS' && (
           <div className="animate-fade-in" style={{ marginTop: '10px' }}>
             <DocumentManagerView filterProjectId={selectedProject.id} />
+          </div>
+        )}
+
+        {/* Subtab: Material Records & Inventory for this Project */}
+        {projectSubTab === 'MATERIALS' && (
+          <div className="glass-card animate-fade-in" style={{ padding: '24px', display: 'flex', flexDirection: 'column', gap: '18px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '10px', borderBottom: '1px solid rgba(226, 232, 240, 0.8)', paddingBottom: '12px' }}>
+              <div>
+                <h3 style={{ fontSize: '16.5px', fontWeight: 800, color: '#0F172A', margin: 0, display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <Cube size={18} color="#2563EB" />
+                  <span>On-Site Material Inventory & Consumption Records</span>
+                </h3>
+                <span style={{ fontSize: '12px', color: '#64748B' }}>
+                  Live warehouse stock, reorder thresholds and inward supplier batches for {selectedProject.project_name}
+                </span>
+              </div>
+              <span className="glass-pill" style={{ padding: '4px 12px', fontSize: '11px', fontWeight: 700 }}>
+                Project Code: {selectedProject.project_code}
+              </span>
+            </div>
+
+            <div className="dubai-table-wrap">
+              <table className="dubai-table">
+                <thead>
+                  <tr>
+                    <th>Material Item</th>
+                    <th>Category</th>
+                    <th>Current Stock</th>
+                    <th>Min Safety Threshold</th>
+                    <th>Procurement Unit Rate</th>
+                    <th>Total Inventory Value</th>
+                    <th>Stock Health Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {[
+                    { id: 1, name: 'UltraTech OPC 53 Grade Cement', cat: 'Cement', stock: '1,450 Bags', min: '500 Bags', rate: 390, val: 565500, status: 'NORMAL' },
+                    { id: 2, name: 'Tata Tiscon Fe550D TMT Sariya (16mm)', cat: 'Steel', stock: '38.5 MT', min: '15 MT', rate: 64500, val: 2483250, status: 'NORMAL' },
+                    { id: 3, name: 'Tata Tiscon Fe550D TMT Sariya (10mm & 12mm)', cat: 'Steel', stock: '12.0 MT', min: '20 MT', rate: 65200, val: 782400, status: 'LOW' },
+                    { id: 4, name: 'Coarse River Sand (Zone II)', cat: 'Aggregates', stock: '85 Brass', min: '30 Brass', rate: 4200, val: 357000, status: 'NORMAL' },
+                    { id: 5, name: 'Crushed Blue Metal Aggregate (20mm)', cat: 'Aggregates', stock: '110 Brass', min: '40 Brass', rate: 3100, val: 341000, status: 'NORMAL' },
+                    { id: 6, name: 'Autoclaved Aerated (AAC) Blocks (600x200x150)', cat: 'Masonry', stock: '4,200 Pcs', min: '1,000 Pcs', rate: 62, val: 260400, status: 'NORMAL' },
+                    { id: 7, name: 'Finolex FRLS Conduit Pipes (25mm)', cat: 'Electrical', stock: '220 Bundles', min: '100 Bundles', rate: 780, val: 171600, status: 'NORMAL' },
+                  ].map((mat, idx) => (
+                    <tr key={idx}>
+                      <td>
+                        <div className="table-cell-title">{mat.name}</div>
+                        <div className="table-cell-sub">{mat.cat} Logistics Batch</div>
+                      </td>
+                      <td><span className="trade-pill">{mat.cat}</span></td>
+                      <td><b style={{ color: mat.status === 'LOW' ? '#EF4444' : '#0F172A' }}>{mat.stock}</b></td>
+                      <td style={{ color: '#64748B' }}>{mat.min}</td>
+                      <td>₹{mat.rate.toLocaleString('en-IN')}</td>
+                      <td><b>₹{mat.val.toLocaleString('en-IN')}</b></td>
+                      <td>
+                        <span className={`status-tag ${mat.status === 'LOW' ? 'tag-rose' : 'tag-green'}`}>
+                          {mat.status === 'LOW' ? '⚠️ Below Threshold' : '✓ Sufficient Stock'}
+                        </span>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        )}
+
+        {/* Subtab: Project Site Expenses & Outflows */}
+        {projectSubTab === 'EXPENSES' && (
+          <div className="glass-card animate-fade-in" style={{ padding: '24px', display: 'flex', flexDirection: 'column', gap: '18px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '10px', borderBottom: '1px solid rgba(226, 232, 240, 0.8)', paddingBottom: '12px' }}>
+              <div>
+                <h3 style={{ fontSize: '16.5px', fontWeight: 800, color: '#0F172A', margin: 0, display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <Banknotes size={18} color="#059669" />
+                  <span>Site Expenses, Petty Cash & Direct Outflows</span>
+                </h3>
+                <span style={{ fontSize: '12px', color: '#64748B' }}>
+                  On-site petty vouchers, machinery diesel, labour welfare & daily disbursements for {selectedProject.project_name}
+                </span>
+              </div>
+              <span className="glass-pill" style={{ padding: '4px 12px', fontSize: '11px', fontWeight: 700, color: '#059669', background: '#ECFDF5' }}>
+                Total Recorded: ₹1,42,850
+              </span>
+            </div>
+
+            <div className="dubai-table-wrap">
+              <table className="dubai-table">
+                <thead>
+                  <tr>
+                    <th>Voucher No / Date</th>
+                    <th>Expense Description</th>
+                    <th>Category</th>
+                    <th>Beneficiary / Handed To</th>
+                    <th>Approved By</th>
+                    <th>Amount (₹)</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {[
+                    { id: 'EXP-901', date: '14 Nov, 2026', desc: 'Hardware shop binding wire nails & cutting blades', cat: 'Consumables', to: 'Rameshwar Patel (Mason Lead)', by: 'Er. Rajesh Verma (PM)', amount: 4850, status: 'PAID' },
+                    { id: 'EXP-902', date: '13 Nov, 2026', desc: 'JCB puncture repair & grease lubrication cash', cat: 'Machinery Fuel & Repair', to: 'JCB Operator Raju', by: 'Er. Rajesh Verma (PM)', amount: 3200, status: 'PAID' },
+                    { id: 'EXP-903', date: '12 Nov, 2026', desc: 'Drinking water tankers (4 Tankers x ₹900)', cat: 'Labour Welfare', to: 'Narmada Water Supplies', by: 'Site Supervisor', amount: 3600, status: 'PAID' },
+                    { id: 'EXP-904', date: '10 Nov, 2026', desc: 'Tower crane motor servicing hydraulic oil (50L)', cat: 'Plant & Equipment', to: 'Apex Hydraulics', by: 'Er. Rajesh Verma (PM)', amount: 18500, status: 'PAID' },
+                    { id: 'EXP-905', date: '08 Nov, 2026', desc: 'Site safety helmets (50 Pcs) & reflective jackets', cat: 'Safety PPE', to: 'Suraksha Industrial Depot', by: 'Safety Officer Amit', amount: 12700, status: 'PAID' },
+                    { id: 'EXP-906', date: '05 Nov, 2026', desc: 'Subcontractor Shuttering Gang advance disbursement', cat: 'Labour Advance', to: 'Devendra Yadav (Contractor)', by: 'Director Office', amount: 100000, status: 'APPROVED' },
+                  ].map((exp, idx) => (
+                    <tr key={idx}>
+                      <td>
+                        <div className="table-cell-title">{exp.id}</div>
+                        <div className="table-cell-sub">{exp.date}</div>
+                      </td>
+                      <td style={{ fontWeight: 600, color: '#0F172A' }}>{exp.desc}</td>
+                      <td><span className="trade-pill">{exp.cat}</span></td>
+                      <td style={{ color: '#475569' }}>{exp.to}</td>
+                      <td style={{ color: '#2563EB', fontWeight: 600 }}>{exp.by}</td>
+                      <td><b style={{ color: '#DC2626' }}>₹{exp.amount.toLocaleString('en-IN')}</b></td>
+                      <td><span className="status-tag tag-green">{exp.status}</span></td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        )}
+
+        {/* Subtab: Purchase History (Purchase Orders) */}
+        {projectSubTab === 'PURCHASES' && (
+          <div className="glass-card animate-fade-in" style={{ padding: '24px', display: 'flex', flexDirection: 'column', gap: '18px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '10px', borderBottom: '1px solid rgba(226, 232, 240, 0.8)', paddingBottom: '12px' }}>
+              <div>
+                <h3 style={{ fontSize: '16.5px', fontWeight: 800, color: '#0F172A', margin: 0, display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <ShoppingCart size={18} color="#D97706" />
+                  <span>Purchase Orders (PO) & Procurement History</span>
+                </h3>
+                <span style={{ fontSize: '12px', color: '#64748B' }}>
+                  Official commercial procurement orders, contracted vendor rates & delivery tracking for {selectedProject.project_name}
+                </span>
+              </div>
+              <span className="glass-pill" style={{ padding: '4px 12px', fontSize: '11px', fontWeight: 700, color: '#2563EB' }}>
+                4 Verified Purchase Orders
+              </span>
+            </div>
+
+            <div className="dubai-table-wrap">
+              <table className="dubai-table">
+                <thead>
+                  <tr>
+                    <th>PO Number</th>
+                    <th>Supplier / Vendor</th>
+                    <th>Purchased Items & Scope</th>
+                    <th>Order Date</th>
+                    <th>Order Value (₹)</th>
+                    <th>Authorized By</th>
+                    <th>Fulfillment Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {[
+                    { po: 'PO-2026-081', vendor: 'UltraTech Cement Ltd (Indore Depot)', items: 'Cement PPC 53G (1,200 Bags @ ₹390)', date: '12 Nov, 2026', amount: 468000, by: 'Mohit Patidar (Owner)', status: 'DISPATCHED' },
+                    { po: 'PO-2026-080', vendor: 'Tata Tiscon Steel Distributors', items: 'Fe550D TMT 16mm Rebars (25 Tons @ ₹59,000)', date: '11 Nov, 2026', amount: 1475000, by: 'Mohit Patidar (Owner)', status: 'DELIVERED' },
+                    { po: 'PO-2026-077', vendor: 'Narmada Aggregates & Sand Mining Co', items: 'Washed Zone II River Sand (80 Brass @ ₹4,000)', date: '04 Nov, 2026', amount: 320000, by: 'Er. Rajesh Verma (PM)', status: 'DELIVERED' },
+                    { po: 'PO-2026-072', vendor: 'Birla Aerocon AAC Blocks Ltd', items: 'AAC Blocks 600x200x150mm (3,500 Pcs @ ₹62)', date: '28 Oct, 2026', amount: 217000, by: 'Er. Rajesh Verma (PM)', status: 'DELIVERED' },
+                  ].map((po, idx) => (
+                    <tr key={idx}>
+                      <td>
+                        <div className="table-cell-title">{po.po}</div>
+                        <div className="table-cell-sub">Official PO Form</div>
+                      </td>
+                      <td><b>{po.vendor}</b></td>
+                      <td style={{ color: '#0F172A' }}>{po.items}</td>
+                      <td>{po.date}</td>
+                      <td><b>₹{po.amount.toLocaleString('en-IN')}</b></td>
+                      <td style={{ color: '#2563EB', fontWeight: 600 }}>{po.by}</td>
+                      <td>
+                        <span className={`status-tag ${po.status === 'DELIVERED' ? 'tag-green' : 'tag-amber'}`}>
+                          {po.status === 'DELIVERED' ? '✓ Delivered to Site' : '🚚 In Transit / Dispatched'}
+                        </span>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        )}
+
+        {/* Subtab: Budget Tracking & Cost Variance Analysis */}
+        {projectSubTab === 'BUDGET_TRACKING' && (
+          <div className="animate-fade-in" style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+            {/* Top KPI Cards for Budget Tracking */}
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '16px' }}>
+              <div className="glass-card" style={{ padding: '20px' }}>
+                <span style={{ fontSize: '11px', color: '#64748B', fontWeight: 800, textTransform: 'uppercase' }}>Total Sanctioned Budget</span>
+                <div style={{ fontSize: '24px', fontWeight: 900, color: '#2563EB', marginTop: '6px' }}>
+                  ₹{(parseFloat(selectedProject.budget) || 0).toLocaleString('en-IN')}
+                </div>
+                <div style={{ fontSize: '11.5px', color: '#64748B', marginTop: '4px' }}>Base Contract + {variations.length} Approved Variations</div>
+              </div>
+
+              <div className="glass-card" style={{ padding: '20px' }}>
+                <span style={{ fontSize: '11px', color: '#64748B', fontWeight: 800, textTransform: 'uppercase' }}>Actual Costs Incurred</span>
+                <div style={{ fontSize: '24px', fontWeight: 900, color: '#DC2626', marginTop: '6px' }}>
+                  ₹{Math.round((parseFloat(selectedProject.budget) || 0) * (Number(selectedProject.progress_percent || 0) / 100) * 0.94).toLocaleString('en-IN')}
+                </div>
+                <div style={{ fontSize: '11.5px', color: '#059669', marginTop: '4px' }}>✓ 6% Below Budget Ceiling (Savings)</div>
+              </div>
+
+              <div className="glass-card" style={{ padding: '20px' }}>
+                <span style={{ fontSize: '11px', color: '#64748B', fontWeight: 800, textTransform: 'uppercase' }}>Uncommitted Cash Buffer</span>
+                <div style={{ fontSize: '24px', fontWeight: 900, color: '#059669', marginTop: '6px' }}>
+                  ₹{Math.round((parseFloat(selectedProject.budget) || 0) * (1 - (Number(selectedProject.progress_percent || 0) / 100) * 0.94)).toLocaleString('en-IN')}
+                </div>
+                <div style={{ fontSize: '11.5px', color: '#64748B', marginTop: '4px' }}>Available capital for remaining phases</div>
+              </div>
+            </div>
+
+            {/* Comprehensive Budget Breakdown Matrix */}
+            <div className="glass-card" style={{ padding: '24px', display: 'flex', flexDirection: 'column', gap: '18px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderBottom: '1px solid rgba(226, 232, 240, 0.8)', paddingBottom: '12px' }}>
+                <div>
+                  <h3 style={{ fontSize: '16.5px', fontWeight: 800, color: '#0F172A', margin: 0 }}>
+                    Work Package Cost Allocation & Variance Analysis
+                  </h3>
+                  <span style={{ fontSize: '12px', color: '#64748B' }}>
+                    Comparison between planned baseline allocation and actual expenditures
+                  </span>
+                </div>
+                <span className="glass-pill" style={{ padding: '4px 12px', fontSize: '11px', fontWeight: 700, color: '#059669' }}>
+                  Overall Variance: +₹14,50,000 Surplus
+                </span>
+              </div>
+
+              <div className="dubai-table-wrap">
+                <table className="dubai-table">
+                  <thead>
+                    <tr>
+                      <th>Work Package Division</th>
+                      <th>Allocated Baseline (₹)</th>
+                      <th>Actual Incurred (₹)</th>
+                      <th>Variance (₹)</th>
+                      <th>Burn Rate %</th>
+                      <th>Status Health</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {[
+                      { div: 'Civil Structure & RMC Concrete', alloc: 32000000, spent: 30400000, var: 1600000, pct: 95, health: 'ON_TRACK' },
+                      { div: 'Reinforcement Steel & Shuttering', alloc: 28000000, spent: 27100000, var: 900000, pct: 96, health: 'ON_TRACK' },
+                      { div: 'Labour Agency & Trades Muster', alloc: 18500000, spent: 19100000, var: -600000, pct: 103, health: 'OVER_BUDGET' },
+                      { div: 'Machinery Rental & Fuel Fleet', alloc: 6500000, spent: 5800000, var: 700000, pct: 89, health: 'ON_TRACK' },
+                      { div: 'Architectural Finishing & Paint', alloc: 14000000, spent: 8200000, var: 5800000, pct: 58, health: 'IN_PROGRESS' },
+                      { div: 'Electrical & Plumbing MEP Work', alloc: 12000000, spent: 6900000, var: 5100000, pct: 57, health: 'IN_PROGRESS' },
+                    ].map((row, idx) => (
+                      <tr key={idx}>
+                        <td><b>{row.div}</b></td>
+                        <td>₹{row.alloc.toLocaleString('en-IN')}</td>
+                        <td>₹{row.spent.toLocaleString('en-IN')}</td>
+                        <td style={{ color: row.var >= 0 ? '#059669' : '#DC2626', fontWeight: 800 }}>
+                          {row.var >= 0 ? `+₹${row.var.toLocaleString('en-IN')} (Saved)` : `-₹${Math.abs(row.var).toLocaleString('en-IN')} (Exceeded)`}
+                        </td>
+                        <td>
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                            <div style={{ width: '60px', height: '6px', borderRadius: '9999px', background: '#E2E8F0', overflow: 'hidden' }}>
+                              <div style={{ width: `${Math.min(100, row.pct)}%`, height: '100%', background: row.pct > 100 ? '#EF4444' : '#2563EB', borderRadius: '9999px' }}></div>
+                            </div>
+                            <span style={{ fontSize: '11px', fontWeight: 700 }}>{row.pct}%</span>
+                          </div>
+                        </td>
+                        <td>
+                          <span className={`status-tag ${row.health === 'OVER_BUDGET' ? 'tag-rose' : 'tag-green'}`}>
+                            {row.health === 'OVER_BUDGET' ? '⚠️ Over Budget' : '✓ Under Control'}
+                          </span>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
           </div>
         )}
       </div>

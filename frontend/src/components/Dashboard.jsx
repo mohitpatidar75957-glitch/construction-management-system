@@ -372,16 +372,19 @@ export default function Dashboard() {
                 <span style={{ color: '#2563EB', fontWeight: 600 }}>Enter in Crores or Lakhs</span>
               </label>
               
-              {/* Clean Flex Prefix Input */}
-              <div style={{
-                display: 'flex',
-                alignItems: 'center',
-                background: 'rgba(255, 255, 255, 0.95)',
-                border: '1px solid rgba(203, 213, 225, 0.85)',
-                borderRadius: '12px',
-                overflow: 'hidden',
-                boxShadow: '0 2px 6px rgba(0, 0, 0, 0.02)'
-              }}>
+              {/* Clean Flex Prefix Input (No double border) */}
+              <div 
+                className="compound-input-wrap"
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  background: 'rgba(255, 255, 255, 0.95)',
+                  border: '1px solid rgba(203, 213, 225, 0.85)',
+                  borderRadius: '12px',
+                  overflow: 'hidden',
+                  boxShadow: '0 2px 6px rgba(0, 0, 0, 0.02)'
+                }}
+              >
                 <div style={{
                   padding: '0 16px',
                   fontSize: '18px',
@@ -412,7 +415,8 @@ export default function Dashboard() {
                     fontWeight: 800,
                     color: '#0F172A',
                     outline: 'none',
-                    minWidth: 0
+                    minWidth: 0,
+                    boxShadow: 'none'
                   }}
                 />
               </div>

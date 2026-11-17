@@ -303,6 +303,41 @@ export const authService = {
     return updated;
   },
 
+  updateUserProfile: (userId, profileData) => {
+    const list = authService.getAllUsers();
+    let updatedUser = null;
+    const updated = list.map(u => {
+      if (u.id === userId) {
+        const initials = profileData.name 
+          ? profileData.name.trim().split(/\s+/).map(n => n[0]).join('').slice(0, 2).toUpperCase() 
+          : u.avatar;
+        updatedUser = { 
+          ...u, 
+          ...profileData,
+          avatar: initials || u.avatar
+        };
+        return updatedUser;
+      }
+      return u;
+    });
+    localStorage.setItem(USERS_LIST_KEY, JSON.stringify(updated));
+
+    const current = authService.getCurrentUser();
+    if (current && current.id === userId) {
+      const initials = profileData.name 
+        ? profileData.name.trim().split(/\s+/).map(n => n[0]).join('').slice(0, 2).toUpperCase() 
+        : current.avatar;
+      const updatedCurrent = { 
+        ...current, 
+        ...profileData,
+        avatar: initials || current.avatar
+      };
+      localStorage.setItem(CURRENT_USER_KEY, JSON.stringify(updatedCurrent));
+      return updatedCurrent;
+    }
+    return updatedUser || current;
+  },
+
   login: async (email, password) => {
     const cleanEmail = (email || '').trim().toLowerCase();
     const cleanPassword = (password || '').trim();
